@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>South Sudan Conflict Timeline - Juba & Bor</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { height: 500px; width: 100%; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        .controls { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .slider-container { display: flex; align-items: center; gap: 20px; }
+        #yearSlider { flex-grow: 1; }
+        #yearLabel { font-size: 1.5em; font-weight: bold; min-width: 60px; }
+        .legend { background: white; padding: 10px; line-height: 18px; color: #555; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+    </style>
+</head>
+<body>
+    <h1>Conflict Timeline: Juba & Bor South</h1>
+    <div class="controls">
+        <p>Move the slider to see conflict events year by year (2011-2026).</p>
+        <div class="slider-container">
+            <span id="yearLabel">2011</span>
+            <input type="range" id="yearSlider" min="2011" max="2026" value="2011" step="1">
+        </div>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([5.5, 31.5], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        var yearlyData = {
+            "Juba": {
+                coords: [4.85, 31.57],
+                years: {
+                    2011: {events: 1, fatalities: 0},
+                    2012: {events: 16, fatalities: 6},
+                    2013: {events: 52, fatalities: 1617},
+                    2014: {events: 31, fatalities: 47},
+                    2015: {events: 50, fatalities: 101},
+                    2016: {events: 87, fatalities: 193},
+                    2017: {events: 55, fatalities: 90},
+                    2018: {events: 28, fatalities: 42},
+                    2019: {events: 34, fatalities: 50},
+                    2020: {events: 44, fatalities: 37},
+                    2021: {events: 59, fatalities: 72},
+                    2022: {events: 70, fatalities: 141},
+                    2023: {events: 87, fatalities: 135},
+                    2024: {events: 45, fatalities: 65},
+                    2025: {events: 66, fatalities: 36},
+                    2026: {events: 16, fatalities: 45}
+                }
+            },
+            "Bor South": {
+                coords: [6.20, 31.55],
+                years: {
+                    2011: {events: 2, fatalities: 39},
+                    2012: {events: 13, fatalities: 39},
+                    2013: {events: 19, fatalities: 93},
+                    2014: {events: 21, fatalities: 293},
+                    2015: {events: 11, fatalities: 25},
+                    2016: {events: 11, fatalities: 9},
+                    2017: {events: 19, fatalities: 52},
+                    2018: {events: 11, fatalities: 24},
+                    2019: {events: 13, fatalities: 12},
+                    2020: {events: 14, fatalities: 66},
+                    2021: {events: 15, fatalities: 17},
+                    2022: {events: 17, fatalities: 11},
+                    2023: {events: 20, fatalities: 20},
+                    2024: {events: 16, fatalities: 15},
+                    2025: {events: 17, fatalities: 9},
+                    2026: {events: 8, fatalities: 3}
+                }
+            }
+        };
+
+        var markers = {};
+
+        function updateMarkers(year) {
+            for (var location in yearlyData) {
+                var data = yearlyData[location];
+                var yearStats = data.years[year];
+                
+                if (markers[location]) {
+                    map.removeLayer(markers[location]);
+                }
+
+                if (yearStats && yearStats.events > 0) {
+                    var radius = Math.sqrt(yearStats.events) * 5;
+                    markers[location] = L.circleMarker(data.coords, {
+                        radius: radius,
+                        fillColor: "#e74c3c",
+                        color: "#c0392b",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.7
+                    }).addTo(map);
+
+                    markers[location].bindPopup("<b>" + location + " (" + year + ")</b><br>Events: " + yearStats.events + "<br>Fatalities: " + yearStats.fatalities);
+                }
+            }
+        }
+
+        var slider = document.getElementById('yearSlider');
+        var label = document.getElementById('yearLabel');
+
+        slider.oninput = function() {
+            label.innerHTML = this.value;
+            updateMarkers(this.value);
+        };
+
+        // Initialize
+        updateMarkers(2011);
+    </script>
+</body>
+</html>
