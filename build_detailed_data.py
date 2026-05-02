@@ -5,14 +5,13 @@ import csv
 import json
 import random
 import hashlib
+import math
 from datetime import datetime, timedelta
 
-# Tightened Bounding box for Juba and Bor areas only
-LAT_JUBA_MIN, LAT_JUBA_MAX = 4.7, 5.1
-LNG_JUBA_MIN, LNG_JUBA_MAX = 31.4, 31.8
-
-LAT_BOR_MIN, LAT_BOR_MAX = 6.0, 6.4
-LNG_BOR_MIN, LNG_BOR_MAX = 31.4, 31.7
+# Schools for Center points
+JUBA_SCHOOL = [4.88, 31.63]
+BOR_SCHOOL = [6.21, 31.55]
+RADIUS_KM = 15.0
 
 CAMEO_CODES = {
     "180": "Assault", "181": "Abduction", "182": "Physical Assault", "183": "Sexual Violence",
@@ -22,27 +21,42 @@ CAMEO_CODES = {
     "100": "Demand", "105": "Military Demand", "174": "Expulsion/Banning", "141": "Protest"
 }
 
+def haversine(lat1, lon1, lat2, lon2):
+    R = 6371  # Earth radius in km
+    dlat = math.radians(lat2 - lat1)
+    dlon = math.radians(lon2 - lon1)
+    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    return R * c
+
 def get_slot_url(timestamp):
     return f"http://data.gdeltproject.org/gdeltv2/{timestamp}.export.CSV.zip"
 
-def is_in_target_areas(lat, lng):
-    in_juba = LAT_JUBA_MIN <= lat <= LAT_JUBA_MAX and LNG_JUBA_MIN <= lng <= LNG_JUBA_MAX
-    in_bor = LAT_BOR_MIN <= lat <= LAT_BOR_MAX and LNG_BOR_MIN <= lng <= LNG_BOR_MAX
-    return in_juba or in_bor
+def is_near_schools(lat, lng):
+    dist_juba = haversine(lat, lng, JUBA_SCHOOL[0], JUBA_SCHOOL[1])
+    dist_bor = haversine(lat, lng, BOR_SCHOOL[0], BOR_SCHOOL[1])
+    return dist_juba <= RADIUS_KM or dist_bor <= RADIUS_KM
 
 def generate_detailed_dataset():
     now = datetime.utcnow()
     all_events = []
     
-    # Sample last 14 days + 30 random days from past year
-    days = [(now - timedelta(days=i)).strftime("%Y%m%d") for i in range(14)]
-    days += [(now - timedelta(days=random.randint(15, 365))).strftime("%Y%m%d") for _ in range(30)]
+    # Extensive sampling: last 30 days daily + 60 random days from the year
+    days = [(now - timedelta(days=i)).strftime("%Y%m%d") for i in range(30)]
+    days += [(now - timedelta(days=random.randint(31, 365))).strftime("%Y%m%d") for _ in range(60)]
     
-    print(f"Sampling {len(days)} days for Juba and Bor specifically...")
+    print(f"Sampling {len(set(days))} unique days for 15km radius around Juba and Bor...")
     
-    for day in days:
-        # 4 samples per day to keep it fast
-        for slot in ["000000", "060000", "120000", "180000"]:
+    unique_days = sorted(list(set(days)), reverse=True)
+    
+    for day in unique_days:
+        # Sample more slots for recent days
+        slots_to_check = ["000000", "060000", "120000", "180000"]
+        if (datetime.utcnow() - datetime.strptime(day, "%Y%m%d")).days < 7:
+            # Check every hour for the last week
+            slots_to_check = [f"{h:02d}0000" for h in range(24)]
+
+        for slot in slots_to_check:
             ts = day + slot
             url = get_slot_url(ts)
             try:
@@ -55,7 +69,7 @@ def generate_detailed_dataset():
                                 if len(row) < 58: continue
                                 try:
                                     lat, lng = float(row[56]), float(row[57])
-                                    if is_in_target_areas(lat, lng):
+                                    if is_near_schools(lat, lng):
                                         event_code = row[26]
                                         if int(event_code) >= 100 or event_code.startswith(('08','09','14')):
                                             all_events.append({
@@ -68,21 +82,20 @@ def generate_detailed_dataset():
                                             })
                                 except: continue
             except: continue
-        print(f"Processed day {day}, cumulative matches: {len(all_events)}")
+        print(f"Processed {day}, cumulative matches: {len(all_events)}")
         
-    # Deterministic Jitter (stays same for same Event ID)
+    # Deterministic Jitter
     unique_events = []
     seen = set()
     for e in all_events:
         if e['id'] not in seen:
-            # Deterministic offset based on ID
             h = int(hashlib.md5(e['id'].encode()).hexdigest(), 16)
             e['lat'] += ((h % 40) / 2000.0) - 0.01
             e['lng'] += (((h // 100) % 40) / 2000.0) - 0.01
             unique_events.append(e)
             seen.add(e['id'])
             
-    print(f"Total stable unique events found: {len(unique_events)}")
+    print(f"Total stable unique events found in 15km radii: {len(unique_events)}")
     with open('events_detailed.json', 'w') as out:
         json.dump(unique_events, out)
 
