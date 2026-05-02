@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>South Sudan Conflict Monitor</title>
+    <title>Education Access Monitor | South Sudan</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -9,12 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #1a1a1a;
-            --panel-bg: #262626;
-            --accent-red: #ff4d4d;
-            --accent-yellow: #f1c40f;
-            --text-main: #e0e0e0;
-            --text-dim: #a0a0a0;
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --accent-red: #ef4444;
+            --accent-yellow: #fbbf24;
+            --accent-blue: #38bdf8;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
         }
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%;
@@ -25,69 +26,69 @@
         
         .overlay-panel {
             position: absolute; top: 20px; left: 20px; z-index: 1000;
-            background: rgba(38, 38, 38, 0.95); backdrop-filter: blur(12px);
-            padding: 24px; border-radius: 12px; width: 320px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(16px);
+            padding: 24px; border-radius: 16px; width: 340px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
         }
-        h1 { margin: 0 0 8px 0; font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; color: white; }
-        .subtitle { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 24px; line-height: 1.4; }
+        h1 { margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 600; color: white; display: flex; align-items: center; gap: 8px; }
+        .subtitle { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 24px; line-height: 1.5; }
         
-        .control-group { margin-bottom: 24px; }
-        .label-header { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 12px; display: block; }
+        .control-group { margin-bottom: 24px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
+        .label-header { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-dim); margin-bottom: 12px; display: block; }
         
-        .slider-wrap { display: flex; flex-direction: column; gap: 8px; }
         #yearSlider { 
-            width: 100%; -webkit-appearance: none; background: #444; height: 4px; border-radius: 2px; outline: none; margin: 15px 0;
+            width: 100%; -webkit-appearance: none; background: #334155; height: 6px; border-radius: 3px; outline: none; margin: 10px 0;
         }
         #yearSlider::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 18px; height: 18px; background: white; border-radius: 50%; cursor: pointer; border: 2px solid var(--accent-red);
+            -webkit-appearance: none; width: 20px; height: 20px; background: var(--accent-blue); border-radius: 50%; cursor: pointer; border: 3px solid white;
         }
-        #yearLabel { font-size: 2.5rem; font-weight: 300; color: white; line-height: 1; }
+        #yearLabel { font-size: 1.8rem; font-weight: 600; color: white; }
 
-        .toggle-wrap { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; cursor: pointer; color: var(--text-main); }
-        .toggle-wrap input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent-yellow); }
-
-        .legend-item { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 0.85rem; color: var(--text-dim); }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .legend-item { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 0.8rem; color: var(--text-dim); }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .square { width: 10px; height: 10px; border-radius: 2px; }
         
-        .pulse { animation: ring 2s cubic-bezier(0, 0.45, 0.45, 1) infinite; }
-        @keyframes ring {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
+        /* New Steady Signal Animation */
+        .signal {
+            box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+            border-radius: 50%;
+            animation: signal-pulse 2s infinite;
+        }
+        @keyframes signal-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
         }
 
-        .leaflet-popup-content-wrapper { background: var(--panel-bg); color: var(--text-main); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); }
+        .leaflet-popup-content-wrapper { background: var(--panel-bg); color: var(--text-main); border-radius: 12px; padding: 5px; }
         .leaflet-popup-tip { background: var(--panel-bg); }
-        .leaflet-popup-content b { color: white; }
-        .leaflet-container a { color: var(--accent-yellow); text-decoration: none; font-weight: 600; }
-        .leaflet-container a:hover { text-decoration: underline; }
+        .leaflet-container a { color: var(--accent-blue); font-weight: 600; text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="overlay-panel">
-        <h1>Conflict Monitor</h1>
-        <p class="subtitle">Real-time situational awareness and historical analysis for the Juba-Bor corridor, South Sudan.</p>
+        <h1><span style="color:var(--accent-blue)">●</span> Education Access Monitor</h1>
+        <p class="subtitle">Assessing safety for <b>Education Bridge Initiative</b> schools. Historical conflict proximity and real-time security alerts.</p>
         
         <div class="control-group">
-            <span class="label-header">Timeline Analysis</span>
-            <div class="slider-wrap">
-                <span id="yearLabel">2011</span>
-                <input type="range" id="yearSlider" min="2011" max="2026" value="2011" step="1">
+            <span class="label-header">Recent Trends (2025-2026)</span>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span id="yearLabel">2026</span>
+                <input type="range" id="yearSlider" min="2025" max="2026" value="2026" step="1">
             </div>
         </div>
 
         <div class="control-group">
-            <span class="label-header">Live Intelligence</span>
-            <label class="toggle-wrap">
-                <input type="checkbox" id="showRealtime" checked>
-                Enable GDELT Data Stream
-            </label>
+            <span class="label-header">Map Legend</span>
+            <div class="legend-item"><div class="square" style="background: var(--accent-blue)"></div> Greenbelt Academy Campus</div>
+            <div class="legend-item"><div class="dot" style="background: var(--accent-red)"></div> Historical Conflict (Fatalities)</div>
+            <div class="legend-item"><div class="dot" style="background: var(--accent-yellow)"></div> Real-time Incident Signal</div>
         </div>
 
-        <div class="control-group" style="margin-bottom: 0;">
-            <span class="label-header">Classification</span>
-            <div class="legend-item"><div class="dot" style="background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red)"></div> Historical (ACLED Verified)</div>
-            <div class="legend-item"><div class="dot" style="background: var(--accent-yellow); box-shadow: 0 0 8px var(--accent-yellow)"></div> Real-time (GDELT Signal)</div>
+        <div class="control-group" style="margin-bottom:0;">
+            <p style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.4;">
+                Map automatically focuses on recent data to reflect current operational risks for students and staff.
+            </p>
         </div>
     </div>
 
@@ -101,31 +102,40 @@
             attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
         }).addTo(map);
 
+        // School Locations (Greenbelt Academy)
+        var schools = [
+            { name: "Greenbelt Academy - Juba", coords: [4.88, 31.63], details: "Shirikat, Juba. Established May 2022. Serving 500+ students." },
+            { name: "Greenbelt Academy - Bor", coords: [6.21, 31.55], details: "Bor, Jonglei. Established Feb 2017. Ranked #1 in 2021 Exams." }
+        ];
+
+        schools.forEach(school => {
+            L.circleMarker(school.coords, {
+                radius: 12, fillColor: "#38bdf8", color: "white", weight: 3, opacity: 1, fillOpacity: 0.8
+            }).addTo(map).bindPopup("<b>" + school.name + "</b><br><span style='color:#94a3b8'>" + school.details + "</span>");
+            
+            // Icon label
+            L.marker(school.coords, {
+                icon: L.divIcon({
+                    className: 'school-label',
+                    html: `<div style="color:white; font-weight:600; font-size:10px; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:4px; margin-top:20px; white-space:nowrap;">${school.name}</div>`,
+                    iconSize: [0, 0]
+                })
+            }).addTo(map);
+        });
+
         var yearlyData = {
             "Juba": {
                 coords: [4.85, 31.57],
                 years: {
-                    2011: {events: 1, fatalities: 0}, 2012: {events: 16, fatalities: 6},
-                    2013: {events: 52, fatalities: 1617}, 2014: {events: 31, fatalities: 47},
-                    2015: {events: 50, fatalities: 101}, 2016: {events: 87, fatalities: 193},
-                    2017: {events: 55, fatalities: 90}, 2018: {events: 28, fatalities: 42},
-                    2019: {events: 34, fatalities: 50}, 2020: {events: 44, fatalities: 37},
-                    2021: {events: 59, fatalities: 72}, 2022: {events: 70, fatalities: 141},
-                    2023: {events: 87, fatalities: 135}, 2024: {events: 45, fatalities: 65},
-                    2025: {events: 66, fatalities: 36}, 2026: {events: 16, fatalities: 45}
+                    2025: {events: 66, fatalities: 36},
+                    2026: {events: 16, fatalities: 45}
                 }
             },
             "Bor South": {
                 coords: [6.20, 31.55],
                 years: {
-                    2011: {events: 2, fatalities: 39}, 2012: {events: 13, fatalities: 39},
-                    2013: {events: 19, fatalities: 93}, 2014: {events: 21, fatalities: 293},
-                    2015: {events: 11, fatalities: 25}, 2016: {events: 11, fatalities: 9},
-                    2017: {events: 19, fatalities: 52}, 2018: {events: 11, fatalities: 24},
-                    2019: {events: 13, fatalities: 12}, 2020: {events: 14, fatalities: 66},
-                    2021: {events: 15, fatalities: 17}, 2022: {events: 17, fatalities: 11},
-                    2023: {events: 20, fatalities: 20}, 2024: {events: 16, fatalities: 15},
-                    2025: {events: 17, fatalities: 9}, 2026: {events: 8, fatalities: 3}
+                    2025: {events: 17, fatalities: 9},
+                    2026: {events: 8, fatalities: 3}
                 }
             }
         };
@@ -140,12 +150,12 @@
                 if (markers[location]) { map.removeLayer(markers[location]); }
 
                 if (yearStats && yearStats.events > 0) {
-                    var radius = Math.sqrt(yearStats.events) * 6;
+                    var radius = Math.sqrt(yearStats.fatalities + 5) * 4;
                     markers[location] = L.circleMarker(data.coords, {
-                        radius: radius, fillColor: "#ff4d4d", color: "white",
-                        weight: 1, opacity: 0.8, fillOpacity: 0.4
+                        radius: radius, fillColor: "#ef4444", color: "white",
+                        weight: 1, opacity: 0.8, fillOpacity: 0.3
                     }).addTo(map);
-                    markers[location].bindPopup("<b>" + location + "</b><br><span style='color: #a0a0a0'>Dataset: ACLED Historical (" + year + ")</span><br>Events: " + yearStats.events + "<br>Fatalities: " + yearStats.fatalities);
+                    markers[location].bindPopup("<b>Conflict Density (" + year + ")</b><br>Fatalities near " + location + ": " + yearStats.fatalities);
                 }
             }
         }
@@ -158,32 +168,16 @@
                 
                 events.forEach(event => {
                     if (event.lat && event.lng) {
-                        // Static yellow circle
+                        // Static signal dot
                         L.circleMarker([event.lat, event.lng], {
-                            radius: 6, fillColor: "#f1c40f", color: "white",
-                            weight: 1, opacity: 1, fillOpacity: 0.8
-                        }).addTo(realtimeLayer);
-
-                        // Pulsing ring (using a simple circle with animation)
-                        var pulseRing = L.circleMarker([event.lat, event.lng], {
-                            radius: 12, color: "#f1c40f", weight: 2,
-                            opacity: 0.6, fill: false, className: 'pulse'
-                        }).addTo(realtimeLayer);
-
-                        var marker = L.circleMarker([event.lat, event.lng], {
-                            radius: 15, opacity: 0, fillOpacity: 0
-                        }).addTo(realtimeLayer);
-
-                        marker.bindPopup("<b>" + event.category + "</b><br><span style='color: #a0a0a0'>Source: GDELT Real-time Signal</span><br>" + event.location + "<br><br><a href='" + event.source + "' target='_blank'>Verify Intelligence &rarr;</a>");
+                            radius: 8, fillColor: "#fbbf24", color: "white",
+                            weight: 2, opacity: 1, fillOpacity: 1, className: 'signal'
+                        }).addTo(realtimeLayer)
+                        .bindPopup("<b>New Threat Signal</b><br><span style='color:#94a3b8'>" + event.category + " reported in " + event.location + "</span><br><br><a href='" + event.source + "' target='_blank'>View Details &rarr;</a>");
                     }
                 });
             } catch (e) { console.log("Realtime data error:", e); }
         }
-
-        document.getElementById('showRealtime').onchange = function() {
-            if (this.checked) { map.addLayer(realtimeLayer); }
-            else { map.removeLayer(realtimeLayer); }
-        };
 
         var slider = document.getElementById('yearSlider');
         var label = document.getElementById('yearLabel');
@@ -192,10 +186,8 @@
             updateMarkers(this.value);
         };
 
-        updateMarkers(2011);
+        updateMarkers(2026);
         fetchRealtimeData();
-        
-        // Refresh realtime data every 5 minutes in UI
         setInterval(fetchRealtimeData, 300000);
     </script>
 </body>
