@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Education Access Monitor | South Sudan</title>
+    <title>Juba Education Access Monitor</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -35,7 +35,13 @@
         .control-group { margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .label-header { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 10px; display: block; }
         
-        #closestBor {
+        .status-badge {
+            display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem;
+            background: rgba(56, 189, 248, 0.1); color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.2); margin-top: 5px;
+        }
+
+        #closestJuba {
             background: rgba(251, 191, 36, 0.1);
             padding: 12px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.3);
             font-size: 0.8rem; margin-top: 10px; display: none;
@@ -52,40 +58,44 @@
 </head>
 <body>
     <div class="overlay-panel">
-        <h1>Education Access Monitor</h1>
-        <p class="subtitle">Security event monitoring for <b>Education Bridge Initiative</b> schools. Data focused on Juba & Bor campuses.</p>
+        <h1>Juba Access Monitor</h1>
+        <p class="subtitle">Security event monitoring for <b>Education Bridge Initiative</b> in Juba. Data focuses on the Shirikat campus and surrounding 15km.</p>
         
         <div class="control-group">
-            <span class="label-header">Critical Alerts</span>
-            <div id="closestBor">
-                <b style="color:var(--accent-yellow)">Closest Incident to Bor:</b><br>
-                <span id="borDist">Calculating...</span>
+            <span class="label-header">System Status</span>
+            <div class="status-badge">● Live Hourly Updates</div>
+            <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 8px;">
+                Last Data Refresh:<br>
+                <span id="lastRefresh" style="color:white">Syncing...</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <span class="label-header">Proximity Alert</span>
+            <div id="closestJuba">
+                <b style="color:var(--accent-yellow)">Closest Incident to Juba:</b><br>
+                <span id="jubaDist">Calculating...</span>
             </div>
         </div>
 
         <div class="control-group">
             <span class="label-header">Map Legend</span>
-            <div class="legend-item"><div class="square" style="background: var(--accent-blue)"></div> Greenbelt Academy Campus</div>
+            <div class="legend-item"><div class="square" style="background: var(--accent-blue)"></div> Greenbelt Academy Juba</div>
             <div class="legend-item"><div class="dot" style="background: var(--accent-yellow)"></div> Security Incident Report</div>
-        </div>
-
-        <div class="control-group" style="margin-bottom:0;">
-            <p style="font-size: 0.7rem; color: var(--text-dim);">
-                Static markers used for maximum stability.
-            </p>
         </div>
     </div>
 
     <div id="map"></div>
 
     <script>
-        // Initialize map with basic settings, disabling all animation for stability
+        var JUBA_COORDS = [4.88, 31.63];
+
         var map = L.map('map', {
             zoomControl: false,
             fadeAnimation: false,
             markerZoomAnimation: false,
             transform3DLimit: 0
-        }).setView([5.8, 31.5], 8);
+        }).setView([4.85, 31.6], 12);
         
         L.control.zoom({ position: 'bottomright' }).addTo(map);
 
@@ -94,22 +104,10 @@
             updateWhenIdle: true
         }).addTo(map);
 
-        // School Locations (Greenbelt Academy)
-        var schools = [
-            { name: "Greenbelt Academy - Juba", coords: [4.88, 31.63], details: "Shirikat, Juba." },
-            { name: "Greenbelt Academy - Bor", coords: [6.21, 31.55], details: "Bor, Jonglei." }
-        ];
-
-        schools.forEach(school => {
-            L.circleMarker(school.coords, {
-                radius: 10, 
-                fillColor: "#38bdf8", 
-                color: "white", 
-                weight: 2, 
-                opacity: 1, 
-                fillOpacity: 0.8
-            }).addTo(map).bindPopup("<b>" + school.name + "</b><br>" + school.details);
-        });
+        // School Location (Greenbelt Academy - Juba)
+        L.circleMarker(JUBA_COORDS, {
+            radius: 12, fillColor: "#38bdf8", color: "white", weight: 3, opacity: 1, fillOpacity: 0.8
+        }).addTo(map).bindPopup("<b>Greenbelt Academy - Juba</b><br>Shirikat, Juba.");
 
         var eventLayer = L.layerGroup().addTo(map);
 
@@ -127,55 +125,50 @@
         async function fetchDetailedEvents() {
             try {
                 const response = await fetch('events_detailed.json?t=' + new Date().getTime());
-                const events = await response.json();
+                const data = await response.json();
+                const events = data.events;
+                
+                document.getElementById('lastRefresh').innerText = data.last_update + " UTC";
                 eventLayer.clearLayers();
                 
-                var minBorDist = Infinity;
-                var closestBorEvent = null;
-                var closestBorMarker = null;
+                var minJubaDist = Infinity;
+                var closestEvent = null;
+                var closestMarker = null;
 
                 events.forEach(event => {
                     if (event.lat && event.lng) {
-                        var dist = getDistance(event.lat, event.lng, 6.21, 31.55);
+                        var dist = getDistance(event.lat, event.lng, JUBA_COORDS[0], JUBA_COORDS[1]);
                         
                         var dot = L.circleMarker([event.lat, event.lng], {
-                            radius: 7, 
-                            fillColor: "#fbbf24", 
-                            color: "white", 
-                            weight: 1, 
-                            opacity: 1, 
-                            fillOpacity: 1
+                            radius: 7, fillColor: "#fbbf24", color: "white", weight: 1, opacity: 1, fillOpacity: 1
                         }).addTo(eventLayer);
 
-                        var popupContent = `
+                        dot.bindPopup(`
                             <div style="min-width: 180px;">
                                 <b style="color: white;">${event.type}</b><br>
                                 <span style="color:#94a3b8; font-size: 0.8em;">${event.date}</span><br>
                                 <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin: 5px 0;">
                                 <p style="margin: 0; font-size: 0.85em;">${event.location}</p>
-                                <p style="font-size:0.75rem; color: #fbbf24; margin:5px 0 0 0;">Dist. to Bor School: ${dist.toFixed(1)} km</p>
+                                <p style="font-size:0.75rem; color: #fbbf24; margin:5px 0 0 0;">Dist. to School: ${dist.toFixed(1)} km</p>
                                 <br>
                                 <a href="${event.source}" target="_blank">View Report &rarr;</a>
                             </div>
-                        `;
-                        dot.bindPopup(popupContent);
+                        `);
 
-                        if (dist < minBorDist) {
-                            minBorDist = dist;
-                            closestBorEvent = event;
-                            closestBorMarker = dot;
+                        if (dist < minJubaDist) {
+                            minJubaDist = dist;
+                            closestEvent = event;
+                            closestMarker = dot;
                         }
                     }
                 });
 
-                if (closestBorEvent) {
-                    document.getElementById('closestBor').style.display = 'block';
-                    document.getElementById('borDist').innerHTML = 
-                        `<b>${closestBorEvent.type}</b> at ${minBorDist.toFixed(1)} km.<br>` +
-                        `<span style="color:#94a3b8; font-size:0.75rem;">${closestBorEvent.location}</span>`;
-                    
-                    // Highlight the closest one
-                    closestBorMarker.setStyle({ color: '#ff4d4d', weight: 3 });
+                if (closestEvent) {
+                    document.getElementById('closestJuba').style.display = 'block';
+                    document.getElementById('jubaDist').innerHTML = 
+                        `<b>${closestEvent.type}</b> at ${minJubaDist.toFixed(1)} km.<br>` +
+                        `<span style="color:#94a3b8; font-size:0.75rem;">${closestEvent.location}</span>`;
+                    closestMarker.setStyle({ color: '#ff4d4d', weight: 3 });
                 }
             } catch (e) { console.log("Data load error:", e); }
         }

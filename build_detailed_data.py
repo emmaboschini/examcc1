@@ -8,9 +8,8 @@ import hashlib
 import math
 from datetime import datetime, timedelta
 
-# Schools for Center points
+# Focus Center: Juba School
 JUBA_SCHOOL = [4.88, 31.63]
-BOR_SCHOOL = [6.21, 31.55]
 RADIUS_KM = 15.0
 
 CAMEO_CODES = {
@@ -32,10 +31,9 @@ def haversine(lat1, lon1, lat2, lon2):
 def get_slot_url(timestamp):
     return f"http://data.gdeltproject.org/gdeltv2/{timestamp}.export.CSV.zip"
 
-def is_near_schools(lat, lng):
+def is_near_juba(lat, lng):
     dist_juba = haversine(lat, lng, JUBA_SCHOOL[0], JUBA_SCHOOL[1])
-    dist_bor = haversine(lat, lng, BOR_SCHOOL[0], BOR_SCHOOL[1])
-    return dist_juba <= RADIUS_KM or dist_bor <= RADIUS_KM
+    return dist_juba <= RADIUS_KM
 
 def generate_detailed_dataset():
     now = datetime.utcnow()
@@ -45,7 +43,7 @@ def generate_detailed_dataset():
     days = [(now - timedelta(days=i)).strftime("%Y%m%d") for i in range(30)]
     days += [(now - timedelta(days=random.randint(31, 365))).strftime("%Y%m%d") for _ in range(60)]
     
-    print(f"Sampling {len(set(days))} unique days for 15km radius around Juba and Bor...")
+    print(f"Sampling for 15km radius around Juba School...")
     
     unique_days = sorted(list(set(days)), reverse=True)
     
@@ -53,7 +51,6 @@ def generate_detailed_dataset():
         # Sample more slots for recent days
         slots_to_check = ["000000", "060000", "120000", "180000"]
         if (datetime.utcnow() - datetime.strptime(day, "%Y%m%d")).days < 7:
-            # Check every hour for the last week
             slots_to_check = [f"{h:02d}0000" for h in range(24)]
 
         for slot in slots_to_check:
@@ -69,7 +66,7 @@ def generate_detailed_dataset():
                                 if len(row) < 58: continue
                                 try:
                                     lat, lng = float(row[56]), float(row[57])
-                                    if is_near_schools(lat, lng):
+                                    if is_near_juba(lat, lng):
                                         event_code = row[26]
                                         if int(event_code) >= 100 or event_code.startswith(('08','09','14')):
                                             all_events.append({
@@ -95,9 +92,15 @@ def generate_detailed_dataset():
             unique_events.append(e)
             seen.add(e['id'])
             
-    print(f"Total stable unique events found in 15km radii: {len(unique_events)}")
+    print(f"Total stable unique events found in Juba 15km radius: {len(unique_events)}")
+    
+    output_data = {
+        "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "events": unique_events
+    }
+    
     with open('events_detailed.json', 'w') as out:
-        json.dump(unique_events, out)
+        json.dump(output_data, out)
 
 if __name__ == "__main__":
     generate_detailed_dataset()
