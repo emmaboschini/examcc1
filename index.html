@@ -42,14 +42,26 @@
         .dot { width: 12px; height: 12px; border-radius: 50%; }
         .square { width: 12px; height: 12px; border-radius: 2px; }
         
-        .pulse { 
-            animation: ring 3s cubic-bezier(0, 0.45, 0.45, 1) infinite;
-            transform-origin: center;
+        /* Steady Signal Radar Animation (Non-transform based) */
+        .signal-point {
+            position: relative;
         }
-        @keyframes ring {
-            0% { transform: scale(0.5); opacity: 0.8; }
-            80% { transform: scale(2.5); opacity: 0; }
-            100% { transform: scale(0.5); opacity: 0; }
+        .signal-point::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-yellow);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px var(--accent-yellow);
+            animation: radar 2s ease-out infinite;
+        }
+        @keyframes radar {
+            0% { width: 8px; height: 8px; opacity: 0.8; }
+            100% { width: 40px; height: 40px; opacity: 0; }
         }
 
         .leaflet-popup-content-wrapper { background: var(--panel-bg); color: var(--text-main); border-radius: 12px; padding: 5px; border: 1px solid rgba(255,255,255,0.1); }
@@ -123,19 +135,16 @@
                     if (event.lat && event.lng) {
                         var dateFormatted = event.date.substring(0,4) + "-" + event.date.substring(4,6) + "-" + event.date.substring(6,8);
                         
-                        // Incident dot
-                        var dot = L.circleMarker([event.lat, event.lng], {
-                            radius: 6, fillColor: "#fbbf24", color: "white", weight: 1, opacity: 0.8, fillOpacity: 0.8
-                        }).addTo(eventLayer);
+                        // Incident Signal (Stable DivIcon)
+                        var signalIcon = L.divIcon({
+                            className: 'signal-point',
+                            iconSize: [20, 20],
+                            iconAnchor: [10, 10]
+                        });
 
-                        // Subtle pulse for recent events (2026)
-                        if (event.date.startsWith('2026')) {
-                            L.circleMarker([event.lat, event.lng], {
-                                radius: 6, color: "#fbbf24", weight: 1, opacity: 0.4, fill: false, className: 'pulse'
-                            }).addTo(eventLayer);
-                        }
+                        var marker = L.marker([event.lat, event.lng], { icon: signalIcon }).addTo(eventLayer);
 
-                        dot.bindPopup(`
+                        marker.bindPopup(`
                             <div style="min-width: 200px;">
                                 <b style="font-size: 1.1em; color: white;">${event.type}</b><br>
                                 <span style="color:#94a3b8; font-size: 0.9em;">${dateFormatted}</span><br>
