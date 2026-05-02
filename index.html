@@ -35,6 +35,12 @@
         .control-group { margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
         .label-header { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 10px; display: block; }
         
+        #closestBor {
+            background: rgba(251, 191, 36, 0.1);
+            padding: 12px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.3);
+            font-size: 0.8rem; margin-top: 10px; display: none;
+        }
+
         .legend-item { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 0.75rem; color: var(--text-dim); }
         .dot { width: 10px; height: 10px; border-radius: 50%; }
         .square { width: 10px; height: 10px; border-radius: 2px; }
@@ -49,6 +55,14 @@
         <h1>Education Access Monitor</h1>
         <p class="subtitle">Security event monitoring for <b>Education Bridge Initiative</b> schools. Data focused on Juba & Bor campuses.</p>
         
+        <div class="control-group">
+            <span class="label-header">Critical Alerts</span>
+            <div id="closestBor">
+                <b style="color:var(--accent-yellow)">Closest Incident to Bor:</b><br>
+                <span id="borDist">Calculating...</span>
+            </div>
+        </div>
+
         <div class="control-group">
             <span class="label-header">Map Legend</span>
             <div class="legend-item"><div class="square" style="background: var(--accent-blue)"></div> Greenbelt Academy Campus</div>
@@ -99,15 +113,31 @@
 
         var eventLayer = L.layerGroup().addTo(map);
 
+        function getDistance(lat1, lon1, lat2, lon2) {
+            var R = 6371;
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
         async function fetchDetailedEvents() {
             try {
                 const response = await fetch('events_detailed.json?t=' + new Date().getTime());
                 const events = await response.json();
                 eventLayer.clearLayers();
                 
+                var minBorDist = Infinity;
+                var closestBorEvent = null;
+                var closestBorMarker = null;
+
                 events.forEach(event => {
                     if (event.lat && event.lng) {
-                        // Standard static circle marker - zero CSS movement
+                        var dist = getDistance(event.lat, event.lng, 6.21, 31.55);
+                        
                         var dot = L.circleMarker([event.lat, event.lng], {
                             radius: 7, 
                             fillColor: "#fbbf24", 
@@ -117,18 +147,36 @@
                             fillOpacity: 1
                         }).addTo(eventLayer);
 
-                        dot.bindPopup(`
+                        var popupContent = `
                             <div style="min-width: 180px;">
                                 <b style="color: white;">${event.type}</b><br>
                                 <span style="color:#94a3b8; font-size: 0.8em;">${event.date}</span><br>
                                 <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin: 5px 0;">
                                 <p style="margin: 0; font-size: 0.85em;">${event.location}</p>
+                                <p style="font-size:0.75rem; color: #fbbf24; margin:5px 0 0 0;">Dist. to Bor School: ${dist.toFixed(1)} km</p>
                                 <br>
                                 <a href="${event.source}" target="_blank">View Report &rarr;</a>
                             </div>
-                        `);
+                        `;
+                        dot.bindPopup(popupContent);
+
+                        if (dist < minBorDist) {
+                            minBorDist = dist;
+                            closestBorEvent = event;
+                            closestBorMarker = dot;
+                        }
                     }
                 });
+
+                if (closestBorEvent) {
+                    document.getElementById('closestBor').style.display = 'block';
+                    document.getElementById('borDist').innerHTML = 
+                        `<b>${closestBorEvent.type}</b> at ${minBorDist.toFixed(1)} km.<br>` +
+                        `<span style="color:#94a3b8; font-size:0.75rem;">${closestBorEvent.location}</span>`;
+                    
+                    // Highlight the closest one
+                    closestBorMarker.setStyle({ color: '#ff4d4d', weight: 3 });
+                }
             } catch (e) { console.log("Data load error:", e); }
         }
 
