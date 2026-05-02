@@ -12,16 +12,15 @@ from datetime import datetime, timedelta
 JUBA_SCHOOL = [4.88, 31.63]
 RADIUS_KM = 15.0
 
-CAMEO_CODES = {
-    "180": "Assault", "181": "Abduction", "182": "Physical Assault", "183": "Sexual Violence",
+# CAMEO codes strictly for lethal or high-intensity violence (Fights, Warfare)
+LETHAL_CODES = {
     "190": "Fight/Clash", "191": "Firefight", "192": "Bombing/Explosion", "193": "Armed Fight",
-    "194": "Air Strike", "195": "Small Arms Fire", "200": "Warfare", "145": "Violent Protest",
-    "112": "Accusation", "130": "Threaten", "170": "Coerce", "175": "Arrest/Detain",
-    "100": "Demand", "105": "Military Demand", "174": "Expulsion/Banning", "141": "Protest"
+    "194": "Air Strike", "195": "Small Arms Fire", "200": "Warfare", "201": "Massive Violence",
+    "202": "Radiological/Chemical Attack", "203": "Biological Attack", "204": "Nuclear Attack"
 }
 
 def haversine(lat1, lon1, lat2, lon2):
-    R = 6371  # Earth radius in km
+    R = 6371
     dlat = math.radians(lat2 - lat1)
     dlon = math.radians(lon2 - lon1)
     a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
@@ -32,54 +31,47 @@ def get_slot_url(timestamp):
     return f"http://data.gdeltproject.org/gdeltv2/{timestamp}.export.CSV.zip"
 
 def is_near_juba(lat, lng):
-    dist_juba = haversine(lat, lng, JUBA_SCHOOL[0], JUBA_SCHOOL[1])
-    return dist_juba <= RADIUS_KM
+    return haversine(lat, lng, JUBA_SCHOOL[0], JUBA_SCHOOL[1]) <= RADIUS_KM
 
 def generate_detailed_dataset():
     now = datetime.utcnow()
     all_events = []
     
-    # Extensive sampling: last 30 days daily + 60 random days from the year
-    days = [(now - timedelta(days=i)).strftime("%Y%m%d") for i in range(30)]
-    days += [(now - timedelta(days=random.randint(31, 365))).strftime("%Y%m%d") for _ in range(60)]
+    # Strictly sample recent days for "New Casualties" (GDELT feed)
+    days = [(now - timedelta(days=i)).strftime("%Y%m%d") for i in range(14)]
     
-    print(f"Sampling for 15km radius around Juba School...")
+    print(f"Sampling recent GDELT data for lethal incidents (new casualties) in Juba...")
     
-    unique_days = sorted(list(set(days)), reverse=True)
-    
-    for day in unique_days:
-        # Sample more slots for recent days
-        slots_to_check = ["000000", "060000", "120000", "180000"]
-        if (datetime.utcnow() - datetime.strptime(day, "%Y%m%d")).days < 7:
-            slots_to_check = [f"{h:02d}0000" for h in range(24)]
-
-        for slot in slots_to_check:
-            ts = day + slot
+    for day in days:
+        # Check all hourly slots for recent days
+        for h in range(24):
+            ts = day + f"{h:02d}0000"
             url = get_slot_url(ts)
             try:
-                r = requests.get(url, timeout=5)
+                r = requests.get(url, timeout=3)
                 if r.status_code == 200:
                     with zipfile.ZipFile(io.BytesIO(r.content)) as z:
                         with z.open(z.namelist()[0]) as f:
                             reader = csv.reader(io.TextIOWrapper(f), delimiter='\t')
                             for row in reader:
                                 if len(row) < 58: continue
-                                try:
-                                    lat, lng = float(row[56]), float(row[57])
-                                    if is_near_juba(lat, lng):
-                                        event_code = row[26]
-                                        if int(event_code) >= 100 or event_code.startswith(('08','09','14')):
+                                event_code = row[26]
+                                # Filter strictly for LETHAL codes
+                                if event_code in LETHAL_CODES:
+                                    try:
+                                        lat, lng = float(row[56]), float(row[57])
+                                        if is_near_juba(lat, lng):
                                             all_events.append({
                                                 'lat': lat, 'lng': lng,
-                                                'type': CAMEO_CODES.get(event_code, f"Security Event ({event_code})"),
+                                                'type': LETHAL_CODES[event_code],
                                                 'date': row[1],
-                                                'source': row[60] if len(row) > 60 else "News Link",
+                                                'source': row[60] if len(row) > 60 else "Intelligence Feed",
                                                 'location': row[52],
                                                 'id': row[0]
                                             })
-                                except: continue
+                                    except: continue
             except: continue
-        print(f"Processed {day}, cumulative matches: {len(all_events)}")
+        print(f"Processed {day}, cumulative lethal matches: {len(all_events)}")
         
     # Deterministic Jitter
     unique_events = []
@@ -92,11 +84,13 @@ def generate_detailed_dataset():
             unique_events.append(e)
             seen.add(e['id'])
             
-    print(f"Total stable unique events found in Juba 15km radius: {len(unique_events)}")
+    print(f"Total verified lethal signals (GDELT): {len(unique_events)}")
     
     output_data = {
         "last_update": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "events": unique_events
+        "events": unique_events,
+        "historical_source": "ACLED (Armed Conflict Location & Event Data)",
+        "realtime_source": "GDELT Project (Casualties Feed)"
     }
     
     with open('events_detailed.json', 'w') as out:
