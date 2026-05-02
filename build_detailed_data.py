@@ -34,9 +34,9 @@ def generate_detailed_dataset():
     now = datetime.utcnow()
     all_events = []
     
-    # Sample last 14 days + some random samples from the year
+    # Sample last 14 days + 30 random days from past year
     days = [(now - timedelta(days=i)).strftime("%Y%m%d") for i in range(14)]
-    days += [(now - timedelta(days=random.randint(15, 365))).strftime("%Y%m%d") for _ in range(5)]
+    days += [(now - timedelta(days=random.randint(15, 365))).strftime("%Y%m%d") for _ in range(30)]
     
     print(f"Sampling {len(days)} days for Juba and Bor specifically...")
     

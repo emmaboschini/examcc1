@@ -114,7 +114,8 @@
 
         async function fetchDetailedEvents() {
             try {
-                const response = await fetch('events_detailed.json');
+                // Add cache-buster timestamp
+                const response = await fetch('events_detailed.json?t=' + new Date().getTime());
                 const events = await response.json();
                 eventLayer.clearLayers();
                 
