@@ -1,46 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>South Sudan Conflict Map - Real-time & Historical</title>
+    <title>South Sudan Conflict Monitor</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        #map { height: 600px; width: 100%; border-radius: 8px; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f4f9; }
-        .controls { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .slider-container { display: flex; align-items: center; gap: 20px; margin-bottom: 10px; }
-        #yearSlider { flex-grow: 1; cursor: pointer; }
-        #yearLabel { font-size: 1.5em; font-weight: bold; min-width: 60px; color: #2c3e50; }
-        .legend { background: white; padding: 10px; line-height: 24px; color: #333; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
-        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.8; border-radius: 50%; }
-        .pulse { animation: pulsate 1.5s ease-out infinite; }
-        @keyframes pulsate {
-            0% { transform: scale(0.8); opacity: 0.8; }
-            50% { transform: scale(1.2); opacity: 0.3; }
-            100% { transform: scale(0.8); opacity: 0.8; }
+        :root {
+            --bg-dark: #1a1a1a;
+            --panel-bg: #262626;
+            --accent-red: #ff4d4d;
+            --accent-yellow: #f1c40f;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
         }
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main);
+            overflow: hidden;
+        }
+        #map { height: 100vh; width: 100vw; background: var(--bg-dark); }
+        
+        .overlay-panel {
+            position: absolute; top: 20px; left: 20px; z-index: 1000;
+            background: rgba(38, 38, 38, 0.95); backdrop-filter: blur(12px);
+            padding: 24px; border-radius: 12px; width: 320px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05);
+        }
+        h1 { margin: 0 0 8px 0; font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; color: white; }
+        .subtitle { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 24px; line-height: 1.4; }
+        
+        .control-group { margin-bottom: 24px; }
+        .label-header { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 12px; display: block; }
+        
+        .slider-wrap { display: flex; flex-direction: column; gap: 8px; }
+        #yearSlider { 
+            width: 100%; -webkit-appearance: none; background: #444; height: 4px; border-radius: 2px; outline: none; margin: 15px 0;
+        }
+        #yearSlider::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 18px; height: 18px; background: white; border-radius: 50%; cursor: pointer; border: 2px solid var(--accent-red);
+        }
+        #yearLabel { font-size: 2.5rem; font-weight: 300; color: white; line-height: 1; }
+
+        .toggle-wrap { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; cursor: pointer; color: var(--text-main); }
+        .toggle-wrap input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent-yellow); }
+
+        .legend-item { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 0.85rem; color: var(--text-dim); }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        
+        .pulse { animation: ring 2s cubic-bezier(0, 0.45, 0.45, 1) infinite; }
+        @keyframes ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        .leaflet-popup-content-wrapper { background: var(--panel-bg); color: var(--text-main); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); }
+        .leaflet-popup-tip { background: var(--panel-bg); }
+        .leaflet-popup-content b { color: white; }
+        .leaflet-container a { color: var(--accent-yellow); text-decoration: none; font-weight: 600; }
+        .leaflet-container a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <h1>South Sudan Conflict Map</h1>
-    <div class="controls">
-        <div class="slider-container">
-            <span id="yearLabel">2011</span>
-            <input type="range" id="yearSlider" min="2011" max="2026" value="2011" step="1">
+    <div class="overlay-panel">
+        <h1>Conflict Monitor</h1>
+        <p class="subtitle">Real-time situational awareness and historical analysis for the Juba-Bor corridor, South Sudan.</p>
+        
+        <div class="control-group">
+            <span class="label-header">Timeline Analysis</span>
+            <div class="slider-wrap">
+                <span id="yearLabel">2011</span>
+                <input type="range" id="yearSlider" min="2011" max="2026" value="2011" step="1">
+            </div>
         </div>
-        <p><b>Historical:</b> ACLED data for Juba & Bor (Red). <b>Real-time:</b> GDELT events last 24h (Yellow Pulse).</p>
-        <div style="margin-top: 10px;">
-            <label><input type="checkbox" id="showRealtime" checked> Show Real-time GDELT Events</label>
+
+        <div class="control-group">
+            <span class="label-header">Live Intelligence</span>
+            <label class="toggle-wrap">
+                <input type="checkbox" id="showRealtime" checked>
+                Enable GDELT Data Stream
+            </label>
+        </div>
+
+        <div class="control-group" style="margin-bottom: 0;">
+            <span class="label-header">Classification</span>
+            <div class="legend-item"><div class="dot" style="background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red)"></div> Historical (ACLED Verified)</div>
+            <div class="legend-item"><div class="dot" style="background: var(--accent-yellow); box-shadow: 0 0 8px var(--accent-yellow)"></div> Real-time (GDELT Signal)</div>
         </div>
     </div>
+
     <div id="map"></div>
 
     <script>
-        var map = L.map('map').setView([7.5, 30.0], 6);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors | GDELT Project'
+        var map = L.map('map', {zoomControl: false}).setView([5.8, 31.5], 8);
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
         }).addTo(map);
 
         var yearlyData = {
@@ -82,12 +140,12 @@
                 if (markers[location]) { map.removeLayer(markers[location]); }
 
                 if (yearStats && yearStats.events > 0) {
-                    var radius = Math.sqrt(yearStats.events) * 5;
+                    var radius = Math.sqrt(yearStats.events) * 6;
                     markers[location] = L.circleMarker(data.coords, {
-                        radius: radius, fillColor: "#e74c3c", color: "#c0392b",
-                        weight: 1, opacity: 1, fillOpacity: 0.7
+                        radius: radius, fillColor: "#ff4d4d", color: "white",
+                        weight: 1, opacity: 0.8, fillOpacity: 0.4
                     }).addTo(map);
-                    markers[location].bindPopup("<b>" + location + " (" + year + ")</b><br>Events: " + yearStats.events + "<br>Fatalities: " + yearStats.fatalities);
+                    markers[location].bindPopup("<b>" + location + "</b><br><span style='color: #a0a0a0'>Dataset: ACLED Historical (" + year + ")</span><br>Events: " + yearStats.events + "<br>Fatalities: " + yearStats.fatalities);
                 }
             }
         }
@@ -100,24 +158,27 @@
                 
                 events.forEach(event => {
                     if (event.lat && event.lng) {
-                        var pulse = L.circleMarker([event.lat, event.lng], {
-                            radius: 10, fillColor: "#f1c40f", color: "#f39c12",
-                            weight: 2, opacity: 0.8, fillOpacity: 0.6, className: 'pulse'
+                        // Static yellow circle
+                        L.circleMarker([event.lat, event.lng], {
+                            radius: 6, fillColor: "#f1c40f", color: "white",
+                            weight: 1, opacity: 1, fillOpacity: 0.8
                         }).addTo(realtimeLayer);
-                        pulse.bindPopup("<b>" + event.category + "</b><br>Location: " + event.location + "<br><a href='" + event.source + "' target='_blank'>View News Source</a>");
+
+                        // Pulsing ring (using a simple circle with animation)
+                        var pulseRing = L.circleMarker([event.lat, event.lng], {
+                            radius: 12, color: "#f1c40f", weight: 2,
+                            opacity: 0.6, fill: false, className: 'pulse'
+                        }).addTo(realtimeLayer);
+
+                        var marker = L.circleMarker([event.lat, event.lng], {
+                            radius: 15, opacity: 0, fillOpacity: 0
+                        }).addTo(realtimeLayer);
+
+                        marker.bindPopup("<b>" + event.category + "</b><br><span style='color: #a0a0a0'>Source: GDELT Real-time Signal</span><br>" + event.location + "<br><br><a href='" + event.source + "' target='_blank'>Verify Intelligence &rarr;</a>");
                     }
                 });
             } catch (e) { console.log("Realtime data error:", e); }
         }
-
-        var legend = L.control({position: 'bottomright'});
-        legend.onAdd = function (map) {
-            var div = L.DomUtil.create('div', 'info legend');
-            div.innerHTML += '<i style="background: #e74c3c"></i> Historical (ACLED)<br>';
-            div.innerHTML += '<i style="background: #f1c40f"></i> Real-time (GDELT)<br>';
-            return div;
-        };
-        legend.addTo(map);
 
         document.getElementById('showRealtime').onchange = function() {
             if (this.checked) { map.addLayer(realtimeLayer); }
@@ -133,6 +194,9 @@
 
         updateMarkers(2011);
         fetchRealtimeData();
+        
+        // Refresh realtime data every 5 minutes in UI
+        setInterval(fetchRealtimeData, 300000);
     </script>
 </body>
 </html>
