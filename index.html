@@ -41,12 +41,6 @@
             border: 1px solid rgba(56, 189, 248, 0.2); margin-top: 5px;
         }
 
-        #closestJuba {
-            background: rgba(251, 191, 36, 0.1);
-            padding: 12px; border-radius: 6px; border: 1px solid rgba(251, 191, 36, 0.3);
-            font-size: 0.8rem; margin-top: 10px; display: none;
-        }
-
         .legend-item { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 0.75rem; color: var(--text-dim); }
         .dot { width: 10px; height: 10px; border-radius: 50%; }
         .square { width: 10px; height: 10px; border-radius: 2px; }
@@ -59,7 +53,7 @@
 <body>
     <div class="overlay-panel">
         <h1>Juba Access Monitor</h1>
-        <p class="subtitle">Security event monitoring for <b>Education Bridge Initiative</b> in Juba. Data focuses on the Shirikat campus and surrounding 15km.</p>
+        <p class="subtitle">Security event monitoring for <b>Education Bridge Initiative</b> in Juba. Data focused on the Shirikat campus and surrounding 15km.</p>
         
         <div class="control-group">
             <span class="label-header">System Status</span>
@@ -67,14 +61,6 @@
             <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 8px;">
                 Last Data Refresh:<br>
                 <span id="lastRefresh" style="color:white">Syncing...</span>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <span class="label-header">Proximity Alert</span>
-            <div id="closestJuba">
-                <b style="color:var(--accent-yellow)">Closest Incident to Juba:</b><br>
-                <span id="jubaDist">Calculating...</span>
             </div>
         </div>
 
@@ -111,17 +97,6 @@
 
         var eventLayer = L.layerGroup().addTo(map);
 
-        function getDistance(lat1, lon1, lat2, lon2) {
-            var R = 6371;
-            var dLat = (lat2 - lat1) * Math.PI / 180;
-            var dLon = (lon2 - lon1) * Math.PI / 180;
-            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c;
-        }
-
         async function fetchDetailedEvents() {
             try {
                 const response = await fetch('events_detailed.json?t=' + new Date().getTime());
@@ -131,13 +106,9 @@
                 document.getElementById('lastRefresh').innerText = data.last_update + " UTC";
                 eventLayer.clearLayers();
                 
-                var minJubaDist = Infinity;
-                var closestEvent = null;
-                var closestMarker = null;
-
                 events.forEach(event => {
                     if (event.lat && event.lng) {
-                        var dist = getDistance(event.lat, event.lng, JUBA_COORDS[0], JUBA_COORDS[1]);
+                        var dateFormatted = event.date.substring(0,4) + "-" + event.date.substring(4,6) + "-" + event.date.substring(6,8);
                         
                         var dot = L.circleMarker([event.lat, event.lng], {
                             radius: 7, fillColor: "#fbbf24", color: "white", weight: 1, opacity: 1, fillOpacity: 1
@@ -145,31 +116,16 @@
 
                         dot.bindPopup(`
                             <div style="min-width: 180px;">
-                                <b style="color: white;">${event.type}</b><br>
-                                <span style="color:#94a3b8; font-size: 0.8em;">${event.date}</span><br>
-                                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin: 5px 0;">
-                                <p style="margin: 0; font-size: 0.85em;">${event.location}</p>
-                                <p style="font-size:0.75rem; color: #fbbf24; margin:5px 0 0 0;">Dist. to School: ${dist.toFixed(1)} km</p>
+                                <b style="color: white; font-size: 1.1em;">${event.type}</b><br>
+                                <span style="color:var(--accent-yellow); font-weight: 600; font-size: 0.9em;">${dateFormatted}</span><br>
+                                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin: 8px 0;">
+                                <p style="margin: 0; font-size: 0.85em; color: #f8fafc;">${event.location}</p>
                                 <br>
-                                <a href="${event.source}" target="_blank">View Report &rarr;</a>
+                                <a href="${event.source}" target="_blank">View Intelligence Report &rarr;</a>
                             </div>
                         `);
-
-                        if (dist < minJubaDist) {
-                            minJubaDist = dist;
-                            closestEvent = event;
-                            closestMarker = dot;
-                        }
                     }
                 });
-
-                if (closestEvent) {
-                    document.getElementById('closestJuba').style.display = 'block';
-                    document.getElementById('jubaDist').innerHTML = 
-                        `<b>${closestEvent.type}</b> at ${minJubaDist.toFixed(1)} km.<br>` +
-                        `<span style="color:#94a3b8; font-size:0.75rem;">${closestEvent.location}</span>`;
-                    closestMarker.setStyle({ color: '#ff4d4d', weight: 3 });
-                }
             } catch (e) { console.log("Data load error:", e); }
         }
 
