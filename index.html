@@ -42,10 +42,14 @@
         .dot { width: 12px; height: 12px; border-radius: 50%; }
         .square { width: 12px; height: 12px; border-radius: 2px; }
         
-        .pulse { animation: ring 2s cubic-bezier(0, 0.45, 0.45, 1) infinite; }
+        .pulse { 
+            animation: ring 3s cubic-bezier(0, 0.45, 0.45, 1) infinite;
+            transform-origin: center;
+        }
         @keyframes ring {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(3); opacity: 0; }
+            0% { transform: scale(0.5); opacity: 0.8; }
+            80% { transform: scale(2.5); opacity: 0; }
+            100% { transform: scale(0.5); opacity: 0; }
         }
 
         .leaflet-popup-content-wrapper { background: var(--panel-bg); color: var(--text-main); border-radius: 12px; padding: 5px; border: 1px solid rgba(255,255,255,0.1); }
