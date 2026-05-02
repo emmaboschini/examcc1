@@ -1,135 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Juba Education Access Monitor</title>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Sudan Education Facilities</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #0f172a;
-            --panel-bg: #1e293b;
-            --accent-yellow: #fbbf24;
-            --accent-blue: #38bdf8;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
+        body { margin: 0; padding: 0; }
+        #map { width: 100vw; height: 100vh; }
+        .info-box {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
         }
-        body, html { 
-            margin: 0; padding: 0; height: 100%; width: 100%;
-            font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main);
-            overflow: hidden;
-        }
-        #map { height: 100vh; width: 100vw; background: var(--bg-dark); }
-        
-        .overlay-panel {
-            position: absolute; top: 20px; left: 20px; z-index: 1000;
-            background: #1e293b;
-            padding: 20px; border-radius: 8px; width: 300px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
-        }
-        h1 { margin: 0 0 8px 0; font-size: 1rem; font-weight: 600; color: white; }
-        .subtitle { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 20px; line-height: 1.4; }
-        
-        .control-group { margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
-        .label-header { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 10px; display: block; }
-        
-        .status-badge {
-            display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem;
-            background: rgba(56, 189, 248, 0.1); color: var(--accent-blue);
-            border: 1px solid rgba(56, 189, 248, 0.2); margin-top: 5px;
-        }
-
-        .legend-item { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 0.75rem; color: var(--text-dim); }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .square { width: 10px; height: 10px; border-radius: 2px; }
-
-        .leaflet-popup-content-wrapper { background: var(--panel-bg); color: var(--text-main); border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-        .leaflet-popup-tip { background: var(--panel-bg); }
-        .leaflet-container a { color: var(--accent-blue); font-weight: 600; }
     </style>
 </head>
 <body>
-    <div class="overlay-panel">
-        <h1>Juba Access Monitor</h1>
-        <p class="subtitle">Security event monitoring for <b>Education Bridge Initiative</b> in Juba. Data focused on the Shirikat campus and surrounding 15km.</p>
-        
-        <div class="control-group">
-            <span class="label-header">System Status</span>
-            <div class="status-badge">● Live Hourly Updates</div>
-            <div style="font-size: 0.7rem; color: var(--text-dim); margin-top: 8px;">
-                Last Data Refresh:<br>
-                <span id="lastRefresh" style="color:white">Syncing...</span>
-            </div>
-        </div>
 
-        <div class="control-group">
-            <span class="label-header">Map Legend</span>
-            <div class="legend-item"><div class="square" style="background: var(--accent-blue)"></div> Greenbelt Academy Juba</div>
-            <div class="legend-item"><div class="dot" style="background: var(--accent-yellow)"></div> Security Incident Report</div>
-        </div>
-    </div>
+<div id="map"></div>
 
-    <div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Initialize the map centered on South Sudan
+    const map = L.map('map').setView([7.8627, 29.6950], 6);
 
-    <script>
-        var JUBA_COORDS = [4.88, 31.63];
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-        var map = L.map('map', {
-            zoomControl: false,
-            fadeAnimation: false,
-            markerZoomAnimation: false,
-            transform3DLimit: 0
-        }).setView([4.85, 31.6], 12);
-        
-        L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; CARTO',
-            updateWhenIdle: true
-        }).addTo(map);
-
-        // School Location (Greenbelt Academy - Juba)
-        L.circleMarker(JUBA_COORDS, {
-            radius: 12, fillColor: "#38bdf8", color: "white", weight: 3, opacity: 1, fillOpacity: 0.8
-        }).addTo(map).bindPopup("<b>Greenbelt Academy - Juba</b><br>Shirikat, Juba.");
-
-        var eventLayer = L.layerGroup().addTo(map);
-
-        async function fetchDetailedEvents() {
-            try {
-                const response = await fetch('events_detailed.json?t=' + new Date().getTime());
-                const data = await response.json();
-                const events = data.events;
-                
-                document.getElementById('lastRefresh').innerText = data.last_update + " UTC";
-                eventLayer.clearLayers();
-                
-                events.forEach(event => {
-                    if (event.lat && event.lng) {
-                        var dateFormatted = event.date.substring(0,4) + "-" + event.date.substring(4,6) + "-" + event.date.substring(6,8);
-                        
-                        var dot = L.circleMarker([event.lat, event.lng], {
-                            radius: 7, fillColor: "#fbbf24", color: "white", weight: 1, opacity: 1, fillOpacity: 1
-                        }).addTo(eventLayer);
-
-                        dot.bindPopup(`
-                            <div style="min-width: 180px;">
-                                <b style="color: white; font-size: 1.1em;">${event.type}</b><br>
-                                <span style="color:var(--accent-yellow); font-weight: 600; font-size: 0.9em;">${dateFormatted}</span><br>
-                                <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin: 8px 0;">
-                                <p style="margin: 0; font-size: 0.85em; color: #f8fafc;">${event.location}</p>
-                                <br>
-                                <a href="${event.source}" target="_blank">View Intelligence Report &rarr;</a>
-                            </div>
-                        `);
-                    }
-                });
-            } catch (e) { console.log("Data load error:", e); }
+    // Function to style and bind popups to each feature
+    function onEachFeature(feature, layer) {
+        let popupContent = `<strong>${feature.properties.name || "Unnamed Facility"}</strong><br>`;
+        popupContent += `Type: ${feature.properties.amenity || "N/A"}<br>`;
+        if (feature.properties["operator:type"]) {
+            popupContent += `Operator: ${feature.properties["operator:type"]}<br>`;
         }
+        if (feature.properties["addr:city"]) {
+            popupContent += `Location: ${feature.properties["addr:city"]}`;
+        }
+        layer.bindPopup(popupContent);
+    }
 
-        fetchDetailedEvents();
-    </script>
+    // Load the GeoJSON data
+    fetch('hotosm_ssd_education_facilities_points_geojson.geojson')
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                onEachFeature: onEachFeature,
+                pointToLayer: function (feature, latlng) {
+                    // Custom marker color based on type
+                    let color = "#3388ff"; // Default blue
+                    if (feature.properties.amenity === 'university' || feature.properties.amenity === 'college') {
+                        color = "#ff7800"; // Orange for higher ed
+                    } else if (feature.properties.amenity === 'kindergarten') {
+                        color = "#72ff00"; // Green for early ed
+                    }
+
+                    return L.circleMarker(latlng, {
+                        radius: 6,
+                        fillColor: color,
+                        color: "#000",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    });
+                }
+            }).addTo(map);
+        })
+        .catch(error => console.error('Error loading GeoJSON:', error));
+
+</script>
+
 </body>
 </html>
