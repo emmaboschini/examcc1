@@ -84,6 +84,16 @@
         .marker-cluster-large { background-color: rgba(253, 156, 115, 0.6); }
         .marker-cluster-large div { background-color: rgba(241, 128, 23, 0.6); }
 
+        /* Custom Multi-Color Dot */
+        .custom-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: block;
+        }
+
         /* Custom Popup Style */
         .leaflet-popup-content-wrapper {
             border-radius: 12px;
@@ -109,7 +119,7 @@
 
     <div class="overlay-panel map-header">
         <h1>South Sudan Education</h1>
-        <p>Enriched Infrastructure Map (Clean Data v1.0)</p>
+        <p>Interactive Infrastructure Explorer</p>
     </div>
 
     <div class="overlay-panel filter-container">
@@ -180,12 +190,10 @@
             const typesSet = new Set();
             const p = feature.properties;
             
-            // Check enriched columns first
             ["school_type1", "school_type2", "school_type3", "school_type4", "school_type5"].forEach(key => {
                 if (p[key] && p[key] !== "0") typesSet.add(p[key]);
             });
 
-            // Fallback to legacy field
             if (p.school_type) {
                 p.school_type.split(',').forEach(t => {
                     const trimmed = t.trim();
@@ -193,7 +201,6 @@
                 });
             }
 
-            // Keyword fallback from name
             const name = (p.school_name || p.name || "").toLowerCase();
             const keywords = {
                 "Primary": "Primary School", "Secondary": "Secondary School", 
@@ -216,7 +223,6 @@
                 allFeatures = data.features.map(f => {
                     f._detectedTypes = getSchoolTypes(f);
                     f._operator = f.properties.operator_type || "Unknown";
-                    // Handle weird CSV header keys
                     f._city = f.properties["addr_city,C,80"] || f.properties.addr_city || "Not Specified";
                     return f;
                 });
@@ -228,7 +234,7 @@
                     allOperators.add(f._operator);
                 });
 
-                // Initialize School Type Filters
+                // Initialize School Type Filters (ALPHABETICAL)
                 const typeContainer = document.getElementById('school-type-filters');
                 Array.from(allTypes).sort().forEach(type => {
                     activeTypeFilters.add(type);
@@ -236,7 +242,7 @@
                     createFilterItem(typeContainer, type, color, activeTypeFilters);
                 });
 
-                // Initialize Operator Filters
+                // Initialize Operator Filters (ALPHABETICAL)
                 const operatorContainer = document.getElementById('operator-filters');
                 Array.from(allOperators).sort().forEach(op => {
                     activeOperatorFilters.add(op);
@@ -279,17 +285,33 @@
                 features: filteredFeatures
             }, {
                 pointToLayer: (feature, latlng) => {
-                    const displayType = feature._detectedTypes.find(t => activeTypeFilters.has(t)) || feature._detectedTypes[0];
-                    const color = colorPalette[displayType] || defaultColor;
+                    // Get all ACTIVE types for this feature
+                    const activeTypes = feature._detectedTypes.filter(t => activeTypeFilters.has(t));
+                    const typesToDisplay = activeTypes.length > 0 ? activeTypes : [feature._detectedTypes[0]];
                     
-                    return L.circleMarker(latlng, {
-                        radius: 7,
-                        fillColor: color,
-                        color: "#fff",
-                        weight: 2,
-                        opacity: 1,
-                        fillOpacity: 0.9
+                    let bgStyle = "";
+                    if (typesToDisplay.length === 1) {
+                        bgStyle = colorPalette[typesToDisplay[0]] || defaultColor;
+                    } else {
+                        // Multi-color split (Half and Half for 2, or segments for more)
+                        const cols = typesToDisplay.map(t => colorPalette[t] || defaultColor);
+                        if (cols.length === 2) {
+                            bgStyle = `linear-gradient(90deg, ${cols[0]} 50%, ${cols[1]} 50%)`;
+                        } else {
+                            // Pie slice style for 3+ types
+                            const percentage = 100 / cols.length;
+                            bgStyle = `conic-gradient(` + cols.map((c, i) => `${c} ${i * percentage}% ${(i + 1) * percentage}%`).join(', ') + `)`;
+                        }
+                    }
+
+                    const icon = L.divIcon({
+                        className: 'custom-icon-container',
+                        html: `<div class="custom-dot" style="background: ${bgStyle}"></div>`,
+                        iconSize: [14, 14],
+                        iconAnchor: [7, 7]
                     });
+
+                    return L.marker(latlng, { icon: icon });
                 },
                 onEachFeature: (feature, layer) => {
                     const p = feature.properties;
