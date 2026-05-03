@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Sudan Population Map (Under 17)</title>
+    
+    <!-- Leaflet CSS for the map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* Make the map fill the whole screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+            background-color: #f8f9fa;
+        }
+        
+        /* Modern Info Box Style */
+        .info {
+            padding: 12px 16px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .info h4 {
+            margin: 0 0 8px;
+            color: #084594;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+        
+        /* Legend Style */
+        .legend {
+            line-height: 24px;
+            color: #555;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.8;
+            border-radius: 3px;
+        }
+
+        /* Title Overlay */
+        .map-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .map-title h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        .map-title p {
+            margin: 0;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="map-title">
+        <h2>South Sudan: Population Under 17</h2>
+        <p>Estimated Distribution by County (2024 UNFPA Data)</p>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Our Population Data -->
+    <script src="population_data.js"></script>
+
+    <script>
+        // 1. Initialize the map centered on South Sudan
+        const map = L.map('map').setView([7.5, 30.5], 6);
+
+        // 2. Add a professional, clean background layer (CartoDB Positron)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO'
+        }).addTo(map);
+
+        // 3. Define colors for our population gradients (Blues)
+        function getColor(d) {
+            return d > 250000 ? '#084594' :
+                   d > 200000 ? '#2171b5' :
+                   d > 150000 ? '#4292c6' :
+                   d > 100000 ? '#6baed6' :
+                   d > 50000  ? '#9ecae1' :
+                   d > 10000  ? '#c6dbef' :
+                                '#eff3ff';
+        }
+
+        // 4. Style each county feature
+        function style(feature) {
+            const pcode = feature.properties.pcode;
+            const pop = populationData[pcode] ? populationData[pcode].Population : 0;
+            
+            return {
+                fillColor: getColor(pop),
+                weight: 1,
+                opacity: 1,
+                color: 'white', // Border color
+                dashArray: '3',
+                fillOpacity: 0.8
+            };
+        }
+
+        // 5. Add interaction: Highlight on hover
+        function highlightFeature(e) {
+            const layer = e.target;
+            layer.setStyle({
+                weight: 2,
+                color: '#666',
+                dashArray: '',
+                fillOpacity: 0.9
+            });
+            layer.bringToFront();
+            info.update(layer.feature.properties);
+        }
+
+        function resetHighlight(e) {
+            geojson.resetStyle(e.target);
+            info.update();
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight
+            });
+        }
+
+        // 6. Custom Info Control (Top Right)
+        const info = L.control();
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        info.update = function (props) {
+            const pcode = props ? props.pcode : null;
+            const data = pcode ? populationData[pcode] : null;
+            
+            this._div.innerHTML = '<h4>County Information</h4>' + (props ?
+                '<b>' + props.shapeName + '</b><br />' + 
+                (data ? data.Population.toLocaleString() + ' children' : 'No data available')
+                : 'Hover over a county');
+        };
+        info.addTo(map);
+
+        // 7. Legend (Bottom Right)
+        const legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            const div = L.DomUtil.create('div', 'info legend');
+            const grades = [0, 10000, 50000, 100000, 150000, 200000, 250000];
+            
+            div.innerHTML += '<b>Population</b><br>';
+            for (let i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;' + grades[i + 1].toLocaleString() + '<br>' : '+');
+            }
+            return div;
+        };
+        legend.addTo(map);
+
+        // 8. Load the GeoJSON file and add it to the map
+        let geojson;
+        fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/15db51d84a38231ded5868247ee6588c95e77620/releaseData/gbHumanitarian/SSD/ADM2/geoBoundaries-SSD-ADM2_simplified.geojson')
+            .then(response => response.json())
+            .then(data => {
+                geojson = L.geoJson(data, {
+                    style: style,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+                
+                // Zoom to fit the boundaries
+                map.fitBounds(geojson.getBounds());
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+
+    </script>
+</body>
+</html>
