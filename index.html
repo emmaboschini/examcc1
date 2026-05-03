@@ -50,14 +50,19 @@
     // 1. Initialize the map centered on South Sudan
     const map = L.map('map').setView([7.8, 30.0], 6);
 
-    // 2. Add a modern, dark-themed background (CartoDB Dark Matter)
+    // 2. Create a custom pane for schools to keep them on top
+    map.createPane('schoolsPane');
+    map.getPane('schoolsPane').style.zIndex = 650;
+    map.getPane('schoolsPane').style.pointerEvents = 'none'; // Allows clicking through markers if needed, but we want popups
+
+    // 3. Add a modern, dark-themed background (CartoDB Light)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(map);
 
-    // 3. Define colors for our population gradients
+    // 4. Define colors for our population gradients
     function getColor(d) {
         return d > 200000 ? '#800026' :
                d > 150000 ? '#BD0026' :
@@ -69,7 +74,7 @@
                             '#FFEDA0';
     }
 
-    // 4. Style each county based on its population
+    // 5. Style each county based on its population
     function style(feature) {
         return {
             fillColor: getColor(feature.properties.population),
@@ -80,7 +85,7 @@
         };
     }
 
-    // 5. Add interaction (Hover effects)
+    // 6. Add interaction (Hover effects)
     const info = L.control();
 
     info.onAdd = function (map) {
@@ -120,10 +125,12 @@
         });
     }
 
-    // 6. Load our prepared GeoJSON data (Population)
-    let geojson;
+    // 7. Load our layers
     const populationLayer = L.layerGroup();
+    const schoolsLayer = L.layerGroup();
     
+    // Population Layer
+    let geojson;
     fetch('data/clean/ss_map_data.geojson')
         .then(response => response.json())
         .then(data => {
@@ -134,24 +141,21 @@
             populationLayer.addTo(map);
         });
 
-    // 7. Add Schools Layer (from the geocoded CSV)
-    const schoolsLayer = L.layerGroup();
-    
-    // We use a small circle marker for schools to avoid cluttering
+    // Schools Layer
     const schoolMarkerOptions = {
         radius: 3,
         fillColor: "#0078ff",
         color: "#fff",
         weight: 1,
         opacity: 1,
-        fillOpacity: 0.8
+        fillOpacity: 0.8,
+        pane: 'schoolsPane' // Use the custom pane to stay on top
     };
 
-    // Helper to read CSV (very simple for this case)
     fetch('data/clean/ss_clean_schools_geo.csv')
         .then(response => response.text())
         .then(csvText => {
-            const lines = csvText.split('\n').slice(1); // skip header
+            const lines = csvText.split('\n').slice(1);
             lines.forEach(line => {
                 const parts = line.split(',');
                 if (parts.length >= 6) {
@@ -167,13 +171,10 @@
                     }
                 }
             });
+            schoolsLayer.addTo(map); // Add to map by default
         });
 
-    // 8. Add Layer Control (Toggle between Population and Schools)
-    const baseMaps = {
-        "Light Map": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png')
-    };
-
+    // 8. Layer Control
     const overlayMaps = {
         "Population Density": populationLayer,
         "School Facilities": schoolsLayer
