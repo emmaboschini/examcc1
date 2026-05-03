@@ -208,26 +208,33 @@
             });
 
             L.geoJson(data, {
-                pane: 'riskPane',
-                pointToLayer: (f, latlng) => {
+                onEachFeature: (f, l) => {
                     const count = f.properties.incidents_count;
                     if (count > 0) {
-                        return L.circleMarker(latlng, {
-                            radius: 8 + (count * 2), // Proportional
-                            fillColor: "#e53e3e", color: "#fff", weight: 2, opacity: 1, fillOpacity: 0.8
+                        // Calculate the center of the state to place the marker
+                        const center = l.getBounds().getCenter();
+                        
+                        const marker = L.circleMarker(center, {
+                            radius: 8 + (count * 2),
+                            fillColor: "#e53e3e", 
+                            color: "#fff", 
+                            weight: 2, 
+                            opacity: 1, 
+                            fillOpacity: 0.9, 
+                            pane: 'riskPane',
+                            className: 'risk-marker'
                         });
-                    }
-                },
-                onEachFeature: (f, l) => {
-                    if (f.properties.incidents_count > 0) {
-                        l.on('click', () => {
+
+                        marker.on('click', () => {
                             document.getElementById('stateFilter').value = f.properties.shapeName;
                             applyFilters();
                         });
-                        l.bindTooltip(`<b>${f.properties.shapeName}</b>: ${f.properties.risk_level}`);
+                        
+                        marker.bindTooltip(`<b>${f.properties.shapeName}</b>: ${f.properties.risk_level}`);
+                        marker.addTo(layerRisk);
                     }
                 }
-            }).addTo(layerRisk);
+            });
             layerRisk.addTo(map);
         });
 
