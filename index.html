@@ -103,7 +103,7 @@
         const map = L.map('map').setView([7.5, 30.5], 6);
 
         // 2. Add a professional, clean background layer (CartoDB Positron)
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        const baseLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO'
         }).addTo(map);
 
@@ -192,20 +192,52 @@
         };
         legend.addTo(map);
 
-        // 8. Load the GeoJSON file and add it to the map
+        // 8. Layers and GeoJSON
         let geojson;
+        const populationLayer = L.layerGroup().addTo(map);
+        const schoolLayer = L.layerGroup().addTo(map);
+
+        // Load Counties (Population)
         fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/15db51d84a38231ded5868247ee6588c95e77620/releaseData/gbHumanitarian/SSD/ADM2/geoBoundaries-SSD-ADM2_simplified.geojson')
             .then(response => response.json())
             .then(data => {
                 geojson = L.geoJson(data, {
                     style: style,
                     onEachFeature: onEachFeature
-                }).addTo(map);
+                }).addTo(populationLayer);
                 
-                // Zoom to fit the boundaries
                 map.fitBounds(geojson.getBounds());
-            })
-            .catch(error => console.error('Error loading GeoJSON:', error));
+            });
+
+        // Load Schools
+        fetch('south_sudan_schools.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJson(data, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 5,
+                            fillColor: "#ff7800",
+                            color: "#000",
+                            weight: 1,
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function (feature, layer) {
+                        const name = feature.properties.name || "Unnamed School";
+                        const type = feature.properties.amenity || "School";
+                        layer.bindPopup(`<strong>${name}</strong><br>Type: ${type}`);
+                    }
+                }).addTo(schoolLayer);
+            });
+
+        // Layer Control
+        const overlayMaps = {
+            "Population Density": populationLayer,
+            "Schools": schoolLayer
+        };
+        L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
 
     </script>
 </body>
