@@ -6,9 +6,9 @@ This project focuses on analyzing conflict incidents in schools across South Sud
 The primary goal is to understand the nature and frequency of conflict-related disruptions to education in South Sudan, including school closures, military use of facilities, and direct attacks.
 
 ## Data Sources
-- **South Sudan Education Cluster Dataset**: Ground-level data on education in emergencies, including school functionality and conflict-related closures.
+- **South Sudan Education Cluster Dataset**: Ground-level data on education in emergencies.
 - **IOM DTM Displacement Data**: Round 16 baseline assessment for IDPs and returnees.
-- **OCHA Population Estimates 2024**: Official county-level population statistics disaggregated by age and sex.
+- **OCHA Population Estimates 2024**: Official county-level population statistics.
 - Detailed source documentation can be found in [sources.md](./sources.md).
 
 ## Project Structure
@@ -17,9 +17,11 @@ The primary goal is to understand the nature and frequency of conflict-related d
 - `data/raw/ssd_2024_population_estimates.xlsx`: OCHA 2024 Population Estimates (XLSX).
 - `data/processed/clean_education in danger.csv`: Processed and cleaned education data.
 - `data/processed/iom_dtm_r16_baseline.csv`: CSV version of the IOM DTM dataset.
-- `data/processed/ssd_2024_population_estimates.csv`: CSV version of the OCHA population data.
+- `data/processed/ssd_2024_population_estimates.csv`: Full CSV version of the OCHA population data.
+- `data/processed/school_age_population_2024.csv`: Filtered version containing only children (ages 0-17).
 - `data/processed/south_sudan_schools.geojson`: Geographic locations of schools from OpenStreetMap.
 - `scripts/fetch_osm_schools.py`: Script used to download data from OpenStreetMap.
+- `scripts/filter_school_age.py`: Script used to filter population data for children.
 - `sources.md`: Documentation of data origins and characteristics.
 - `README.md`: Project overview and status (this file).
 
@@ -31,6 +33,7 @@ The primary goal is to understand the nature and frequency of conflict-related d
 - [x] Tidy project structure (organized into `data/` and `scripts/`).
 - [x] Acquire IDP data (IOM DTM Round 16).
 - [x] Acquire school-age population estimates (OCHA 2024).
+- [x] Filter and isolate school-age population data.
 - [ ] Exploratory Data Analysis (EDA).
 - [ ] Visualization of conflict trends.
 - [ ] Final report/insights generation.

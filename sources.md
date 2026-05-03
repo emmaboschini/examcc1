@@ -30,4 +30,6 @@
 - **Description:** Official subnational population statistics for South Sudan, projected for 2024. Includes age-disaggregated data (e.g., ages 5-17 for school-age estimates) at the county level (Admin 2).
 - **Local Files:**
     - `data/raw/ssd_2024_population_estimates.xlsx`: The raw Excel projections.
-    - `data/processed/ssd_2024_population_estimates.csv`: CSV version with focused age brackets for analysis.
+    - `data/processed/ssd_2024_population_estimates.csv`: Full CSV version.
+    - `data/processed/school_age_population_2024.csv`: Filtered version with only school-age children (0-17).
+    - `scripts/filter_school_age.py`: Script used to filter and transform the population data.

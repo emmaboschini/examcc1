@@ -1,0 +1,321 @@
+Admin1,Admin2,Admin2_Pcode,Age_Group,Population_Count
+Abyei Administrative Area,Abyei Administrative Area,SS0001,Male_Under_5,13954.368
+Central Equatoria,Juba,SS0101,Male_Under_5,42241.726166933695
+Central Equatoria,Kajo-keji,SS0102,Male_Under_5,4205.225570812271
+Central Equatoria,Lainya,SS0103,Male_Under_5,12511.285676616184
+Central Equatoria,Morobo,SS0104,Male_Under_5,11140.775324546092
+Central Equatoria,Terekeka,SS0105,Male_Under_5,23602.31787093024
+Central Equatoria,Yei,SS0106,Male_Under_5,30729.04200518573
+Eastern Equatoria,Budi,SS0201,Male_Under_5,11237.885300477654
+Eastern Equatoria,Ikotos,SS0202,Male_Under_5,12904.270917007345
+Eastern Equatoria,Kapoeta East,SS0203,Male_Under_5,23110.274963755324
+Eastern Equatoria,Kapoeta North,SS0204,Male_Under_5,17675.2418920249
+Eastern Equatoria,Kapoeta South,SS0205,Male_Under_5,9812.55545604283
+Eastern Equatoria,Lafon,SS0206,Male_Under_5,19815.81156311258
+Eastern Equatoria,Magwi,SS0207,Male_Under_5,40834.11699239408
+Eastern Equatoria,Torit,SS0208,Male_Under_5,7045.2758915497225
+Jonglei,Akobo,SS0301,Male_Under_5,22304.50925916192
+Jonglei,Ayod,SS0302,Male_Under_5,18205.258529388164
+Jonglei,Bor South,SS0303,Male_Under_5,47282.99409459608
+Jonglei,Canal/Pigi,SS0304,Male_Under_5,10134.472966820487
+Jonglei,Duk,SS0305,Male_Under_5,23133.089543347825
+Jonglei,Fangak,SS0306,Male_Under_5,21068.57835890312
+Jonglei,Nyirol,SS0307,Male_Under_5,13796.538299040774
+Jonglei,Pibor,SS0308,Male_Under_5,32557.925661540925
+Jonglei,Pochalla,SS0309,Male_Under_5,11229.201599128955
+Jonglei,Twic East,SS0310,Male_Under_5,9567.885980338193
+Jonglei,Uror,SS0311,Male_Under_5,29523.36271187838
+Lakes,Awerial,SS0401,Male_Under_5,9143.744741895232
+Lakes,Cueibet,SS0402,Male_Under_5,14265.589202135356
+Lakes,Rumbek Centre,SS0403,Male_Under_5,18044.515019193477
+Lakes,Rumbek East,SS0404,Male_Under_5,16794.0200008847
+Lakes,Rumbek North,SS0405,Male_Under_5,7166.965292326154
+Lakes,Wulu,SS0406,Male_Under_5,7425.855811904031
+Lakes,Yirol East,SS0407,Male_Under_5,17907.533312189178
+Lakes,Yirol West,SS0408,Male_Under_5,16174.184812233669
+Northern Bahr el Ghazal,Aweil Centre,SS0501,Male_Under_5,13975.641047839756
+Northern Bahr el Ghazal,Aweil East,SS0502,Male_Under_5,33798.68992586888
+Northern Bahr el Ghazal,Aweil North,SS0503,Male_Under_5,14799.986217577913
+Northern Bahr el Ghazal,Aweil South,SS0504,Male_Under_5,16676.43976687324
+Northern Bahr el Ghazal,Aweil West,SS0505,Male_Under_5,22763.63071237517
+Unity,Abiemnhom,SS0601,Male_Under_5,5992.694690678238
+Unity,Guit,SS0602,Male_Under_5,8643.780616406128
+Unity,Koch,SS0603,Male_Under_5,10018.739209624971
+Unity,Leer,SS0604,Male_Under_5,7940.740261009639
+Unity,Mayendit,SS0605,Male_Under_5,7106.457540883499
+Unity,Mayom,SS0606,Male_Under_5,19749.165509942275
+Unity,Panyijiar,SS0607,Male_Under_5,9619.410958345565
+Unity,Pariang,SS0608,Male_Under_5,17691.325282184764
+Unity,Rubkona,SS0609,Male_Under_5,36903.79188178789
+Upper Nile,Baliet,SS0701,Male_Under_5,5825.089762888705
+Upper Nile,Fashoda,SS0702,Male_Under_5,8628.834818176432
+Upper Nile,Longochuk,SS0703,Male_Under_5,9502.120473740126
+Upper Nile,Luakpiny/Nasir,SS0704,Male_Under_5,39633.81801644322
+Upper Nile,Maban,SS0705,Male_Under_5,6797.839919904
+Upper Nile,Maiwut,SS0706,Male_Under_5,20695.158531496345
+Upper Nile,Malakal,SS0707,Male_Under_5,8528.917539512136
+Upper Nile,Manyo,SS0708,Male_Under_5,8636.885772041602
+Upper Nile,Melut,SS0709,Male_Under_5,13807.58642350321
+Upper Nile,Panyikang,SS0710,Male_Under_5,2319.528740172739
+Upper Nile,Renk,SS0711,Male_Under_5,20214.718299238026
+Upper Nile,Ulang,SS0712,Male_Under_5,13163.75187078868
+Warrap,Gogrial East,SS0801,Male_Under_5,12685.638240057542
+Warrap,Gogrial West,SS0802,Male_Under_5,29193.26019542415
+Warrap,Tonj East,SS0803,Male_Under_5,15505.877739532843
+Warrap,Tonj North,SS0804,Male_Under_5,20578.7478598337
+Warrap,Tonj South,SS0805,Male_Under_5,8802.32506490666
+Warrap,Twic,SS0806,Male_Under_5,24500.6920512496
+Western Bahr el Ghazal,Jur River,SS0901,Male_Under_5,25593.501437317915
+Western Bahr el Ghazal,Raja,SS0902,Male_Under_5,7318.432329714868
+Western Bahr el Ghazal,Wau,SS0903,Male_Under_5,45665.12291680492
+Western Equatoria,Ezo,SS1001,Male_Under_5,8159.188405097562
+Western Equatoria,Ibba,SS1002,Male_Under_5,6072.986275524889
+Western Equatoria,Maridi,SS1003,Male_Under_5,11306.652470010378
+Western Equatoria,Mundri East,SS1004,Male_Under_5,10204.407052290131
+Western Equatoria,Mundri West,SS1005,Male_Under_5,4868.820728375496
+Western Equatoria,Mvolo,SS1006,Male_Under_5,8459.551292319506
+Western Equatoria,Nagero,SS1007,Male_Under_5,3699.8161
+Western Equatoria,Nzara,SS1008,Male_Under_5,8136.014416377141
+Western Equatoria,Tambura,SS1009,Male_Under_5,14331.647290968263
+Western Equatoria,Yambio,SS1010,Male_Under_5,17762.525278906236
+,,,Male_Under_5,1295913.935170432
+Abyei Administrative Area,Abyei Administrative Area,SS0001,Female_Under_5,12936.862
+Central Equatoria,Juba,SS0101,Female_Under_5,55599.244981883
+Central Equatoria,Kajo-keji,SS0102,Female_Under_5,7765.477894567446
+Central Equatoria,Lainya,SS0103,Female_Under_5,12034.66526988795
+Central Equatoria,Morobo,SS0104,Female_Under_5,14353.146123648336
+Central Equatoria,Terekeka,SS0105,Female_Under_5,22162.176441517546
+Central Equatoria,Yei,SS0106,Female_Under_5,39967.4107103695
+Eastern Equatoria,Budi,SS0201,Female_Under_5,10608.737281725043
+Eastern Equatoria,Ikotos,SS0202,Female_Under_5,11670.529253107416
+Eastern Equatoria,Kapoeta East,SS0203,Female_Under_5,15249.279919265824
+Eastern Equatoria,Kapoeta North,SS0204,Female_Under_5,17350.925527033618
+Eastern Equatoria,Kapoeta South,SS0205,Female_Under_5,10762.1575969502
+Eastern Equatoria,Lafon,SS0206,Female_Under_5,22108.550091076024
+Eastern Equatoria,Magwi,SS0207,Female_Under_5,28835.168768475207
+Eastern Equatoria,Torit,SS0208,Female_Under_5,7703.712890759977
+Jonglei,Akobo,SS0301,Female_Under_5,18233.995829795123
+Jonglei,Ayod,SS0302,Female_Under_5,19789.218876012896
+Jonglei,Bor South,SS0303,Female_Under_5,32065.88646775308
+Jonglei,Canal/Pigi,SS0304,Female_Under_5,7154.402171510939
+Jonglei,Duk,SS0305,Female_Under_5,19787.05337725644
+Jonglei,Fangak,SS0306,Female_Under_5,23646.23051403687
+Jonglei,Nyirol,SS0307,Female_Under_5,11727.057554184656
+Jonglei,Pibor,SS0308,Female_Under_5,27804.943813140788
+Jonglei,Pochalla,SS0309,Female_Under_5,8520.982389927267
+Jonglei,Twic East,SS0310,Female_Under_5,10827.15998317782
+Jonglei,Uror,SS0311,Female_Under_5,26521.683773205503
+Lakes,Awerial,SS0401,Female_Under_5,8797.60929425251
+Lakes,Cueibet,SS0402,Female_Under_5,8059.868700410693
+Lakes,Rumbek Centre,SS0403,Female_Under_5,12393.088613675416
+Lakes,Rumbek East,SS0404,Female_Under_5,14151.85737143517
+Lakes,Rumbek North,SS0405,Female_Under_5,7324.563482000341
+Lakes,Wulu,SS0406,Female_Under_5,6512.613917023907
+Lakes,Yirol East,SS0407,Female_Under_5,15917.807388612604
+Lakes,Yirol West,SS0408,Female_Under_5,14143.3454636124
+Northern Bahr el Ghazal,Aweil Centre,SS0501,Female_Under_5,10975.22093587416
+Northern Bahr el Ghazal,Aweil East,SS0502,Female_Under_5,36964.843548901095
+Northern Bahr el Ghazal,Aweil North,SS0503,Female_Under_5,12606.018411454552
+Northern Bahr el Ghazal,Aweil South,SS0504,Female_Under_5,13128.906216465664
+Northern Bahr el Ghazal,Aweil West,SS0505,Female_Under_5,25888.050614073727
+Unity,Abiemnhom,SS0601,Female_Under_5,5141.768254237521
+Unity,Guit,SS0602,Female_Under_5,7454.337300815199
+Unity,Koch,SS0603,Female_Under_5,8245.307211599404
+Unity,Leer,SS0604,Female_Under_5,7289.859911746555
+Unity,Mayendit,SS0605,Female_Under_5,5902.225196089433
+Unity,Mayom,SS0606,Female_Under_5,15816.357550634802
+Unity,Panyijiar,SS0607,Female_Under_5,12535.531603198351
+Unity,Pariang,SS0608,Female_Under_5,13851.0132087349
+Unity,Rubkona,SS0609,Female_Under_5,35890.746614444695
+Upper Nile,Baliet,SS0701,Female_Under_5,4378.335442694125
+Upper Nile,Fashoda,SS0702,Female_Under_5,7204.65819770071
+Upper Nile,Longochuk,SS0703,Female_Under_5,6780.326643126428
+Upper Nile,Luakpiny/Nasir,SS0704,Female_Under_5,41387.526778232736
+Upper Nile,Maban,SS0705,Female_Under_5,7178.316034824
+Upper Nile,Maiwut,SS0706,Female_Under_5,14501.393228141367
+Upper Nile,Malakal,SS0707,Female_Under_5,6325.273773322399
+Upper Nile,Manyo,SS0708,Female_Under_5,8075.068930559285
+Upper Nile,Melut,SS0709,Female_Under_5,13941.640660624598
+Upper Nile,Panyikang,SS0710,Female_Under_5,2110.562187004024
+Upper Nile,Renk,SS0711,Female_Under_5,16954.27986387705
+Upper Nile,Ulang,SS0712,Female_Under_5,10788.58952561461
+Warrap,Gogrial East,SS0801,Female_Under_5,12630.121223689675
+Warrap,Gogrial West,SS0802,Female_Under_5,23312.85379133991
+Warrap,Tonj East,SS0803,Female_Under_5,15238.535019885723
+Warrap,Tonj North,SS0804,Female_Under_5,22777.796113984798
+Warrap,Tonj South,SS0805,Female_Under_5,10418.820916137724
+Warrap,Twic,SS0806,Female_Under_5,17354.65686963513
+Western Bahr el Ghazal,Jur River,SS0901,Female_Under_5,32028.606850374887
+Western Bahr el Ghazal,Raja,SS0902,Female_Under_5,6099.970821416791
+Western Bahr el Ghazal,Wau,SS0903,Female_Under_5,42897.53970972583
+Western Equatoria,Ezo,SS1001,Female_Under_5,11865.396019616455
+Western Equatoria,Ibba,SS1002,Female_Under_5,4523.894968223958
+Western Equatoria,Maridi,SS1003,Female_Under_5,9587.312567722798
+Western Equatoria,Mundri East,SS1004,Female_Under_5,9419.452663652432
+Western Equatoria,Mundri West,SS1005,Female_Under_5,4668.309631853168
+Western Equatoria,Mvolo,SS1006,Female_Under_5,6208.844985188628
+Western Equatoria,Nagero,SS1007,Female_Under_5,3576.6941
+Western Equatoria,Nzara,SS1008,Female_Under_5,9759.762516460902
+Western Equatoria,Tambura,SS1009,Female_Under_5,12905.857337492864
+Western Equatoria,Yambio,SS1010,Female_Under_5,17745.12809449986
+,,,Female_Under_5,1187529.032739594
+Abyei Administrative Area,Abyei Administrative Area,SS0001,Male_5_17,25728.366
+Central Equatoria,Juba,SS0101,Male_5_17,87908.45715821336
+Central Equatoria,Kajo-keji,SS0102,Male_5_17,14834.38468231323
+Central Equatoria,Lainya,SS0103,Male_5_17,13107.06118502648
+Central Equatoria,Morobo,SS0104,Male_5_17,24332.00009532766
+Central Equatoria,Terekeka,SS0105,Male_5_17,48271.407171055056
+Central Equatoria,Yei,SS0106,Male_5_17,47829.85216158973
+Eastern Equatoria,Budi,SS0201,Male_5_17,20501.54750762815
+Eastern Equatoria,Ikotos,SS0202,Male_5_17,17561.367828485447
+Eastern Equatoria,Kapoeta East,SS0203,Male_5_17,30043.357452881923
+Eastern Equatoria,Kapoeta North,SS0204,Male_5_17,34377.534689075954
+Eastern Equatoria,Kapoeta South,SS0205,Male_5_17,23085.88315894808
+Eastern Equatoria,Lafon,SS0206,Male_5_17,23909.987505904443
+Eastern Equatoria,Magwi,SS0207,Male_5_17,51419.57655119163
+Eastern Equatoria,Torit,SS0208,Male_5_17,9679.02388839074
+Jonglei,Akobo,SS0301,Male_5_17,42133.38461976158
+Jonglei,Ayod,SS0302,Male_5_17,34559.13483544872
+Jonglei,Bor South,SS0303,Male_5_17,58882.04815981207
+Jonglei,Canal/Pigi,SS0304,Male_5_17,15737.45251455604
+Jonglei,Duk,SS0305,Male_5_17,36351.9978538323
+Jonglei,Fangak,SS0306,Male_5_17,44949.14088704305
+Jonglei,Nyirol,SS0307,Male_5_17,33418.28165767654
+Jonglei,Pibor,SS0308,Male_5_17,32795.57475396092
+Jonglei,Pochalla,SS0309,Male_5_17,16100.693469339314
+Jonglei,Twic East,SS0310,Male_5_17,19732.9534465591
+Jonglei,Uror,SS0311,Male_5_17,29605.600491020105
+Lakes,Awerial,SS0401,Male_5_17,32738.6444228741
+Lakes,Cueibet,SS0402,Male_5_17,42569.72905146493
+Lakes,Rumbek Centre,SS0403,Male_5_17,49171.85967005866
+Lakes,Rumbek East,SS0404,Male_5_17,33099.42088536435
+Lakes,Rumbek North,SS0405,Male_5_17,15234.491668504808
+Lakes,Wulu,SS0406,Male_5_17,20017.52436252391
+Lakes,Yirol East,SS0407,Male_5_17,26363.868487389624
+Lakes,Yirol West,SS0408,Male_5_17,30281.26528747783
+Northern Bahr el Ghazal,Aweil Centre,SS0501,Male_5_17,11109.45025667262
+Northern Bahr el Ghazal,Aweil East,SS0502,Male_5_17,80261.99434386662
+Northern Bahr el Ghazal,Aweil North,SS0503,Male_5_17,37594.93986424941
+Northern Bahr el Ghazal,Aweil South,SS0504,Male_5_17,24029.233664085536
+Northern Bahr el Ghazal,Aweil West,SS0505,Male_5_17,42626.01437317312
+Unity,Abiemnhom,SS0601,Male_5_17,11056.00873446378
+Unity,Guit,SS0602,Male_5_17,13748.782672762223
+Unity,Koch,SS0603,Male_5_17,19738.067822180696
+Unity,Leer,SS0604,Male_5_17,14492.935776924694
+Unity,Mayendit,SS0605,Male_5_17,15000.869578977929
+Unity,Mayom,SS0606,Male_5_17,28261.73685043463
+Unity,Panyijiar,SS0607,Male_5_17,23253.221765449514
+Unity,Pariang,SS0608,Male_5_17,24451.42518675943
+Unity,Rubkona,SS0609,Male_5_17,58250.10287223384
+Upper Nile,Baliet,SS0701,Male_5_17,19112.386019412614
+Upper Nile,Fashoda,SS0702,Male_5_17,16084.818301843445
+Upper Nile,Longochuk,SS0703,Male_5_17,14051.864598878406
+Upper Nile,Luakpiny/Nasir,SS0704,Male_5_17,58047.76001523321
+Upper Nile,Maban,SS0705,Male_5_17,17248.250543039998
+Upper Nile,Maiwut,SS0706,Male_5_17,26327.19810328213
+Upper Nile,Malakal,SS0707,Male_5_17,18730.972012612783
+Upper Nile,Manyo,SS0708,Male_5_17,8804.592291887071
+Upper Nile,Melut,SS0709,Male_5_17,29760.04064094866
+Upper Nile,Panyikang,SS0710,Male_5_17,7474.037051667715
+Upper Nile,Renk,SS0711,Male_5_17,47749.64676302841
+Upper Nile,Ulang,SS0712,Male_5_17,28936.837022191125
+Warrap,Gogrial East,SS0801,Male_5_17,26925.752938415357
+Warrap,Gogrial West,SS0802,Male_5_17,75888.55838643631
+Warrap,Tonj East,SS0803,Male_5_17,40559.70975217705
+Warrap,Tonj North,SS0804,Male_5_17,49139.22641991952
+Warrap,Tonj South,SS0805,Male_5_17,23363.416599823988
+Warrap,Twic,SS0806,Male_5_17,59210.00579051986
+Western Bahr el Ghazal,Jur River,SS0901,Male_5_17,58092.25297540473
+Western Bahr el Ghazal,Raja,SS0902,Male_5_17,15518.141850966083
+Western Bahr el Ghazal,Wau,SS0903,Male_5_17,46702.96661945958
+Western Equatoria,Ezo,SS1001,Male_5_17,23924.399899692853
+Western Equatoria,Ibba,SS1002,Male_5_17,14188.57967306605
+Western Equatoria,Maridi,SS1003,Male_5_17,18104.307580379154
+Western Equatoria,Mundri East,SS1004,Male_5_17,16184.520092043156
+Western Equatoria,Mundri West,SS1005,Male_5_17,11182.349613745197
+Western Equatoria,Mvolo,SS1006,Male_5_17,15009.882751693509
+Western Equatoria,Nagero,SS1007,Male_5_17,10834.736
+Western Equatoria,Nzara,SS1008,Male_5_17,14760.561186399716
+Western Equatoria,Tambura,SS1009,Male_5_17,16961.983929276335
+Western Equatoria,Yambio,SS1010,Male_5_17,29575.21349083311
+,,,Male_5_17,2377401.8954570214
+Abyei Administrative Area,Abyei Administrative Area,SS0001,Female_5_17,25146.934
+Central Equatoria,Juba,SS0101,Female_5_17,90762.62784516836
+Central Equatoria,Kajo-keji,SS0102,Female_5_17,14989.178261606932
+Central Equatoria,Lainya,SS0103,Female_5_17,12392.130574934125
+Central Equatoria,Morobo,SS0104,Female_5_17,22281.550649092183
+Central Equatoria,Terekeka,SS0105,Female_5_17,43737.62859697807
+Central Equatoria,Yei,SS0106,Female_5_17,61916.72642835931
+Eastern Equatoria,Budi,SS0201,Female_5_17,18765.96676624164
+Eastern Equatoria,Ikotos,SS0202,Female_5_17,17339.072033188164
+Eastern Equatoria,Kapoeta East,SS0203,Female_5_17,29763.23290786671
+Eastern Equatoria,Kapoeta North,SS0204,Female_5_17,27080.416476772098
+Eastern Equatoria,Kapoeta South,SS0205,Female_5_17,21629.82654289011
+Eastern Equatoria,Lafon,SS0206,Female_5_17,30133.134938948057
+Eastern Equatoria,Magwi,SS0207,Female_5_17,46488.071652879415
+Eastern Equatoria,Torit,SS0208,Female_5_17,12115.24078546868
+Jonglei,Akobo,SS0301,Female_5_17,37848.63364148074
+Jonglei,Ayod,SS0302,Female_5_17,31062.07952471879
+Jonglei,Bor South,SS0303,Female_5_17,54980.225691390784
+Jonglei,Canal/Pigi,SS0304,Female_5_17,17188.42331377043
+Jonglei,Duk,SS0305,Female_5_17,32840.72533385986
+Jonglei,Fangak,SS0306,Female_5_17,34723.743908000084
+Jonglei,Nyirol,SS0307,Female_5_17,29340.63811596005
+Jonglei,Pibor,SS0308,Female_5_17,36835.60932510104
+Jonglei,Pochalla,SS0309,Female_5_17,14366.772634179692
+Jonglei,Twic East,SS0310,Female_5_17,22459.216751675813
+Jonglei,Uror,SS0311,Female_5_17,36595.811718066514
+Lakes,Awerial,SS0401,Female_5_17,33748.20614516537
+Lakes,Cueibet,SS0402,Female_5_17,38596.55433999487
+Lakes,Rumbek Centre,SS0403,Female_5_17,50284.34518295591
+Lakes,Rumbek East,SS0404,Female_5_17,36917.88879504826
+Lakes,Rumbek North,SS0405,Female_5_17,16210.099509345018
+Lakes,Wulu,SS0406,Female_5_17,16973.384712923496
+Lakes,Yirol East,SS0407,Female_5_17,28353.5944109662
+Lakes,Yirol West,SS0408,Female_5_17,37171.61307744284
+Northern Bahr el Ghazal,Aweil Centre,SS0501,Female_5_17,10501.470391879591
+Northern Bahr el Ghazal,Aweil East,SS0502,Female_5_17,84298.84021323269
+Northern Bahr el Ghazal,Aweil North,SS0503,Female_5_17,43879.35612246717
+Northern Bahr el Ghazal,Aweil South,SS0504,Female_5_17,28653.155599445847
+Northern Bahr el Ghazal,Aweil West,SS0505,Female_5_17,43072.36007341577
+Unity,Abiemnhom,SS0601,Female_5_17,9655.902824859197
+Unity,Guit,SS0602,Female_5_17,13889.151759695316
+Unity,Koch,SS0603,Female_5_17,23261.90023384189
+Unity,Leer,SS0604,Female_5_17,15794.696475450866
+Unity,Mayendit,SS0605,Female_5_17,13083.01806689849
+Unity,Mayom,SS0606,Female_5_17,33539.5310815399
+Unity,Panyijiar,SS0607,Female_5_17,28151.294536890564
+Unity,Pariang,SS0608,Female_5_17,24019.92944816956
+Unity,Rubkona,SS0609,Female_5_17,60493.27453563662
+Upper Nile,Baliet,SS0701,Female_5_17,17208.76191389343
+Upper Nile,Fashoda,SS0702,Female_5_17,13739.115632824612
+Upper Nile,Longochuk,SS0703,Female_5_17,14172.654265917476
+Upper Nile,Luakpiny/Nasir,SS0704,Female_5_17,64185.740681496536
+Upper Nile,Maban,SS0705,Female_5_17,17544.176410199998
+Upper Nile,Maiwut,SS0706,Female_5_17,19069.110361164487
+Upper Nile,Malakal,SS0707,Female_5_17,13752.369429739669
+Upper Nile,Manyo,SS0708,Female_5_17,9307.711851423475
+Upper Nile,Melut,SS0709,Female_5_17,25296.034544806367
+Upper Nile,Panyikang,SS0710,Female_5_17,4604.2297214840255
+Upper Nile,Renk,SS0711,Female_5_17,37863.15602354676
+Upper Nile,Ulang,SS0712,Female_5_17,32951.19591544308
+Warrap,Gogrial East,SS0801,Female_5_17,25315.759463747218
+Warrap,Gogrial West,SS0802,Female_5_17,65763.12487407825
+Warrap,Tonj East,SS0803,Female_5_17,37237.02166513429
+Warrap,Tonj North,SS0804,Female_5_17,46967.32690964683
+Warrap,Tonj South,SS0805,Female_5_17,25068.314567919253
+Warrap,Twic,SS0806,Female_5_17,63876.80427647217
+Western Bahr el Ghazal,Jur River,SS0901,Female_5_17,57886.56467453076
+Western Bahr el Ghazal,Raja,SS0902,Female_5_17,14100.435064581528
+Western Bahr el Ghazal,Wau,SS0903,Female_5_17,60956.020135916864
+Western Equatoria,Ezo,SS1001,Female_5_17,25376.45885314242
+Western Equatoria,Ibba,SS1002,Female_5_17,11721.000599489347
+Western Equatoria,Maridi,SS1003,Female_5_17,19094.92063666405
+Western Equatoria,Mundri East,SS1004,Female_5_17,12807.150551457253
+Western Equatoria,Mundri West,SS1005,Female_5_17,8380.33557259985
+Western Equatoria,Mvolo,SS1006,Female_5_17,13581.84840510012
+Western Equatoria,Nagero,SS1007,Female_5_17,8852.471800000001
+Western Equatoria,Nzara,SS1008,Female_5_17,14164.61108583706
+Western Equatoria,Tambura,SS1009,Female_5_17,20034.80710486988
+Western Equatoria,Yambio,SS1010,Female_5_17,25399.88923330373
+,,,Female_5_17,2334265.083438514
