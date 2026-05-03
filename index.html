@@ -110,21 +110,27 @@
             iconAnchor: [10, 10]
         });
 
-        // Approximate locations for states (as news often mentions states/Juba)
+        // Approximate locations for hotspots
         const stateCoords = {
-            "Juba": [4.85, 31.6], "Khartoum": [15.5, 32.53], "Tonj": [7.27, 28.68], "Upper Nile": [9.3, 32.7],
-            "Jonglei": [7.0, 32.0], "Unity": [9.0, 30.0], "Warrap": [8.0, 28.5], "Lakes": [6.5, 30.0],
-            "Western Equatoria": [5.5, 28.5], "Eastern Equatoria": [4.5, 33.0], "Northern Bahr el Ghazal": [9.0, 27.5], "Western Bahr el Ghazal": [8.0, 25.5]
+            "Juba": [4.85, 31.6], "Malakal": [9.53, 31.66], "Wau": [7.70, 27.99], "Bor": [6.20, 31.55],
+            "Bentiu": [9.23, 29.83], "Yambio": [4.57, 28.39], "Torit": [4.41, 32.57], "Rumbek": [6.81, 29.68],
+            "Aweil": [8.77, 27.40], "Kuajok": [8.30, 27.98], "Abyei": [9.59, 28.43], "Tonj": [7.27, 28.68],
+            "Upper Nile": [9.3, 32.7], "Jonglei": [7.0, 32.0], "Unity": [9.0, 30.0], "Warrap": [8.0, 28.5],
+            "Lakes": [6.5, 30.0], "Equatoria": [4.8, 30.5], "Bahr el Ghazal": [8.5, 26.5]
         };
 
         fetch('data/processed/realtime_conflicts.json')
             .then(res => res.json())
             .then(data => {
                 data.articles.forEach(art => {
-                    // Try to find a location in the title or text
-                    let loc = [7.5, 30.5]; // Default to South Sudan center
-                    for (const [name, coord] of Object.entries(stateCoords)) {
-                        if (art.title.includes(name)) { loc = coord; break; }
+                    let loc = [7.5, 30.5]; // Default center
+                    // Give priority to specific cities over general states
+                    const sortedHotspots = Object.keys(stateCoords).sort((a, b) => b.length - a.length);
+                    for (const name of sortedHotspots) {
+                        if (art.title.toLowerCase().includes(name.toLowerCase())) { 
+                            loc = stateCoords[name]; 
+                            break; 
+                        }
                     }
                     
                     const marker = L.marker(loc, { icon: pulsingIcon, pane: 'topPane' });

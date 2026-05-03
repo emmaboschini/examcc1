@@ -4,11 +4,10 @@ import os
 from datetime import datetime
 
 def fetch_conflicts():
-    # Using GDELT DOC API to find news articles about conflicts in South Sudan
-    # mode=ArtList returns article metadata
-    # maxrows=50 for a good sample
-    # timespan=24h for real-time (last 24 hours)
-    url = 'https://api.gdeltproject.org/api/v2/doc/doc?query=South%20Sudan%20(threaten%20OR%20conflict%20OR%20violence%20OR%20protest)&mode=ArtList&maxrows=50&format=JSON&timespan=24h'
+    # Using more aggressive keywords to find serious events with casualties or armed action
+    # We look for: (South Sudan) AND (killed OR casualty OR dead OR explosion OR shooting OR gunfire OR gunmen OR "armed action" OR clashes)
+    query = 'South%20Sudan%20(killed%20OR%20dead%20OR%20casualty%20OR%20casualties%20OR%20explosion%20OR%20shooting%20OR%20gunfire%20OR%20gunmen%20OR%20"armed%20action"%20OR%20clashes)'
+    url = f'https://api.gdeltproject.org/api/v2/doc/doc?query={query}&mode=ArtList&maxrows=50&format=JSON&timespan=24h'
     
     print(f"Fetching news-based conflict data from GDELT at {datetime.now()}...")
     
