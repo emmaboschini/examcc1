@@ -145,30 +145,36 @@
     const layerSchools = L.layerGroup();
     const layerRisk = L.layerGroup();
 
-    // 1. Palette (Neutral & Readable)
+    // 1. Palette (Professional Blue Gradient)
     function getPopColor(d) {
-        // Using a more subtle neutral/blue scale for population
-        return d > 200000 ? '#4a5568' : 
-               d > 100000 ? '#718096' : 
-               d > 50000  ? '#a0aec0' : 
-               d > 20000  ? '#cbd5e0' : 
-               d > 5000   ? '#e2e8f0' : 
-                            '#f7fafc';
+        return d > 200000 ? '#084594' : 
+               d > 100000 ? '#2171b5' : 
+               d > 50000  ? '#4292c6' : 
+               d > 20000  ? '#6baed6' : 
+               d > 5000   ? '#9ecae1' : 
+               d > 0      ? '#c6dbef' :
+                            '#f7fbff';
     }
 
     // 2. Load Data
-    // --- Population (Subtle backdrop) ---
+    // --- Population (Base Analysis Layer) ---
     fetch('data/clean/ss_map_data.geojson')
         .then(res => res.json())
         .then(data => {
             L.geoJson(data, {
                 pane: 'popPane',
-                style: f => ({ fillColor: getPopColor(f.properties.population), weight: 1.5, opacity: 1, color: '#fff', fillOpacity: 0.7 }),
+                style: f => ({ 
+                    fillColor: getPopColor(f.properties.population), 
+                    weight: 1, 
+                    opacity: 1, 
+                    color: '#fff', 
+                    fillOpacity: 0.7 
+                }),
                 onEachFeature: (f, l) => {
                     l.bindTooltip(`<b>${f.properties.shapeName}</b><br>${f.properties.population.toLocaleString()} children`);
                 }
             }).addTo(layerPop);
-            // DO NOT addTo(map) by default to keep focus on risk
+            layerPop.addTo(map); // Added by default for verification
         });
 
     // --- Schools ---
@@ -310,7 +316,7 @@
     legend.onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');
         const grades = [0, 5000, 10000, 50000, 100000, 200000];
-        div.innerHTML = '<b>Child Population</b><br>(Context Layer)<br>';
+        div.innerHTML = '<b style="display:block; margin-bottom:10px;">Children Population (Under 17)</b>';
         for (let i = 0; i < grades.length; i++) {
             div.innerHTML += '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
