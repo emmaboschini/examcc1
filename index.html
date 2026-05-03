@@ -11,42 +11,50 @@
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         #map { height: 100vh; width: 100%; background: #f0f0f0; }
         
-        .map-header {
+        .overlay-panel {
             position: absolute;
-            top: 20px;
-            left: 50px;
             z-index: 1000;
             background: rgba(255, 255, 255, 0.95);
-            padding: 15px 25px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.15);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255,255,255,0.3);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .map-header {
+            top: 20px;
+            left: 50px;
+            padding: 15px 25px;
         }
 
         .map-header h1 { margin: 0; font-size: 1.4rem; color: #1a1a1a; font-weight: 700; letter-spacing: -0.5px; }
         .map-header p { margin: 4px 0 0; font-size: 0.85rem; color: #666; font-weight: 500; }
 
         .filter-container {
-            position: absolute;
             top: 20px;
             right: 20px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            width: 240px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.3);
+            width: 260px;
         }
 
-        .filter-container h3 { margin: 0 0 15px; font-size: 0.95rem; color: #1a1a1a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .filter-section { margin-bottom: 20px; }
+        .filter-section h3 { 
+            margin: 0 0 12px; 
+            font-size: 0.85rem; 
+            color: #1a1a1a; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            border-bottom: 2px solid #f0f0f0; 
+            padding-bottom: 8px; 
+        }
 
         .filter-item {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             cursor: pointer;
             transition: all 0.2s ease;
             padding: 4px 8px;
@@ -55,14 +63,14 @@
 
         .filter-item:hover { background: rgba(0,0,0,0.03); transform: translateX(3px); }
 
-        .filter-item input { margin-right: 12px; cursor: pointer; width: 18px; height: 18px; accent-color: #333; }
+        .filter-item input { margin-right: 12px; cursor: pointer; width: 16px; height: 16px; accent-color: #333; }
 
-        .filter-item label { cursor: pointer; font-size: 0.85rem; color: #333; flex-grow: 1; font-weight: 500; }
+        .filter-item label { cursor: pointer; font-size: 0.8rem; color: #333; flex-grow: 1; font-weight: 500; }
 
         .legend-color {
-            width: 14px;
-            height: 14px;
-            border-radius: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
             margin-right: 10px;
             display: inline-block;
             box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
@@ -81,15 +89,16 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .leaflet-popup-content h4 { margin: 8px 0; color: #1a1a1a; font-size: 1.1rem; }
-        .leaflet-popup-content p { margin: 6px 0; font-size: 0.8rem; color: #666; }
+        .leaflet-popup-content h4 { margin: 8px 0; color: #1a1a1a; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        .leaflet-popup-content p { margin: 6px 0; font-size: 0.8rem; color: #444; }
+        .leaflet-popup-content .meta-info { color: #888; font-size: 0.75rem; margin-top: 10px; font-style: italic; }
         .tag-container { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
         .type-tag {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 2px 8px;
             background: #f0f2f5;
             border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
             color: #4a5568;
             border: 1px solid #e2e8f0;
@@ -98,14 +107,21 @@
 </head>
 <body>
 
-    <div class="map-header">
+    <div class="overlay-panel map-header">
         <h1>South Sudan Education</h1>
-        <p>Interactive Infrastructure Map</p>
+        <p>Enriched Infrastructure Map (Clean Data v1.0)</p>
     </div>
 
-    <div class="filter-container" id="filters">
-        <h3>Filter Schools</h3>
-        <!-- Filters will be generated dynamically -->
+    <div class="overlay-panel filter-container">
+        <div class="filter-section" id="school-type-filters">
+            <h3>School Types</h3>
+            <!-- Filters will be generated dynamically -->
+        </div>
+        
+        <div class="filter-section" id="operator-filters">
+            <h3>Operator Type</h3>
+            <!-- Filters will be generated dynamically -->
+        </div>
     </div>
 
     <div id="map"></div>
@@ -129,13 +145,13 @@
         }).addTo(map);
 
         const colorPalette = {
-            "Primary School": "#FF5733",    // Vibrant Orange
-            "Secondary School": "#33FF57",  // Vibrant Green
-            "Nursery School": "#3357FF",    // Vibrant Blue
-            "Vocational School": "#FF33F5", // Vibrant Magenta
-            "University": "#FFD700",        // Gold
-            "College": "#00CED1",           // Dark Turquoise
-            "Other or Unknown": "#808080"   // Grey
+            "Primary School": "#FF5733",
+            "Secondary School": "#33FF57",
+            "Nursery School": "#3357FF",
+            "Vocational School": "#FF33F5",
+            "University": "#FFD700",
+            "College": "#00CED1",
+            "Other or Unknown": "#808080"
         };
 
         const defaultColor = "#333333";
@@ -143,7 +159,7 @@
         let markers = L.markerClusterGroup({
             showCoverageOnHover: false,
             spiderfyOnMaxZoom: true,
-            maxClusterRadius: 40,
+            maxClusterRadius: 45,
             disableClusteringAtZoom: 14,
             iconCreateFunction: function(cluster) {
                 var childCount = cluster.getChildCount();
@@ -155,100 +171,107 @@
             }
         });
 
-        const activeFilters = new Set();
+        const activeTypeFilters = new Set();
+        const activeOperatorFilters = new Set();
         let allFeatures = [];
 
-        // Helper to extract types from a feature
+        // Helper to extract types from a feature using enriched properties
         function getSchoolTypes(feature) {
             const typesSet = new Set();
-            const primaryType = feature.properties.school_type;
-            const name = (feature.properties.name || "").toLowerCase();
+            const p = feature.properties;
+            
+            // Check enriched columns first
+            ["school_type1", "school_type2", "school_type3", "school_type4", "school_type5"].forEach(key => {
+                if (p[key] && p[key] !== "0") typesSet.add(p[key]);
+            });
 
-            // Split explicit types and clean them
-            if (primaryType) {
-                primaryType.split(',').forEach(t => {
+            // Fallback to legacy field
+            if (p.school_type) {
+                p.school_type.split(',').forEach(t => {
                     const trimmed = t.trim();
-                    if (trimmed && trimmed !== "0" && trimmed !== "null") {
-                        typesSet.add(trimmed);
-                    }
+                    if (trimmed && trimmed !== "0" && trimmed !== "null") typesSet.add(trimmed);
                 });
             }
 
-            // Check name for multi-type keywords
+            // Keyword fallback from name
+            const name = (p.school_name || p.name || "").toLowerCase();
             const keywords = {
-                "Primary": "Primary School",
-                "Secondary": "Secondary School",
-                "Nursery": "Nursery School",
-                "Vocational": "Vocational School",
-                "University": "University",
-                "College": "College"
+                "Primary": "Primary School", "Secondary": "Secondary School", 
+                "Nursery": "Nursery School", "Vocational": "Vocational School", 
+                "University": "University", "College": "College"
             };
 
             for (let [keyword, officialType] of Object.entries(keywords)) {
-                if (name.includes(keyword.toLowerCase())) {
-                    typesSet.add(officialType);
-                }
+                if (name.includes(keyword.toLowerCase())) typesSet.add(officialType);
             }
             
-            // If it only had keywords but no explicit "Other or Unknown" and it was empty, 
-            // the explicit check for keywords would have filled it.
-            // If it's still empty, then it's Other or Unknown.
             const result = Array.from(typesSet);
             return result.length > 0 ? result : ["Other or Unknown"];
         }
 
-        // Fetch Data
-        fetch('maps/dots_education facilities.geojson')
+        // Fetch Enriched Data
+        fetch('maps/enriched_education_facilities.geojson')
             .then(response => response.json())
             .then(data => {
                 allFeatures = data.features.map(f => {
                     f._detectedTypes = getSchoolTypes(f);
+                    f._operator = f.properties.operator_type || "Unknown";
+                    // Handle weird CSV header keys
+                    f._city = f.properties["addr_city,C,80"] || f.properties.addr_city || "Not Specified";
                     return f;
                 });
                 
-                // Collect all unique types across all features
-                const allPossibleTypes = new Set();
-                allFeatures.forEach(f => f._detectedTypes.forEach(t => allPossibleTypes.add(t)));
-                
-                // Ensure "Other or Unknown" is always included if present in palette or data
-                if (allFeatures.some(f => f._detectedTypes.includes("Other or Unknown"))) {
-                    allPossibleTypes.add("Other or Unknown");
-                }
+                const allTypes = new Set();
+                const allOperators = new Set();
+                allFeatures.forEach(f => {
+                    f._detectedTypes.forEach(t => allTypes.add(t));
+                    allOperators.add(f._operator);
+                });
 
-                const sortedTypes = Array.from(allPossibleTypes).sort();
-                
-                // Initialize filters
-                const filterContainer = document.getElementById('filters');
-                sortedTypes.forEach(type => {
-                    activeFilters.add(type);
-                    
-                    const div = document.createElement('div');
-                    div.className = 'filter-item';
+                // Initialize School Type Filters
+                const typeContainer = document.getElementById('school-type-filters');
+                Array.from(allTypes).sort().forEach(type => {
+                    activeTypeFilters.add(type);
                     const color = colorPalette[type] || defaultColor;
-                    
-                    div.innerHTML = `
-                        <input type="checkbox" checked id="type-${type.replace(/\s+/g, '-')}" value="${type}">
-                        <span class="legend-color" style="background: ${color}"></span>
-                        <label for="type-${type.replace(/\s+/g, '-')}">${type}</label>
-                    `;
-                    
-                    div.querySelector('input').addEventListener('change', (e) => {
-                        if (e.target.checked) activeFilters.add(type);
-                        else activeFilters.delete(type);
-                        updateMap();
-                    });
-                    
-                    filterContainer.appendChild(div);
+                    createFilterItem(typeContainer, type, color, activeTypeFilters);
+                });
+
+                // Initialize Operator Filters
+                const operatorContainer = document.getElementById('operator-filters');
+                Array.from(allOperators).sort().forEach(op => {
+                    activeOperatorFilters.add(op);
+                    createFilterItem(operatorContainer, op, '#555', activeOperatorFilters);
                 });
 
                 updateMap();
             });
 
+        function createFilterItem(container, label, color, filterSet) {
+            const div = document.createElement('div');
+            div.className = 'filter-item';
+            const safeId = label.replace(/\s+/g, '-').toLowerCase();
+            
+            div.innerHTML = `
+                <input type="checkbox" checked id="filter-${safeId}">
+                <span class="legend-color" style="background: ${color}"></span>
+                <label for="filter-${safeId}">${label}</label>
+            `;
+            
+            div.querySelector('input').addEventListener('change', (e) => {
+                if (e.target.checked) filterSet.add(label);
+                else filterSet.delete(label);
+                updateMap();
+            });
+            
+            container.appendChild(div);
+        }
+
         function updateMap() {
             markers.clearLayers();
             
             const filteredFeatures = allFeatures.filter(f => 
-                f._detectedTypes.some(type => activeFilters.has(type))
+                f._detectedTypes.some(type => activeTypeFilters.has(type)) &&
+                activeOperatorFilters.has(f._operator)
             );
             
             const layer = L.geoJSON({
@@ -256,8 +279,7 @@
                 features: filteredFeatures
             }, {
                 pointToLayer: (feature, latlng) => {
-                    // Use the color of the first active type detected
-                    const displayType = feature._detectedTypes.find(t => activeFilters.has(t)) || feature._detectedTypes[0];
+                    const displayType = feature._detectedTypes.find(t => activeTypeFilters.has(t)) || feature._detectedTypes[0];
                     const color = colorPalette[displayType] || defaultColor;
                     
                     return L.circleMarker(latlng, {
@@ -270,14 +292,18 @@
                     });
                 },
                 onEachFeature: (feature, layer) => {
-                    const props = feature.properties;
+                    const p = feature.properties;
                     const tags = feature._detectedTypes.map(t => `<span class="type-tag">${t}</span>`).join('');
                     
                     layer.bindPopup(`
-                        <h4>${props.name || 'Unnamed Facility'}</h4>
+                        <h4>${p.school_name || p.name || 'Unnamed Facility'}</h4>
                         <div class="tag-container">${tags}</div>
-                        <p><strong>Lat:</strong> ${feature.geometry.coordinates[1].toFixed(5)}<br>
-                           <strong>Lon:</strong> ${feature.geometry.coordinates[0].toFixed(5)}</p>
+                        <p><strong>Operator:</strong> ${feature._operator}</p>
+                        <p><strong>City/Area:</strong> ${feature._city}</p>
+                        <div class="meta-info">
+                            Source: ${p["source,C,80"] || "OpenStreetMap"}<br>
+                            OSM ID: ${p["osm_id,N,18,0"] || "N/A"}
+                        </div>
                     `);
                 }
             });
