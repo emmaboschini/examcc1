@@ -124,12 +124,7 @@
 
     <div class="overlay-panel filter-container">
         <div class="filter-section" id="school-type-filters">
-            <h3>School Types</h3>
-            <!-- Filters will be generated dynamically -->
-        </div>
-        
-        <div class="filter-section" id="operator-filters">
-            <h3>Operator Type</h3>
+            <h3>Filter School Types</h3>
             <!-- Filters will be generated dynamically -->
         </div>
     </div>
@@ -182,7 +177,6 @@
         });
 
         const activeTypeFilters = new Set();
-        const activeOperatorFilters = new Set();
         let allFeatures = [];
 
         // Helper to extract types from a feature using enriched properties
@@ -228,10 +222,8 @@
                 });
                 
                 const allTypes = new Set();
-                const allOperators = new Set();
                 allFeatures.forEach(f => {
                     f._detectedTypes.forEach(t => allTypes.add(t));
-                    allOperators.add(f._operator);
                 });
 
                 // Initialize School Type Filters (ALPHABETICAL)
@@ -240,13 +232,6 @@
                     activeTypeFilters.add(type);
                     const color = colorPalette[type] || defaultColor;
                     createFilterItem(typeContainer, type, color, activeTypeFilters);
-                });
-
-                // Initialize Operator Filters (ALPHABETICAL)
-                const operatorContainer = document.getElementById('operator-filters');
-                Array.from(allOperators).sort().forEach(op => {
-                    activeOperatorFilters.add(op);
-                    createFilterItem(operatorContainer, op, '#555', activeOperatorFilters);
                 });
 
                 updateMap();
@@ -276,8 +261,7 @@
             markers.clearLayers();
             
             const filteredFeatures = allFeatures.filter(f => 
-                f._detectedTypes.some(type => activeTypeFilters.has(type)) &&
-                activeOperatorFilters.has(f._operator)
+                f._detectedTypes.some(type => activeTypeFilters.has(type))
             );
             
             const layer = L.geoJSON({
@@ -285,7 +269,6 @@
                 features: filteredFeatures
             }, {
                 pointToLayer: (feature, latlng) => {
-                    // Get all ACTIVE types for this feature
                     const activeTypes = feature._detectedTypes.filter(t => activeTypeFilters.has(t));
                     const typesToDisplay = activeTypes.length > 0 ? activeTypes : [feature._detectedTypes[0]];
                     
@@ -293,12 +276,10 @@
                     if (typesToDisplay.length === 1) {
                         bgStyle = colorPalette[typesToDisplay[0]] || defaultColor;
                     } else {
-                        // Multi-color split (Half and Half for 2, or segments for more)
                         const cols = typesToDisplay.map(t => colorPalette[t] || defaultColor);
                         if (cols.length === 2) {
                             bgStyle = `linear-gradient(90deg, ${cols[0]} 50%, ${cols[1]} 50%)`;
                         } else {
-                            // Pie slice style for 3+ types
                             const percentage = 100 / cols.length;
                             bgStyle = `conic-gradient(` + cols.map((c, i) => `${c} ${i * percentage}% ${(i + 1) * percentage}%`).join(', ') + `)`;
                         }
