@@ -18,6 +18,18 @@ The dashboard ([Live View](https://emmaboschini.github.io/examcc1/)) is an inter
 
 ---
 
+## 🧠 Analytical Methodology & Data Notes
+
+To provide an accurate assessment of risk, this project employs a specific multi-layered approach:
+
+### Why include School Infrastructure?
+We include the precise locations of thousands of school facilities to move beyond generic state-level warnings. By layering these locations over the areas with reported attacks, researchers can identify **specific facilities** that are physically exposed to high-risk environments. This intersection is crucial for prioritizing safety interventions and identifying gaps in infrastructure security.
+
+### Spatial Precision of Conflict Data
+It is important to note that the conflict incident data is mapped at the **Administrative State level (Admin 1)** rather than with exact GPS coordinates. While the individual records contain location descriptions, the map visualizes these as state-wide risk indicators. This approach is highly effective for highlighting regional "hotspots" and identifying which broader areas are becoming progressively more dangerous for educational activities.
+
+---
+
 ## 📁 Repository Organization
 
 The project follows a structured data pipeline to ensure transparency and reproducibility:

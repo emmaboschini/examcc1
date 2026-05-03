@@ -26,6 +26,7 @@ This project integrates diverse datasets to provide a holistic view of South Sud
 - **Dataset:** Violence incidents affecting aid operations and education.
 - **Timeframe:** 2024–2026.
 - **Used For:** Calculating state-level risk metrics and populating the sidebar chronological logs.
+- **Note on Precision:** While specific site descriptions are included in the logs, geographic visualization is performed at the **State level** to highlight regional risk trends.
 
 ---
 
