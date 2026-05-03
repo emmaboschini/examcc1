@@ -107,19 +107,19 @@
     <script src="population_data.js"></script>
 
     <script>
-        // 1. Initialize the map centered on South Sudan
+        // 1. Initialize the map
         const map = L.map('map').setView([7.5, 30.5], 6);
 
-        // Create a custom pane for facilities to keep them on top
+        // Create a custom pane for facilities to ensure they are on top of polygons
         map.createPane('facilitiesPane');
         map.getPane('facilitiesPane').style.zIndex = 650;
 
-        // 2. Add a professional, clean background layer
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        // 2. Base Tile Layer
+        const cartoLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO'
         }).addTo(map);
 
-        // 3. Population coloring
+        // 3. Population Density Logic
         function getColor(d) {
             return d > 250000 ? '#084594' :
                    d > 200000 ? '#2171b5' :
@@ -143,41 +143,24 @@
             };
         }
 
-        // 4. Interaction
-        function highlightFeature(e) {
-            const layer = e.target;
-            layer.setStyle({ weight: 2, color: '#666', dashArray: '', fillOpacity: 0.9 });
-            layer.bringToFront();
-            info.update(layer.feature.properties);
-        }
-
-        function resetHighlight(e) {
-            geojson.resetStyle(e.target);
-            info.update();
-        }
-
-        function onEachFeature(feature, layer) {
-            layer.on({ mouseover: highlightFeature, mouseout: resetHighlight });
-        }
-
-        // 5. Info Box
+        // 4. Interaction & Info Box
         const info = L.control();
         info.onAdd = function (map) { this._div = L.DomUtil.create('div', 'info'); this.update(); return this._div; };
         info.update = function (props) {
             const pcode = props ? props.pcode : null;
             const data = pcode ? populationData[pcode] : null;
-            this._div.innerHTML = '<h4>County Information</h4>' + (props ?
+            this._div.innerHTML = '<h4>County Info</h4>' + (props ?
                 '<b>' + props.shapeName + '</b><br />' + (data ? data.Population.toLocaleString() + ' children' : 'No data')
                 : 'Hover over a county');
         };
         info.addTo(map);
 
-        // 6. Legend
+        // 5. Legend
         const legend = L.control({position: 'bottomright'});
         legend.onAdd = function (map) {
             const div = L.DomUtil.create('div', 'info legend');
             const grades = [0, 10000, 50000, 100000, 150000, 200000, 250000];
-            div.innerHTML += '<b>Population</b><br>';
+            div.innerHTML += '<b>Population (Under 17)</b><br>';
             for (let i = 0; i < grades.length; i++) {
                 div.innerHTML += '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
                     grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;' + grades[i + 1].toLocaleString() + '<br>' : '+');
@@ -186,10 +169,10 @@
         };
         legend.addTo(map);
 
-        // 7. Layer Management
+        // 6. Layer Groups
         const populationLayer = L.layerGroup().addTo(map);
         
-        // Facilities layers (grouped by type)
+        // Define school type layers and their colors
         const schoolTypes = {
             "Primary School": { color: "#ff7800", layer: L.layerGroup().addTo(map) },
             "Secondary School": { color: "#e31a1c", layer: L.layerGroup().addTo(map) },
@@ -198,12 +181,27 @@
             "Other or Unknown": { color: "#b15928", layer: L.layerGroup().addTo(map) }
         };
 
+        // 7. Load Data
         // Load Counties
-        let geojson;
         fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/15db51d84a38231ded5868247ee6588c95e77620/releaseData/gbHumanitarian/SSD/ADM2/geoBoundaries-SSD-ADM2_simplified.geojson')
             .then(res => res.json())
             .then(data => {
-                geojson = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(populationLayer);
+                const geojson = L.geoJson(data, {
+                    style: style,
+                    onEachFeature: function(feature, layer) {
+                        layer.on({
+                            mouseover: (e) => {
+                                let l = e.target;
+                                l.setStyle({ weight: 2, color: '#666', fillOpacity: 0.9 });
+                                info.update(l.feature.properties);
+                            },
+                            mouseout: (e) => {
+                                geojson.resetStyle(e.target);
+                                info.update();
+                            }
+                        });
+                    }
+                }).addTo(populationLayer);
                 map.fitBounds(geojson.getBounds());
             });
 
@@ -212,12 +210,14 @@
             .then(res => res.json())
             .then(data => {
                 L.geoJson(data, {
-                    pointToLayer: function (feature, latlng) {
-                        // Find the first matching type color, default to Other
-                        const primaryType = feature.properties.types[0];
+                    onEachFeature: function (feature, layer) {
+                        const name = feature.properties.name || "Unnamed Facility";
+                        const types = feature.properties.types || ["Other or Unknown"];
+                        const primaryType = types[0];
                         const config = schoolTypes[primaryType] || schoolTypes["Other or Unknown"];
-                        
-                        return L.circleMarker(latlng, {
+
+                        // Create a specific marker for each school
+                        const marker = L.circleMarker(layer.getLatLng(), {
                             radius: 6,
                             fillColor: config.color,
                             color: "#000",
@@ -226,32 +226,27 @@
                             fillOpacity: 0.9,
                             pane: 'facilitiesPane'
                         });
-                    },
-                    onEachFeature: function (feature, layer) {
-                        const name = feature.properties.name || "Unnamed Facility";
-                        const types = feature.properties.types.join(", ");
-                        layer.bindPopup(`<strong>${name}</strong><br>Types: ${types}`);
+
+                        marker.bindPopup(`<strong>${name}</strong><br>Types: ${types.join(", ")}`);
                         
-                        // Add to all relevant layers (if a school has multiple types)
-                        feature.properties.types.forEach(t => {
-                            if (schoolTypes[t]) {
-                                layer.addTo(schoolTypes[t].layer);
-                            } else {
-                                layer.addTo(schoolTypes["Other or Unknown"].layer);
-                            }
+                        // Add the marker to the correct category layers
+                        types.forEach(t => {
+                            const targetLayer = schoolTypes[t] ? schoolTypes[t].layer : schoolTypes["Other or Unknown"].layer;
+                            marker.addTo(targetLayer);
                         });
                     }
                 });
-            });
+            })
+            .catch(err => console.error("Error loading schools:", err));
 
-        // 8. Advanced Layer Control
+        // 8. Layer Control
         const overlays = {
             "<b>Population Density</b>": populationLayer
         };
         
-        // Add each school type as a filter
         for (const [name, config] of Object.entries(schoolTypes)) {
-            overlays[`<i style="background:${config.color}; width:10px; height:10px; display:inline-block; border-radius:50%; margin-right:5px;"></i> ${name}`] = config.layer;
+            const icon = `<i style="background:${config.color}; width:10px; height:10px; display:inline-block; border-radius:50%; margin-right:5px; border:1px solid #000;"></i>`;
+            overlays[icon + name] = config.layer;
         }
 
         L.control.layers(null, overlays, { collapsed: false }).addTo(map);
