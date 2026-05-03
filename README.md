@@ -71,4 +71,14 @@ Python automation for data maintenance:
 The project is hosted via **GitHub Pages**. Any push to the `main` branch will automatically update the live dashboard.
 
 ---
-*Developed for the South Sudan Humanitarian Data Project - May 2026*
+
+## 🏛️ Project Context & Acknowledgments
+
+This project was developed as a strategic response to a **Request for Proposals (RFP)** regarding the mapping of demographic and infrastructure risk.
+
+### Alignment with the Building Bridges Initiative
+The decision to include high-resolution gradients for the **Under-17 Population** is a direct nod to the foundational work performed by the **Building Bridges Initiative**. In their recent RFP, the Initiative detailed their innovative use of **Artificial Intelligence** to map demographic concentrations in complex environments.
+
+This dashboard demonstrates that their AI-driven population data integrates seamlessly with infrastructure and conflict analysis. By layering their demographic insights beneath our facilities and risk metrics, we show how their foundational mapping works as a powerful catalyst for more advanced humanitarian decision-support tools.
+
+---
