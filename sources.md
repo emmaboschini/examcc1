@@ -1,61 +1,44 @@
-# Open Data Sources for South Sudan (2024-2026)
+# Data Inventory: South Sudan Risk Analysis
 
-This document provides a detailed list of the original sources for the data used in this project. All sources listed here are open-source and publicly accessible.
-
----
-
-## 1. Population & Demographics
-
-### WorldPop (University of Southampton)
-*   **Coverage:** High-resolution gridded population estimates (100m x 100m squares).
-*   **Projections:** 2024, 2025, and 2026.
-*   **Access:** [WorldPop South Sudan Data Hub](https://www.worldpop.org/project/categories?id=3&l=SSD)
-*   **Best For:** Mapping where people live in rural vs. urban areas.
-
-### Humanitarian Data Exchange (HDX) - OCHA
-*   **Coverage:** Official subnational (State/County) population statistics.
-*   **Projections:** 2024 and 2025 baseline data.
-*   **Access:** [HDX South Sudan Population](https://data.humdata.org/dataset/cod-ps-ssd)
-*   **Best For:** Official statistics used by the UN for humanitarian planning.
-
-### UN World Population Prospects (2024 Revision)
-*   **Coverage:** Global-level demographic projections.
-*   **Access:** [UN Population Division](https://population.un.org/wpp/)
-*   **Best For:** Understanding long-term growth trends (2020–2050).
+This document provides a detailed list of all open-source data assets used in this project.
 
 ---
 
-## 2. Education Facilities
-
-### EMIS (Education Management Information System)
-*   **Coverage:** Official school census from the South Sudan Ministry of General Education and Instruction (MoGEI).
-*   **Contents:** 6,300+ schools, enrollment numbers, and facility types.
-*   **Access:** [MoGEI EMIS Portal](http://mogei.gov.ss/emis/) (Mirror available on HDX).
-*   **Best For:** Analyzing official education infrastructure and pupil-teacher ratios.
-
-### SSSAMS (Schools Attendance Monitoring System)
-*   **Coverage:** Real-time and archived attendance data for registered schools.
-*   **Access:** [SSSAMS.org](https://www.sssams.org/)
-*   **Best For:** Tracking school functionality and attendance trends.
+## 1. Demographic Data
+**Source:** [WorldPop (University of Southampton)](https://www.worldpop.org/project/categories?id=3&l=SSD)
+- **Content:** High-resolution population counts for children under 17.
+- **Used For:** Providing the neutral background layer for human context.
 
 ---
 
-## 3. Conflict & Insecurity
-
-### Insecurity Insight (Education in Danger)
-*   **Coverage:** Documented incidents of violence against schools, universities, students, and teachers.
-*   **Contents:** Shootings, bombings, looting, and military use of schools.
-*   **Access:** [HDX Education in Danger](https://data.humdata.org/dataset/south-sudan-violence-incidents-affecting-aid-operations-education-and-health-care)
-*   **Best For:** Researching the physical and human impact of conflict on the education sector.
+## 2. Education Infrastructure
+**Source:** [Official EMIS database via OCHA/HDX Mirror](https://data.humdata.org/dataset/811c4282-2223-4fc9-9b40-43223c4e3c3e)
+- **Content:** Official census of over 6,000 schools, including facility names and types.
+- **Used For:** Identifying the locations and levels (Primary/Secondary) of schools nationwide.
 
 ---
 
-## 📊 Summary of Estimates (Total Population)
+## 3. Conflict Incident Data
+**Source:** [Insecurity Insight - Education in Danger](https://data.humdata.org/dataset/south-sudan-violence-incidents-affecting-aid-operations-education-and-health-care)
+- **Content:** Documented violence affecting schools, students, and educators (2024-2026).
+- **Used For:** Assessing the safety and risk levels of educational facilities.
 
-| Source | 2024 Estimate | 2025 Projection | 2026 Projection |
-| :--- | :--- | :--- | :--- |
-| **UN WPP (2024 Rev)** | ~11.94M | ~12.19M | ~12.44M |
-| **NBS (Official Gov)** | ~15.25M | ~15.78M | ~16.3M |
-| **OCHA (Humanitarian)** | ~12.4M | ~13.4M | ~14.1M |
+---
 
-*Note: NBS (Government) estimates are generally higher because they assume a faster birth rate compared to UN models.*
+## 4. Geographic Boundaries
+**Source:** [geoBoundaries.org (william & Mary geoLab)](https://www.geoboundaries.org/)
+- **Content:** ADM1 (State) and ADM2 (County) digital boundary files (GeoJSON).
+- **Used For:** Drawing the map shapes and enabling the regional filtering system.
+
+---
+
+## 5. Basemap & Technology
+- **Leaflet.js:** Open-source JavaScript library for interactive maps.
+- **CartoDB Light:** Professional, minimalist map background for maximum readability.
+- **Pandas (Python):** Used for data cleaning and merging.
+
+---
+### Final Data Statistics
+- **Schools Mapped:** 4,861 geocoded facilities.
+- **Reported Incidents:** 47 major conflict events (2024-2026).
+- **Population Resolution:** 100m x 100m grid estimates.
