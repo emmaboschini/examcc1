@@ -215,7 +215,7 @@
             });
 
         // Load Schools
-        fetch('south_sudan_schools.geojson')
+        fetch('data/processed/south_sudan_schools.geojson')
             .then(response => response.json())
             .then(data => {
                 L.geoJson(data, {

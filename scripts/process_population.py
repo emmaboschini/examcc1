@@ -15,8 +15,8 @@ def clean_number(text):
         return 0
 
 # The names of the files we are using
-input_file = 'raw_population 2024 (UNFPA).csv'
-output_file = 'population_under_17.csv'
+input_file = '../data/raw/raw_population 2024 (UNFPA).csv'
+output_file = '../data/processed/population_under_17.csv'
 
 # Open the original file to read it
 with open(input_file, mode='r', encoding='utf-8') as f:

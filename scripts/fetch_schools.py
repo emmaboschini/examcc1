@@ -57,11 +57,11 @@ def fetch_schools():
             geojson["features"].append(feature)
 
     # 3. Save the file
-    with open('south_sudan_schools.geojson', 'w', encoding='utf-8') as f:
+    with open('../data/processed/south_sudan_schools.geojson', 'w', encoding='utf-8') as f:
         json.dump(geojson, f, indent=2)
 
     print(f"Success! Found {len(geojson['features'])} schools.")
-    print("Saved to 'south_sudan_schools.geojson'")
+    print("Saved to '../data/processed/south_sudan_schools.geojson'")
 
 if __name__ == "__main__":
     fetch_schools()
