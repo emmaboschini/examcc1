@@ -120,18 +120,68 @@
         });
     }
 
-    // 6. Load our prepared GeoJSON data
+    // 6. Load our prepared GeoJSON data (Population)
     let geojson;
+    const populationLayer = L.layerGroup();
+    
     fetch('data/clean/ss_map_data.geojson')
         .then(response => response.json())
         .then(data => {
             geojson = L.geoJson(data, {
                 style: style,
                 onEachFeature: onEachFeature
-            }).addTo(map);
+            }).addTo(populationLayer);
+            populationLayer.addTo(map);
         });
 
-    // 7. Add a Legend
+    // 7. Add Schools Layer (from the geocoded CSV)
+    const schoolsLayer = L.layerGroup();
+    
+    // We use a small circle marker for schools to avoid cluttering
+    const schoolMarkerOptions = {
+        radius: 3,
+        fillColor: "#0078ff",
+        color: "#fff",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+
+    // Helper to read CSV (very simple for this case)
+    fetch('data/clean/ss_clean_schools_geo.csv')
+        .then(response => response.text())
+        .then(csvText => {
+            const lines = csvText.split('\n').slice(1); // skip header
+            lines.forEach(line => {
+                const parts = line.split(',');
+                if (parts.length >= 6) {
+                    const name = parts[0];
+                    const type = parts[1];
+                    const lat = parseFloat(parts[4]);
+                    const lon = parseFloat(parts[5]);
+                    
+                    if (!isNaN(lat) && !isNaN(lon)) {
+                        L.circleMarker([lat, lon], schoolMarkerOptions)
+                            .bindPopup(`<b>${name}</b><br>Type: ${type}`)
+                            .addTo(schoolsLayer);
+                    }
+                }
+            });
+        });
+
+    // 8. Add Layer Control (Toggle between Population and Schools)
+    const baseMaps = {
+        "Light Map": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png')
+    };
+
+    const overlayMaps = {
+        "Population Density": populationLayer,
+        "School Facilities": schoolsLayer
+    };
+
+    L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
+
+    // 9. Add a Legend
     const legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function (map) {

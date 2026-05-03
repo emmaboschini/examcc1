@@ -15,7 +15,8 @@ Contains the original datasets exactly as they were downloaded from global sourc
 ### 2. `data/clean/`
 Contains simplified and processed files that are easier to read and analyze.
 - `ss_clean_population_u17.csv`: Focuses on children under 17.
-- `ss_clean_schools.csv`: Simplified list of 6,000+ schools.
+- `ss_clean_schools.csv`: Simplified list of 6,000+ schools (Stats).
+- `ss_clean_schools_geo.csv`: Geocoded school list used for mapping.
 - `ss_clean_conflict.csv`: Filtered specifically for South Sudan events.
 
 ### 3. `scripts/`
