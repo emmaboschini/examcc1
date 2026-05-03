@@ -81,6 +81,14 @@
             font-size: 12px;
             color: #7f8c8d;
         }
+        
+        /* Custom Styling for Layer Control */
+        .leaflet-control-layers {
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+            border-radius: 8px !important;
+            padding: 10px !important;
+        }
     </style>
 </head>
 <body>
@@ -106,12 +114,12 @@
         map.createPane('facilitiesPane');
         map.getPane('facilitiesPane').style.zIndex = 650;
 
-        // 2. Add a professional, clean background layer (CartoDB Positron)
-        const baseLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        // 2. Add a professional, clean background layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO'
         }).addTo(map);
 
-        // 3. Define colors for our population gradients (Blues)
+        // 3. Population coloring
         function getColor(d) {
             return d > 250000 ? '#084594' :
                    d > 200000 ? '#2171b5' :
@@ -122,30 +130,23 @@
                                 '#eff3ff';
         }
 
-        // 4. Style each county feature
         function style(feature) {
             const pcode = feature.properties.pcode;
             const pop = populationData[pcode] ? populationData[pcode].Population : 0;
-            
             return {
                 fillColor: getColor(pop),
                 weight: 1,
                 opacity: 1,
-                color: 'white', // Border color
+                color: 'white',
                 dashArray: '3',
                 fillOpacity: 0.8
             };
         }
 
-        // 5. Add interaction: Highlight on hover
+        // 4. Interaction
         function highlightFeature(e) {
             const layer = e.target;
-            layer.setStyle({
-                weight: 2,
-                color: '#666',
-                dashArray: '',
-                fillOpacity: 0.9
-            });
+            layer.setStyle({ weight: 2, color: '#666', dashArray: '', fillOpacity: 0.9 });
             layer.bringToFront();
             info.update(layer.feature.properties);
         }
@@ -156,93 +157,104 @@
         }
 
         function onEachFeature(feature, layer) {
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight
-            });
+            layer.on({ mouseover: highlightFeature, mouseout: resetHighlight });
         }
 
-        // 6. Custom Info Control (Top Right)
+        // 5. Info Box
         const info = L.control();
-        info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info');
-            this.update();
-            return this._div;
-        };
+        info.onAdd = function (map) { this._div = L.DomUtil.create('div', 'info'); this.update(); return this._div; };
         info.update = function (props) {
             const pcode = props ? props.pcode : null;
             const data = pcode ? populationData[pcode] : null;
-            
             this._div.innerHTML = '<h4>County Information</h4>' + (props ?
-                '<b>' + props.shapeName + '</b><br />' + 
-                (data ? data.Population.toLocaleString() + ' children' : 'No data available')
+                '<b>' + props.shapeName + '</b><br />' + (data ? data.Population.toLocaleString() + ' children' : 'No data')
                 : 'Hover over a county');
         };
         info.addTo(map);
 
-        // 7. Legend (Bottom Right)
+        // 6. Legend
         const legend = L.control({position: 'bottomright'});
         legend.onAdd = function (map) {
             const div = L.DomUtil.create('div', 'info legend');
             const grades = [0, 10000, 50000, 100000, 150000, 200000, 250000];
-            
             div.innerHTML += '<b>Population</b><br>';
             for (let i = 0; i < grades.length; i++) {
-                div.innerHTML +=
-                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                div.innerHTML += '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
                     grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;' + grades[i + 1].toLocaleString() + '<br>' : '+');
             }
             return div;
         };
         legend.addTo(map);
 
-        // 8. Layers and GeoJSON
-        let geojson;
+        // 7. Layer Management
         const populationLayer = L.layerGroup().addTo(map);
-        const facilityLayer = L.layerGroup().addTo(map);
+        
+        // Facilities layers (grouped by type)
+        const schoolTypes = {
+            "Primary School": { color: "#ff7800", layer: L.layerGroup().addTo(map) },
+            "Secondary School": { color: "#e31a1c", layer: L.layerGroup().addTo(map) },
+            "College": { color: "#6a3d9a", layer: L.layerGroup().addTo(map) },
+            "Nursery School": { color: "#33a02c", layer: L.layerGroup().addTo(map) },
+            "Other or Unknown": { color: "#b15928", layer: L.layerGroup().addTo(map) }
+        };
 
-        // Load Counties (Population)
+        // Load Counties
+        let geojson;
         fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/15db51d84a38231ded5868247ee6588c95e77620/releaseData/gbHumanitarian/SSD/ADM2/geoBoundaries-SSD-ADM2_simplified.geojson')
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
-                geojson = L.geoJson(data, {
-                    style: style,
-                    onEachFeature: onEachFeature
-                }).addTo(populationLayer);
-                
+                geojson = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(populationLayer);
                 map.fitBounds(geojson.getBounds());
             });
 
-        // Load Education Facilities from local file
+        // Load Education Facilities
         fetch('data/processed/education_facilities.geojson')
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
                 L.geoJson(data, {
                     pointToLayer: function (feature, latlng) {
+                        // Find the first matching type color, default to Other
+                        const primaryType = feature.properties.types[0];
+                        const config = schoolTypes[primaryType] || schoolTypes["Other or Unknown"];
+                        
                         return L.circleMarker(latlng, {
-                            radius: 5,
-                            fillColor: "#ff7800",
+                            radius: 6,
+                            fillColor: config.color,
                             color: "#000",
                             weight: 1,
                             opacity: 1,
-                            fillOpacity: 0.8,
+                            fillOpacity: 0.9,
                             pane: 'facilitiesPane'
                         });
                     },
                     onEachFeature: function (feature, layer) {
                         const name = feature.properties.name || "Unnamed Facility";
-                        const type = feature.properties.type || "Education Facility";
-                        layer.bindPopup(`<strong>${name}</strong><br>Type: ${type}`);
+                        const types = feature.properties.types.join(", ");
+                        layer.bindPopup(`<strong>${name}</strong><br>Types: ${types}`);
+                        
+                        // Add to all relevant layers (if a school has multiple types)
+                        feature.properties.types.forEach(t => {
+                            if (schoolTypes[t]) {
+                                layer.addTo(schoolTypes[t].layer);
+                            } else {
+                                layer.addTo(schoolTypes["Other or Unknown"].layer);
+                            }
+                        });
                     }
-                }).addTo(facilityLayer);
+                });
             });
 
-        // Layer Control
-        const overlayMaps = {
-            "Population Density": populationLayer,
-            "Education Facilities": facilityLayer
+        // 8. Advanced Layer Control
+        const overlays = {
+            "<b>Population Density</b>": populationLayer
         };
-        L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
+        
+        // Add each school type as a filter
+        for (const [name, config] of Object.entries(schoolTypes)) {
+            overlays[`<i style="background:${config.color}; width:10px; height:10px; display:inline-block; border-radius:50%; margin-right:5px;"></i> ${name}`] = config.layer;
+        }
+
+        L.control.layers(null, overlays, { collapsed: false }).addTo(map);
 
     </script>
 </body>

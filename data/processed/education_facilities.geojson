@@ -12,7 +12,9 @@
       },
       "properties": {
         "name": "",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -26,7 +28,9 @@
       },
       "properties": {
         "name": "Mentor Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -40,7 +44,9 @@
       },
       "properties": {
         "name": "Matu Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -54,7 +60,9 @@
       },
       "properties": {
         "name": "Merwa Progressive College",
-        "type": "0"
+        "types": [
+          "College"
+        ]
       }
     },
     {
@@ -68,7 +76,9 @@
       },
       "properties": {
         "name": "Agonk Bek Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -82,7 +92,9 @@
       },
       "properties": {
         "name": "Etele Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -96,7 +108,9 @@
       },
       "properties": {
         "name": "Moyo Girls' Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -110,7 +124,9 @@
       },
       "properties": {
         "name": "Moyo Technical Institute",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -124,7 +140,9 @@
       },
       "properties": {
         "name": "Eden Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -138,7 +156,9 @@
       },
       "properties": {
         "name": "Limidia Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -152,7 +172,9 @@
       },
       "properties": {
         "name": "Logoa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -166,7 +188,9 @@
       },
       "properties": {
         "name": "Logoba Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -180,7 +204,9 @@
       },
       "properties": {
         "name": "Liri Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -194,7 +220,9 @@
       },
       "properties": {
         "name": "Liwa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -208,7 +236,9 @@
       },
       "properties": {
         "name": "Logoba Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -222,7 +252,9 @@
       },
       "properties": {
         "name": "Athian Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -236,7 +268,9 @@
       },
       "properties": {
         "name": "Emma Memorial Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -250,7 +284,9 @@
       },
       "properties": {
         "name": "Mundri One Teachers Training Center",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -264,7 +300,9 @@
       },
       "properties": {
         "name": "Moyo Town Council Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -278,7 +316,10 @@
       },
       "properties": {
         "name": "Emmanuel And Moni Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -292,7 +333,9 @@
       },
       "properties": {
         "name": "",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -306,7 +349,9 @@
       },
       "properties": {
         "name": "Yei Teacher Training Collage",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -320,7 +365,9 @@
       },
       "properties": {
         "name": "Agoro Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -334,7 +381,9 @@
       },
       "properties": {
         "name": "Lokwa Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -348,7 +397,9 @@
       },
       "properties": {
         "name": "Erepi Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -362,7 +413,9 @@
       },
       "properties": {
         "name": "Majak Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -376,7 +429,9 @@
       },
       "properties": {
         "name": "Mama Kezia Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -390,7 +445,9 @@
       },
       "properties": {
         "name": "Lokwa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -404,7 +461,9 @@
       },
       "properties": {
         "name": "Benagoro Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -418,7 +477,9 @@
       },
       "properties": {
         "name": "Mandi Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -432,7 +493,9 @@
       },
       "properties": {
         "name": "Lurunya Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -446,7 +509,9 @@
       },
       "properties": {
         "name": "Mugumbe Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -460,7 +525,9 @@
       },
       "properties": {
         "name": "Eremi Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -474,7 +541,9 @@
       },
       "properties": {
         "name": "Mena Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -488,7 +557,9 @@
       },
       "properties": {
         "name": "Epc Nehemiah Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -502,7 +573,9 @@
       },
       "properties": {
         "name": "Era Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -516,7 +589,9 @@
       },
       "properties": {
         "name": "Aguu Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -530,7 +605,9 @@
       },
       "properties": {
         "name": "Agoro Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -544,7 +621,9 @@
       },
       "properties": {
         "name": "Emmanuel Kintergarden Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -558,7 +637,9 @@
       },
       "properties": {
         "name": "Father Biribawo Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -572,7 +653,9 @@
       },
       "properties": {
         "name": "Mundri 2 Primary And Hai Malakal Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -586,7 +669,9 @@
       },
       "properties": {
         "name": "City Academy Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -600,7 +685,9 @@
       },
       "properties": {
         "name": "Home Dave Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -614,7 +701,9 @@
       },
       "properties": {
         "name": "Kerwa Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -628,7 +717,9 @@
       },
       "properties": {
         "name": "Kerwa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -642,7 +733,9 @@
       },
       "properties": {
         "name": "Kilaji Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -656,7 +749,9 @@
       },
       "properties": {
         "name": "Gulu One Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -670,7 +765,9 @@
       },
       "properties": {
         "name": "Kololo Community Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -684,7 +781,9 @@
       },
       "properties": {
         "name": "Koloa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -698,7 +797,9 @@
       },
       "properties": {
         "name": "Kolokolo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -712,7 +813,9 @@
       },
       "properties": {
         "name": "Kongolo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -726,7 +829,9 @@
       },
       "properties": {
         "name": "Elegu Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -740,7 +845,9 @@
       },
       "properties": {
         "name": "Koromula Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -754,7 +861,9 @@
       },
       "properties": {
         "name": "Kotobi Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -768,7 +877,9 @@
       },
       "properties": {
         "name": "Malualbai P School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -782,7 +893,9 @@
       },
       "properties": {
         "name": "Bari Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -796,7 +909,9 @@
       },
       "properties": {
         "name": "Cwep Itc",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -810,7 +925,9 @@
       },
       "properties": {
         "name": "Kotobi Vocational Center",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -824,7 +941,9 @@
       },
       "properties": {
         "name": "Emma Memorial Academy",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -838,7 +957,9 @@
       },
       "properties": {
         "name": "Mama Alice Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -852,7 +973,9 @@
       },
       "properties": {
         "name": "Lafon Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -866,7 +989,9 @@
       },
       "properties": {
         "name": "Makuen Agap P. School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -880,7 +1005,9 @@
       },
       "properties": {
         "name": "Kulundu Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -894,7 +1021,9 @@
       },
       "properties": {
         "name": "Lama Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -908,7 +1037,9 @@
       },
       "properties": {
         "name": "Kyeyo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -922,7 +1053,9 @@
       },
       "properties": {
         "name": "Ladder Kindergarten And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -936,7 +1069,9 @@
       },
       "properties": {
         "name": "Lamuribenge Vocational School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -950,7 +1085,9 @@
       },
       "properties": {
         "name": "Lamwoka Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -964,7 +1101,9 @@
       },
       "properties": {
         "name": "Baya Primary",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -978,7 +1117,9 @@
       },
       "properties": {
         "name": "Lechu Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -992,7 +1133,9 @@
       },
       "properties": {
         "name": "Baya Memorial Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -1006,7 +1149,9 @@
       },
       "properties": {
         "name": "Ledingwa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1020,7 +1165,9 @@
       },
       "properties": {
         "name": "Lekuangole Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1034,7 +1181,9 @@
       },
       "properties": {
         "name": "Light House School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1048,7 +1197,9 @@
       },
       "properties": {
         "name": "Lendrewa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1062,7 +1213,9 @@
       },
       "properties": {
         "name": "Lerwa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1076,7 +1229,9 @@
       },
       "properties": {
         "name": "Masaloa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1090,7 +1245,9 @@
       },
       "properties": {
         "name": "Halbul Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1104,7 +1261,10 @@
       },
       "properties": {
         "name": "Karika One Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -1118,7 +1278,9 @@
       },
       "properties": {
         "name": "Majak Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1132,7 +1294,10 @@
       },
       "properties": {
         "name": "Hia Baraka Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -1146,7 +1311,9 @@
       },
       "properties": {
         "name": "Karkia Ll Primary And Pre School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1160,7 +1327,9 @@
       },
       "properties": {
         "name": "Majak Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1174,7 +1343,9 @@
       },
       "properties": {
         "name": "Kaya Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1188,7 +1359,9 @@
       },
       "properties": {
         "name": "Chokokbid Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -1202,7 +1375,9 @@
       },
       "properties": {
         "name": "Jebel Church",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1216,7 +1391,9 @@
       },
       "properties": {
         "name": "Kendra Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1230,7 +1407,9 @@
       },
       "properties": {
         "name": "Bura Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1244,7 +1423,9 @@
       },
       "properties": {
         "name": "Adibu Primary",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1258,7 +1439,9 @@
       },
       "properties": {
         "name": "Dong Abel Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1272,7 +1455,9 @@
       },
       "properties": {
         "name": "Mahat Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1286,7 +1471,9 @@
       },
       "properties": {
         "name": "Kai Gai Primary",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1300,7 +1487,9 @@
       },
       "properties": {
         "name": "Magwi Central Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1314,7 +1503,9 @@
       },
       "properties": {
         "name": "Kagoropa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1328,7 +1519,9 @@
       },
       "properties": {
         "name": "Bright Hope Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -1342,7 +1535,9 @@
       },
       "properties": {
         "name": "Janga Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1356,7 +1551,10 @@
       },
       "properties": {
         "name": "Fundraising Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -1370,7 +1568,9 @@
       },
       "properties": {
         "name": "Besia Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1384,7 +1584,9 @@
       },
       "properties": {
         "name": "Fataha Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1398,7 +1600,9 @@
       },
       "properties": {
         "name": "Father Biribawo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1412,7 +1616,9 @@
       },
       "properties": {
         "name": "Adotic Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1426,7 +1632,9 @@
       },
       "properties": {
         "name": "Crop Training Centre (Ctc)",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1440,7 +1648,9 @@
       },
       "properties": {
         "name": "Bitti Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1454,7 +1664,9 @@
       },
       "properties": {
         "name": "House Of Hope",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1468,7 +1680,9 @@
       },
       "properties": {
         "name": "Mada Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1482,7 +1696,9 @@
       },
       "properties": {
         "name": "Baac Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1496,7 +1712,9 @@
       },
       "properties": {
         "name": "Gra",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1510,7 +1728,9 @@
       },
       "properties": {
         "name": "Ayaa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1524,7 +1744,9 @@
       },
       "properties": {
         "name": "Ayipe Cope Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1538,7 +1760,9 @@
       },
       "properties": {
         "name": "Merwa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1552,7 +1776,9 @@
       },
       "properties": {
         "name": "Goopi Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1566,7 +1792,9 @@
       },
       "properties": {
         "name": "Amadi Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1580,7 +1808,9 @@
       },
       "properties": {
         "name": "Goboro Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1594,7 +1824,9 @@
       },
       "properties": {
         "name": "Andiriya Apaya",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1608,7 +1840,9 @@
       },
       "properties": {
         "name": "Amua Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1622,7 +1856,9 @@
       },
       "properties": {
         "name": "Apwoyo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1636,7 +1872,9 @@
       },
       "properties": {
         "name": "Arra Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1650,7 +1888,9 @@
       },
       "properties": {
         "name": "Amalo",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1664,7 +1904,9 @@
       },
       "properties": {
         "name": "Amara(Hs-Halls)",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -1678,7 +1920,9 @@
       },
       "properties": {
         "name": "Amadi 2 Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1692,7 +1936,9 @@
       },
       "properties": {
         "name": "Mundri One Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1706,7 +1952,9 @@
       },
       "properties": {
         "name": "Akande Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1720,7 +1968,9 @@
       },
       "properties": {
         "name": "Akka Community Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1734,7 +1984,9 @@
       },
       "properties": {
         "name": "Akuem Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1748,7 +2000,9 @@
       },
       "properties": {
         "name": "Mundri Secondary School, Motherland Secondary And Kotobi Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -1762,7 +2016,9 @@
       },
       "properties": {
         "name": "Mundri Adventist Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1776,7 +2032,9 @@
       },
       "properties": {
         "name": "Eria Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1790,7 +2048,9 @@
       },
       "properties": {
         "name": "Alliance Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -1804,7 +2064,9 @@
       },
       "properties": {
         "name": "Alimo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1818,7 +2080,9 @@
       },
       "properties": {
         "name": "Mijikita Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1832,7 +2096,10 @@
       },
       "properties": {
         "name": "Mijale Amazing Grace Baptist Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -1846,7 +2113,9 @@
       },
       "properties": {
         "name": "Mijale Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1860,7 +2129,9 @@
       },
       "properties": {
         "name": "Mundri Advertise Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -1874,7 +2145,9 @@
       },
       "properties": {
         "name": "Miri Mojo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1888,7 +2161,9 @@
       },
       "properties": {
         "name": "Moyo Boys' Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1902,7 +2177,9 @@
       },
       "properties": {
         "name": "Alipi Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1916,7 +2193,9 @@
       },
       "properties": {
         "name": "Mitikologa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1930,7 +2209,9 @@
       },
       "properties": {
         "name": "Aligo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1944,7 +2225,10 @@
       },
       "properties": {
         "name": "Erepi Primary Teachers College",
-        "type": "Primary School"
+        "types": [
+          "Primary School",
+          "College"
+        ]
       }
     },
     {
@@ -1958,7 +2242,9 @@
       },
       "properties": {
         "name": "Abeso Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -1972,7 +2258,9 @@
       },
       "properties": {
         "name": "Disu Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -1986,7 +2274,9 @@
       },
       "properties": {
         "name": "Metu Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2000,7 +2290,9 @@
       },
       "properties": {
         "name": "Mianga Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -2014,7 +2306,9 @@
       },
       "properties": {
         "name": "Moyo Army Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2028,7 +2322,9 @@
       },
       "properties": {
         "name": "Dongoda",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2042,7 +2338,9 @@
       },
       "properties": {
         "name": "",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2056,7 +2354,9 @@
       },
       "properties": {
         "name": "Lutaya Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2070,7 +2370,9 @@
       },
       "properties": {
         "name": "Limidia High Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2084,7 +2386,9 @@
       },
       "properties": {
         "name": "Afonji Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2098,7 +2402,9 @@
       },
       "properties": {
         "name": "Upper Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2112,7 +2418,9 @@
       },
       "properties": {
         "name": "Ezra Baya Memorials Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2126,7 +2434,9 @@
       },
       "properties": {
         "name": "University Of Juba. College Of Comunity Studies And Rural Development",
-        "type": "0"
+        "types": [
+          "College"
+        ]
       }
     },
     {
@@ -2140,7 +2450,9 @@
       },
       "properties": {
         "name": "Faka Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2154,7 +2466,9 @@
       },
       "properties": {
         "name": "Aciek Agriculture Training Centre",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2168,7 +2482,9 @@
       },
       "properties": {
         "name": "Alero School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2182,7 +2498,9 @@
       },
       "properties": {
         "name": "Mbara Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2196,7 +2514,9 @@
       },
       "properties": {
         "name": "Ezibon Mandiri Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2210,7 +2530,9 @@
       },
       "properties": {
         "name": "Medewu Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2224,7 +2546,9 @@
       },
       "properties": {
         "name": "Yei Day Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2238,7 +2562,9 @@
       },
       "properties": {
         "name": "Imotong Life Skills Centre",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2252,7 +2578,9 @@
       },
       "properties": {
         "name": "Gbari Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2266,7 +2594,9 @@
       },
       "properties": {
         "name": "Goboro Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2280,7 +2610,9 @@
       },
       "properties": {
         "name": "Dufile Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2294,7 +2626,9 @@
       },
       "properties": {
         "name": "Dar El Salaam Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2308,7 +2642,9 @@
       },
       "properties": {
         "name": "",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2322,7 +2658,9 @@
       },
       "properties": {
         "name": "Banika Islamic Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2336,7 +2674,9 @@
       },
       "properties": {
         "name": "",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2350,7 +2690,9 @@
       },
       "properties": {
         "name": "Geria Bush School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2364,7 +2706,10 @@
       },
       "properties": {
         "name": "Bright Junior Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -2378,7 +2723,9 @@
       },
       "properties": {
         "name": "Bishop Asili Senior Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2392,7 +2739,9 @@
       },
       "properties": {
         "name": "Bishop Gwynne School Of Theology",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2406,7 +2755,9 @@
       },
       "properties": {
         "name": "Bari Displace",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2420,7 +2771,9 @@
       },
       "properties": {
         "name": "",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2434,7 +2787,9 @@
       },
       "properties": {
         "name": "Akuem Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2448,7 +2803,9 @@
       },
       "properties": {
         "name": "Mundri Teachers Union Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2462,7 +2819,9 @@
       },
       "properties": {
         "name": "Mundri Youth Center",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2476,7 +2835,9 @@
       },
       "properties": {
         "name": "Nanga Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -2490,7 +2851,10 @@
       },
       "properties": {
         "name": "Nasir Primary And Secondary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School",
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2504,7 +2868,9 @@
       },
       "properties": {
         "name": "New Generation Academy",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2518,7 +2884,9 @@
       },
       "properties": {
         "name": "Noor Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2532,7 +2900,9 @@
       },
       "properties": {
         "name": "Nuru Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -2546,7 +2916,9 @@
       },
       "properties": {
         "name": "Nyambiri Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2560,7 +2932,9 @@
       },
       "properties": {
         "name": "Nyojo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2574,7 +2948,9 @@
       },
       "properties": {
         "name": "Obero Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2588,7 +2964,9 @@
       },
       "properties": {
         "name": "Odokomba Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2602,7 +2980,9 @@
       },
       "properties": {
         "name": "Ogolo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2616,7 +2996,9 @@
       },
       "properties": {
         "name": "Okari Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2630,7 +3012,9 @@
       },
       "properties": {
         "name": "Omdurman Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2644,7 +3028,10 @@
       },
       "properties": {
         "name": "One Way Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -2658,7 +3045,9 @@
       },
       "properties": {
         "name": "Orphanage Primary",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2672,7 +3061,9 @@
       },
       "properties": {
         "name": "Osubira Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2686,7 +3077,9 @@
       },
       "properties": {
         "name": "Paanjala Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -2700,7 +3093,9 @@
       },
       "properties": {
         "name": "Palacam Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2714,7 +3109,9 @@
       },
       "properties": {
         "name": "Palmar Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2728,7 +3125,9 @@
       },
       "properties": {
         "name": "Panjara Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2742,7 +3141,9 @@
       },
       "properties": {
         "name": "Parish Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2756,7 +3157,9 @@
       },
       "properties": {
         "name": "Partial P School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2770,7 +3173,9 @@
       },
       "properties": {
         "name": "Pentagon College",
-        "type": "0"
+        "types": [
+          "College"
+        ]
       }
     },
     {
@@ -2784,7 +3189,9 @@
       },
       "properties": {
         "name": "Peremasu School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -2798,7 +3205,9 @@
       },
       "properties": {
         "name": "Pibor Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2812,7 +3221,9 @@
       },
       "properties": {
         "name": "Potika Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -2826,7 +3237,9 @@
       },
       "properties": {
         "name": "Primary School Leer",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2840,7 +3253,9 @@
       },
       "properties": {
         "name": "Riangmal Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2854,7 +3269,9 @@
       },
       "properties": {
         "name": "Riangmal Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2868,7 +3285,9 @@
       },
       "properties": {
         "name": "Roa Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2882,7 +3301,9 @@
       },
       "properties": {
         "name": "Romogi Seed Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2896,7 +3317,9 @@
       },
       "properties": {
         "name": "Rubeke Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2910,7 +3333,9 @@
       },
       "properties": {
         "name": "Rubeke Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2924,7 +3349,9 @@
       },
       "properties": {
         "name": "Rubeke Primary School Otogo Pam",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2938,7 +3365,9 @@
       },
       "properties": {
         "name": "Rubeke Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -2952,7 +3381,9 @@
       },
       "properties": {
         "name": "Rumaker Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2966,7 +3397,9 @@
       },
       "properties": {
         "name": "Saint Andrew College",
-        "type": "0"
+        "types": [
+          "College"
+        ]
       }
     },
     {
@@ -2980,7 +3413,9 @@
       },
       "properties": {
         "name": "Saint Kizito Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -2994,7 +3429,9 @@
       },
       "properties": {
         "name": "Sasanya Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -3008,7 +3445,9 @@
       },
       "properties": {
         "name": "Seventh Advertise Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -3022,7 +3461,9 @@
       },
       "properties": {
         "name": "Seventh Days Advertise Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -3036,7 +3477,9 @@
       },
       "properties": {
         "name": "St Augustine Nursery School Mijale",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -3050,7 +3493,9 @@
       },
       "properties": {
         "name": "St Joseph Lutaya Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -3064,7 +3509,9 @@
       },
       "properties": {
         "name": "St Kizito Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -3078,7 +3525,9 @@
       },
       "properties": {
         "name": "St Mary'S College",
-        "type": "0"
+        "types": [
+          "College"
+        ]
       }
     },
     {
@@ -3092,7 +3541,9 @@
       },
       "properties": {
         "name": "St Paul Secondary School",
-        "type": "0"
+        "types": [
+          "Secondary School"
+        ]
       }
     },
     {
@@ -3106,7 +3557,10 @@
       },
       "properties": {
         "name": "St. John Bugo Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -3120,7 +3574,9 @@
       },
       "properties": {
         "name": "St. Joseph Basic School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -3134,7 +3590,9 @@
       },
       "properties": {
         "name": "St.Mark Nursery School Kololo",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -3148,7 +3606,10 @@
       },
       "properties": {
         "name": "Stordy Nursery & Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -3162,7 +3623,9 @@
       },
       "properties": {
         "name": "Swinga Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -3176,7 +3639,9 @@
       },
       "properties": {
         "name": "Take Care Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -3190,7 +3655,9 @@
       },
       "properties": {
         "name": "Tendele Community School",
-        "type": "0"
+        "types": [
+          "Other or Unknown"
+        ]
       }
     },
     {
@@ -3204,7 +3671,9 @@
       },
       "properties": {
         "name": "Tororo Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -3218,7 +3687,10 @@
       },
       "properties": {
         "name": "True Light Nursery And Primary School",
-        "type": "Primary School"
+        "types": [
+          "Nursery School",
+          "Primary School"
+        ]
       }
     },
     {
@@ -3232,7 +3704,9 @@
       },
       "properties": {
         "name": "Ubbi Primary School",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -3246,7 +3720,9 @@
       },
       "properties": {
         "name": "Uyon Primary Sch",
-        "type": "Primary School"
+        "types": [
+          "Primary School"
+        ]
       }
     },
     {
@@ -3260,7 +3736,9 @@
       },
       "properties": {
         "name": "Wardoper Family Care Nursery School",
-        "type": "0"
+        "types": [
+          "Nursery School"
+        ]
       }
     },
     {
@@ -3274,21 +3752,9 @@
       },
       "properties": {
         "name": "Lunguma Primary School",
-        "type": "Primary School"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          55.5356506,
-          -21.1940645
+        "types": [
+          "Primary School"
         ]
-      },
-      "properties": {
-        "name": "",
-        "type": "0"
       }
     }
   ]
