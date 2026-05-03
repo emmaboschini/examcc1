@@ -1,120 +1,345 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Education Facilities Map</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Sudan | Education Explorer</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
-        #map { height: 600px; width: 100%; }
-        .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }
-        .legend { line-height: 18px; color: #555; }
-        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
-        #controls { padding: 10px; background: white; }
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --sidebar-width: 360px;
+            --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding: 32px 24px;
+            overflow-y: auto;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .filter-section {
+            margin-bottom: 32px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            background-color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .stats-container {
+            margin-top: auto;
+            background: #f1f5f9;
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        #map {
+            flex-grow: 1;
+            height: 100%;
+        }
+
+        /* Leaflet Overrides */
+        .leaflet-container {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .leaflet-popup-content {
+            margin: 0 !important;
+            width: 280px !important;
+        }
+
+        .popup-header {
+            padding: 16px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .popup-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .popup-body {
+            padding: 16px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+        }
+
+        .info-value {
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            #app { flex-direction: column; }
+            #sidebar {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            header { margin-bottom: 20px; }
+            .stats-container { margin-top: 20px; padding: 16px; }
+        }
     </style>
 </head>
 <body>
 
-<div id="controls">
-    <label for="typeFilter">Filter by School Type:</label>
-    <select id="typeFilter">
-        <option value="all">All Types</option>
-    </select>
+<div id="app">
+    <aside id="sidebar">
+        <header>
+            <h1>Education Explorer</h1>
+            <p class="subtitle">Interactive mapping of educational facilities across South Sudan.</p>
+        </header>
+
+        <div class="filter-section">
+            <label for="typeFilter">Facility Type</label>
+            <select id="typeFilter">
+                <option value="all">All Facilities</option>
+            </select>
+        </div>
+
+        <div class="stats-container">
+            <span id="count" class="stat-value">0</span>
+            <span class="stat-label">Total Facilities Found</span>
+        </div>
+    </aside>
+
+    <div id="map"></div>
 </div>
-<div id="map"></div>
 
 <script>
-    var map = L.map('map').setView([4.85, 31.6], 6);
+    const colors = {
+        'Primary School': '#2563eb',    // Blue
+        'Secondary School': '#7c3aed',  // Violet
+        'Nursery School': '#059669',    // Emerald
+        'Kindergarten': '#d97706',      // Amber
+        'University': '#db2777',       // Pink
+        'College': '#4f46e5',          // Indigo
+        'Other or Unknown': '#64748b'  // Slate
+    };
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
+    const map = L.map('map', {
+        zoomControl: false
+    }).setView([4.85, 31.6], 7);
+
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    // Modern Basemap
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        subdomains: 'abcd',
+        maxZoom: 20
     }).addTo(map);
 
-    var geojsonLayer;
-    var allData;
+    let geojsonLayer;
+    let rawData;
 
-    function getColor(type) {
-        switch (type) {
-            case 'Primary School': return "#ff7800";
-            case 'Secondary School': return "#1f78b4";
-            case 'Nursery School': return "#33a02c";
-            case 'Kindergarten': return "#e31a1c";
-            case 'University': return "#6a3d9a";
-            case 'College': return "#b15928";
-            case 'Other or Unknown': return "#a6cee3";
-            default: return "#fb9a99";
-        }
-    }
-
-    function style(feature) {
-        return {
-            fillColor: getColor(feature.properties.school_type),
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7
-        };
-    }
-
-    function pointToLayer(feature, latlng) {
-        return L.circleMarker(latlng, {
-            radius: 8,
-            fillColor: getColor(feature.properties.school_type),
-            color: "#000",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
-        });
-    }
-
-    function onEachFeature(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup("<strong>Name:</strong> " + (feature.properties.name || "Unnamed") + 
-                           "<br><strong>Type:</strong> " + feature.properties.school_type +
-                           "<br><strong>Amenity:</strong> " + feature.properties.amenity);
-        }
+    function createPopup(props) {
+        const type = props.school_type || 'Other or Unknown';
+        const color = colors[type] || colors['Other or Unknown'];
+        
+        return `
+            <div class="popup-header">
+                <div class="popup-title">${props.name || 'Unnamed Facility'}</div>
+            </div>
+            <div class="popup-body">
+                <span class="tag" style="background: ${color}15; color: ${color}">
+                    ${type}
+                </span>
+                <div class="info-row">
+                    <span class="info-label">Category</span>
+                    <span class="info-value">${props.amenity || 'N/A'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">OSM ID</span>
+                    <span class="info-value">${props.osm_id}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Type</span>
+                    <span class="info-value">${props.osm_type || 'N/A'}</span>
+                </div>
+            </div>
+        `;
     }
 
     fetch('map_education facilities.geojson')
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
-            allData = data;
+            rawData = data;
             
-            // Populate filter
-            var types = new Set();
-            data.features.forEach(f => types.add(f.properties.school_type));
-            var filter = document.getElementById('typeFilter');
-            Array.from(types).sort().forEach(type => {
-                var opt = document.createElement('option');
-                opt.value = type;
-                opt.innerHTML = type;
-                filter.appendChild(opt);
+            // Setup Filter
+            const types = [...new Set(data.features.map(f => f.properties.school_type))].sort();
+            const select = document.getElementById('typeFilter');
+            types.forEach(t => {
+                if(t) {
+                    const opt = document.createElement('option');
+                    opt.value = t;
+                    opt.textContent = t;
+                    select.appendChild(opt);
+                }
             });
 
-            geojsonLayer = L.geoJSON(data, {
-                pointToLayer: pointToLayer,
-                onEachFeature: onEachFeature
-            }).addTo(map);
+            // Initial Layer
+            renderMarkers(data.features);
 
-            filter.addEventListener('change', function() {
-                var selectedType = this.value;
-                map.removeLayer(geojsonLayer);
-                
-                var filteredData = {
-                    type: "FeatureCollection",
-                    features: allData.features.filter(f => selectedType === 'all' || f.properties.school_type === selectedType)
-                };
-
-                geojsonLayer = L.geoJSON(filteredData, {
-                    pointToLayer: pointToLayer,
-                    onEachFeature: onEachFeature
-                }).addTo(map);
+            // Filter Event
+            select.addEventListener('change', (e) => {
+                const val = e.target.value;
+                const filtered = val === 'all' 
+                    ? data.features 
+                    : data.features.filter(f => f.properties.school_type === val);
+                renderMarkers(filtered);
             });
         });
 
+    function renderMarkers(features) {
+        if (geojsonLayer) map.removeLayer(geojsonLayer);
+
+        geojsonLayer = L.geoJSON({ type: 'FeatureCollection', features }, {
+            pointToLayer: (feature, latlng) => {
+                const type = feature.properties.school_type || 'Other or Unknown';
+                return L.circleMarker(latlng, {
+                    radius: 9,
+                    fillColor: colors[type] || colors['Other or Unknown'],
+                    color: 'white',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.9
+                });
+            },
+            onEachFeature: (feature, layer) => {
+                layer.bindPopup(createPopup(feature.properties));
+            }
+        }).addTo(map);
+
+        document.getElementById('count').textContent = features.length.toLocaleString();
+    }
 </script>
 
 </body>
