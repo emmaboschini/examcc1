@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Education Facilities Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { height: 600px; width: 100%; }
+        .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }
+        .legend { line-height: 18px; color: #555; }
+        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+        #controls { padding: 10px; background: white; }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+    <label for="typeFilter">Filter by School Type:</label>
+    <select id="typeFilter">
+        <option value="all">All Types</option>
+    </select>
+</div>
+<div id="map"></div>
+
+<script>
+    var map = L.map('map').setView([4.85, 31.6], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var geojsonLayer;
+    var allData;
+
+    function getColor(type) {
+        switch (type) {
+            case 'Primary School': return "#ff7800";
+            case 'Secondary School': return "#1f78b4";
+            case 'Nursery School': return "#33a02c";
+            case 'Kindergarten': return "#e31a1c";
+            case 'University': return "#6a3d9a";
+            case 'College': return "#b15928";
+            case 'Other or Unknown': return "#a6cee3";
+            default: return "#fb9a99";
+        }
+    }
+
+    function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.school_type),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+        };
+    }
+
+    function pointToLayer(feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 8,
+            fillColor: getColor(feature.properties.school_type),
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        });
+    }
+
+    function onEachFeature(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup("<strong>Name:</strong> " + (feature.properties.name || "Unnamed") + 
+                           "<br><strong>Type:</strong> " + feature.properties.school_type +
+                           "<br><strong>Amenity:</strong> " + feature.properties.amenity);
+        }
+    }
+
+    fetch('map_educationfacilities.geojson')
+        .then(response => response.json())
+        .then(data => {
+            allData = data;
+            
+            // Populate filter
+            var types = new Set();
+            data.features.forEach(f => types.add(f.properties.school_type));
+            var filter = document.getElementById('typeFilter');
+            Array.from(types).sort().forEach(type => {
+                var opt = document.createElement('option');
+                opt.value = type;
+                opt.innerHTML = type;
+                filter.appendChild(opt);
+            });
+
+            geojsonLayer = L.geoJSON(data, {
+                pointToLayer: pointToLayer,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+
+            filter.addEventListener('change', function() {
+                var selectedType = this.value;
+                map.removeLayer(geojsonLayer);
+                
+                var filteredData = {
+                    type: "FeatureCollection",
+                    features: allData.features.filter(f => selectedType === 'all' || f.properties.school_type === selectedType)
+                };
+
+                geojsonLayer = L.geoJSON(filteredData, {
+                    pointToLayer: pointToLayer,
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+            });
+        });
+
+</script>
+
+</body>
+</html>
