@@ -3,202 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>South Sudan Population Distribution (Under 17)</title>
+    <title>South Sudan: Risk Assessment Map (Population, Schools & Conflict)</title>
     
-    <!-- Leaflet CSS for mapping -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
         #map { height: 100vh; width: 100vw; }
+        
+        /* UI Controls */
+        .ui-panel {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            z-index: 1000;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            width: 250px;
+        }
+        .ui-panel h3 { margin-top: 0; font-size: 16px; color: #333; }
+        select { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px; }
         
         .info {
             padding: 10px 15px;
             font: 14px/16px Arial, Helvetica, sans-serif;
-            background: white;
             background: rgba(255,255,255,0.9);
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             border-radius: 8px;
         }
-        .info h4 { margin: 0 0 5px; color: #333; }
+        .legend { line-height: 18px; color: #555; background: white; padding: 10px; }
+        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
         
-        .legend {
-            line-height: 18px;
-            color: #555;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        }
-        .legend i {
-            width: 18px;
-            height: 18px;
-            float: left;
-            margin-right: 8px;
-            opacity: 0.7;
-        }
+        /* Risk Marker Style */
+        .risk-popup { text-align: center; }
+        .risk-popup h2 { margin: 0; color: #d9534f; font-size: 18px; }
+        
     </style>
 </head>
 <body>
 
+<div class="ui-panel">
+    <h3>Filter by Region</h3>
+    <select id="stateFilter">
+        <option value="All">All of South Sudan</option>
+    </select>
+    <div id="riskSummary" style="margin-top: 15px; display: none;">
+        <hr>
+        <p><b>State Risk Summary:</b></p>
+        <p id="riskText">No selected state.</p>
+    </div>
+</div>
+
 <div id="map"></div>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-    // 1. Initialize the map centered on South Sudan
     const map = L.map('map').setView([7.8, 30.0], 6);
 
-    // 2. Create a custom pane for schools to keep them on top
+    // Panes for layer ordering
+    map.createPane('polygonsPane');
+    map.getPane('polygonsPane').style.zIndex = 400;
+    
     map.createPane('schoolsPane');
     map.getPane('schoolsPane').style.zIndex = 650;
-    map.getPane('schoolsPane').style.pointerEvents = 'none'; // Allows clicking through markers if needed, but we want popups
+    
+    map.createPane('conflictPane');
+    map.getPane('conflictPane').style.zIndex = 700;
 
-    // 3. Add a modern, dark-themed background (CartoDB Light)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20
+        attribution: '&copy; CARTO'
     }).addTo(map);
 
-    // 4. Define colors for our population gradients
-    function getColor(d) {
-        return d > 200000 ? '#800026' :
-               d > 150000 ? '#BD0026' :
-               d > 100000 ? '#E31A1C' :
-               d > 50000  ? '#FC4E2A' :
-               d > 20000  ? '#FD8D3C' :
-               d > 10000  ? '#FEB24C' :
-               d > 5000   ? '#FED976' :
-                            '#FFEDA0';
-    }
-
-    // 5. Style each county based on its population
-    function style(feature) {
-        return {
-            fillColor: getColor(feature.properties.population),
-            weight: 1,
-            opacity: 1,
-            color: 'white',
-            fillOpacity: 0.7
-        };
-    }
-
-    // 6. Add interaction (Hover effects)
-    const info = L.control();
-
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    info.update = function (props) {
-        this._div.innerHTML = '<h4>Under-17 Population</h4>' +  (props ?
-            '<b>' + props.shapeName + '</b><br />' + props.population.toLocaleString() + ' children'
-            : 'Hover over a county');
-    };
-
-    info.addTo(map);
-
-    function highlightFeature(e) {
-        const layer = e.target;
-        layer.setStyle({
-            weight: 3,
-            color: '#666',
-            fillOpacity: 0.9
-        });
-        layer.bringToFront();
-        info.update(layer.feature.properties);
-    }
-
-    function resetHighlight(e) {
-        geojson.resetStyle(e.target);
-        info.update();
-    }
-
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight
-        });
-    }
-
-    // 7. Load our layers
+    // --- 1. DATA LAYERS ---
     const populationLayer = L.layerGroup();
     const schoolsLayer = L.layerGroup();
-    
-    // Population Layer
-    let geojson;
-    fetch('data/clean/ss_map_data.geojson')
-        .then(response => response.json())
+    const conflictLayer = L.layerGroup();
+
+    // Store references for filtering
+    let stateData = [];
+    let schoolMarkers = [];
+    let popGeoJSON;
+
+    // --- 2. POPULATION GRADIENTS ---
+    function getColor(d) {
+        return d > 200000 ? '#800026' : d > 150000 ? '#BD0026' : d > 100000 ? '#E31A1C' :
+               d > 50000  ? '#FC4E2A' : d > 20000  ? '#FD8D3C' : d > 10000  ? '#FEB24C' :
+               d > 5000   ? '#FED976' : '#FFEDA0';
+    }
+
+    // --- 3. CONFLICT LAYER (States with Stats) ---
+    fetch('data/clean/ss_conflict_map_data.geojson')
+        .then(res => res.json())
         .then(data => {
-            geojson = L.geoJson(data, {
-                style: style,
-                onEachFeature: onEachFeature
+            stateData = data.features;
+            
+            // Fill the filter dropdown
+            const filter = document.getElementById('stateFilter');
+            stateData.sort((a,b) => a.properties.shapeName.localeCompare(b.properties.shapeName))
+                     .forEach(f => {
+                const opt = document.createElement('option');
+                opt.value = f.properties.shapeName;
+                opt.textContent = f.properties.shapeName;
+                filter.appendChild(opt);
+            });
+
+            // Add conflict indicators (only where incidents > 0)
+            L.geoJson(data, {
+                pane: 'conflictPane',
+                pointToLayer: function (feature, latlng) {
+                    if (feature.properties.incidents > 0) {
+                        return L.circleMarker(latlng, {
+                            radius: 12,
+                            fillColor: "#ff0000",
+                            color: "#000",
+                            weight: 2,
+                            opacity: 1,
+                            fillOpacity: 0.6
+                        });
+                    }
+                },
+                onEachFeature: function(feature, layer) {
+                    if (feature.properties.incidents > 0) {
+                        layer.bindPopup(`
+                            <div class="risk-popup">
+                                <h2>⚠️ High Risk Area</h2>
+                                <b>${feature.properties.shapeName}</b><hr>
+                                <p>Reported Attacks on Schools: <b>${feature.properties.incidents}</b></p>
+                                <p>Educators Killed: ${feature.properties.educators_killed}</p>
+                                <p>Students Killed: ${feature.properties.students_killed}</p>
+                            </div>
+                        `);
+                        layer.addTo(conflictLayer);
+                    }
+                }
+            });
+            conflictLayer.addTo(map);
+        });
+
+    // --- 4. SCHOOLS LAYER ---
+    fetch('data/clean/ss_clean_schools_geo.csv')
+        .then(res => res.text())
+        .then(csv => {
+            const lines = csv.split('\n').slice(1);
+            lines.forEach(line => {
+                const p = line.split(',');
+                if (p.length >= 6) {
+                    const marker = L.circleMarker([parseFloat(p[4]), parseFloat(p[5])], {
+                        radius: 3, fillColor: "#0078ff", color: "#fff", weight: 1, opacity: 1, fillOpacity: 0.8, pane: 'schoolsPane'
+                    }).bindPopup(`<b>${p[0]}</b><br>State: ${p[2]}<br>Type: ${p[1]}`);
+                    marker.state = p[2]; // Attach state for filtering
+                    schoolMarkers.push(marker);
+                    marker.addTo(schoolsLayer);
+                }
+            });
+            schoolsLayer.addTo(map);
+        });
+
+    // --- 5. POPULATION LAYER ---
+    fetch('data/clean/ss_map_data.geojson')
+        .then(res => res.json())
+        .then(data => {
+            popGeoJSON = L.geoJson(data, {
+                pane: 'polygonsPane',
+                style: f => ({
+                    fillColor: getColor(f.properties.population),
+                    weight: 1, opacity: 1, color: 'white', fillOpacity: 0.7
+                }),
+                onEachFeature: (f, l) => {
+                    l.bindTooltip(`<b>${f.properties.shapeName}</b><br>${f.properties.population.toLocaleString()} children`);
+                }
             }).addTo(populationLayer);
             populationLayer.addTo(map);
         });
 
-    // Schools Layer
-    const schoolMarkerOptions = {
-        radius: 3,
-        fillColor: "#0078ff",
-        color: "#fff",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8,
-        pane: 'schoolsPane' // Use the custom pane to stay on top
-    };
+    // --- 6. FILTERING LOGIC ---
+    document.getElementById('stateFilter').addEventListener('change', function(e) {
+        const selectedState = e.target.value;
+        const summaryPanel = document.getElementById('riskSummary');
+        const riskText = document.getElementById('riskText');
 
-    fetch('data/clean/ss_clean_schools_geo.csv')
-        .then(response => response.text())
-        .then(csvText => {
-            const lines = csvText.split('\n').slice(1);
-            lines.forEach(line => {
-                const parts = line.split(',');
-                if (parts.length >= 6) {
-                    const name = parts[0];
-                    const type = parts[1];
-                    const lat = parseFloat(parts[4]);
-                    const lon = parseFloat(parts[5]);
-                    
-                    if (!isNaN(lat) && !isNaN(lon)) {
-                        L.circleMarker([lat, lon], schoolMarkerOptions)
-                            .bindPopup(`<b>${name}</b><br>Type: ${type}`)
-                            .addTo(schoolsLayer);
-                    }
+        if (selectedState === "All") {
+            map.setView([7.8, 30.0], 6);
+            schoolMarkers.forEach(m => m.addTo(schoolsLayer));
+            summaryPanel.style.display = 'none';
+        } else {
+            // Find selected state bounds and conflict info
+            const feature = stateData.find(f => f.properties.shapeName === selectedState);
+            if (feature) {
+                const bounds = L.geoJson(feature).getBounds();
+                map.fitBounds(bounds);
+                
+                // Show risk summary
+                summaryPanel.style.display = 'block';
+                riskText.innerHTML = `
+                    Incidents: <b>${feature.properties.incidents}</b><br>
+                    Fatalities: <b>${feature.properties.educators_killed + feature.properties.students_killed}</b>
+                `;
+            }
+
+            // Filter schools
+            schoolMarkers.forEach(m => {
+                if (m.state === selectedState) {
+                    m.addTo(schoolsLayer);
+                } else {
+                    schoolsLayer.removeLayer(m);
                 }
             });
-            schoolsLayer.addTo(map); // Add to map by default
-        });
+        }
+    });
 
-    // 8. Layer Control
+    // --- 7. LEGEND & CONTROLS ---
     const overlayMaps = {
         "Population Density": populationLayer,
-        "School Facilities": schoolsLayer
+        "School Locations": schoolsLayer,
+        "Conflict Risk Indicators": conflictLayer
     };
-
     L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
 
-    // 9. Add a Legend
     const legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
+    legend.onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');
         const grades = [0, 5000, 10000, 20000, 50000, 100000, 150000, 200000];
-        const labels = [];
-
+        div.innerHTML = '<h4>Children Under 17</h4>';
         for (let i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            div.innerHTML += '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
-
         return div;
     };
-
     legend.addTo(map);
 
 </script>

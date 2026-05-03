@@ -24,11 +24,18 @@ Contains the Python scripts used to transform the "raw" data into "clean" data.
 - `ss_proc_population.py`: Processes population data.
 - `ss_proc_schools.py`: Processes EMIS school data.
 - `ss_proc_conflict.py`: Filters and cleans conflict data.
-- `ss_prep_map.py`: Merges geographic boundaries with population data for the map.
+- `ss_prep_map.py`: Merges geographic boundaries with population data.
+- `ss_prep_conflict_map.py`: Aggregates conflict incidents by state for risk assessment.
 
-## 🗺️ Interactive Map
+## 🗺️ Interactive Map & Risk Assessment
 
-The project includes a professional interactive map (`index.html`) that visualizes the distribution of children under 17 across South Sudan.
+The project includes an advanced interactive map (`index.html`) designed for humanitarian risk analysis.
+
+### Features:
+- **Population Density:** Visualizes where children under 17 are concentrated.
+- **School Locations:** Points showing 4,800+ educational facilities.
+- **Conflict Risk Indicators:** Large red indicators showing states where education has been targeted.
+- **Regional Filter:** A dropdown menu to focus on a specific State, which automatically zooms the map and filters schools for that region.
 
 ### How to View the Map:
 1. **Locally:** Open the `index.html` file in any web browser.
