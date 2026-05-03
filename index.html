@@ -30,14 +30,18 @@
         .pulse-orange { border-radius: 50%; height: 20px; width: 20px; position: absolute; left: -10px; top: -10px; animation: pulsate 2s ease-out infinite; opacity: 0.0; box-shadow: 0 0 1px 2px #ff7800; }
         @keyframes pulsate { 0% { transform: scale(0.1, 0.1); opacity: 0.0; } 50% { opacity: 1.0; } 100% { transform: scale(1.2, 1.2); opacity: 0.0; } }
 
+        /* Split Dot CSS */
+        .split-dot { border-radius: 50%; border: 1px solid #000; box-shadow: 0 0 2px rgba(0,0,0,0.5); }
+
         .leaflet-control-layers { border: none !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important; border-radius: 8px !important; padding: 12px !important; }
+        .leaflet-control-layers-overlays label { margin-bottom: 5px; display: flex; align-items: center; }
     </style>
 </head>
 <body>
 
     <div class="map-title">
-        <h2>South Sudan: Population & Conflicts</h2>
-        <p>Live Conflict Reports (GDELT) & Population Density</p>
+        <h2>South Sudan: Population, Education & Conflicts</h2>
+        <p>Live Conflicts, School Types & Population Density</p>
     </div>
 
     <div class="live-status">
@@ -52,6 +56,7 @@
     <script>
         const map = L.map('map').setView([7.5, 30.5], 6);
         map.createPane('topPane').style.zIndex = 650;
+        map.createPane('facilitiesPane').style.zIndex = 640;
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO'
@@ -99,10 +104,59 @@
         };
         legend.addTo(map);
 
-        // --- GDELT Conflicts (Pulsing Markers) ---
+        // --- Education Facilities ---
+        const typeConfigs = {
+            "Primary School": { color: "#3498db", layer: L.layerGroup().addTo(map) }, // Blue
+            "Secondary School": { color: "#e74c3c", layer: L.layerGroup().addTo(map) }, // Red
+            "College": { color: "#f1c40f", layer: L.layerGroup().addTo(map) }, // Gold
+            "Nursery School": { color: "#2ecc71", layer: L.layerGroup().addTo(map) }, // Green
+            "Other or Unknown": { color: "#95a5a6", layer: L.layerGroup().addTo(map) } // Grey
+        };
+
+        fetch('data/processed/education_facilities.geojson')
+            .then(res => res.json())
+            .then(data => {
+                data.features.forEach(feature => {
+                    const coords = feature.geometry.coordinates;
+                    const latlng = [coords[1], coords[0]];
+                    const types = feature.properties.types || ["Other or Unknown"];
+                    const name = feature.properties.name || "Unnamed Facility";
+
+                    // Create gradient for multi-type schools
+                    let gradient;
+                    if (types.length > 1) {
+                        const colors = types.map(t => typeConfigs[t]?.color || typeConfigs["Other or Unknown"].color);
+                        const step = 100 / colors.length;
+                        let gradParts = [];
+                        colors.forEach((c, i) => {
+                            gradParts.push(`${c} ${i * step}%`, `${c} ${(i + 1) * step}%`);
+                        });
+                        gradient = `conic-gradient(${gradParts.join(", ")})`;
+                    } else {
+                        gradient = typeConfigs[types[0]]?.color || typeConfigs["Other or Unknown"].color;
+                    }
+
+                    const marker = L.marker(latlng, {
+                        icon: L.divIcon({
+                            className: 'split-dot',
+                            html: `<div style="background: ${gradient}; width: 12px; height: 12px; border-radius: 50%;"></div>`,
+                            iconSize: [12, 12],
+                            iconAnchor: [6, 6]
+                        }),
+                        pane: 'facilitiesPane'
+                    });
+
+                    marker.bindPopup(`<strong>${name}</strong><br>Types: ${types.join(", ")}`);
+                    
+                    types.forEach(t => {
+                        const targetLayer = typeConfigs[t] ? typeConfigs[t].layer : typeConfigs["Other or Unknown"].layer;
+                        marker.addTo(targetLayer);
+                    });
+                });
+            });
+
+        // --- GDELT Conflicts ---
         const conflictLayer = L.layerGroup().addTo(map);
-        
-        // Custom Pulsing Icon
         const pulsingIcon = L.divIcon({
             className: 'custom-pulsing-icon',
             html: '<div class="pulse-orange"></div><div style="background-color:#ff7800; width:10px; height:10px; border-radius:50%; border:1px solid white;"></div>',
@@ -110,7 +164,6 @@
             iconAnchor: [10, 10]
         });
 
-        // Approximate locations for hotspots
         const stateCoords = {
             "Juba": [4.85, 31.6], "Malakal": [9.53, 31.66], "Wau": [7.70, 27.99], "Bor": [6.20, 31.55],
             "Bentiu": [9.23, 29.83], "Yambio": [4.57, 28.39], "Torit": [4.41, 32.57], "Rumbek": [6.81, 29.68],
@@ -123,16 +176,11 @@
             .then(res => res.json())
             .then(data => {
                 data.articles.forEach(art => {
-                    let loc = [7.5, 30.5]; // Default center
-                    // Give priority to specific cities over general states
+                    let loc = [7.5, 30.5];
                     const sortedHotspots = Object.keys(stateCoords).sort((a, b) => b.length - a.length);
                     for (const name of sortedHotspots) {
-                        if (art.title.toLowerCase().includes(name.toLowerCase())) { 
-                            loc = stateCoords[name]; 
-                            break; 
-                        }
+                        if (art.title.toLowerCase().includes(name.toLowerCase())) { loc = stateCoords[name]; break; }
                     }
-                    
                     const marker = L.marker(loc, { icon: pulsingIcon, pane: 'topPane' });
                     marker.bindPopup(`<strong>Conflict Report</strong><br/>${art.title}<br/><a href="${art.url}" target="_blank">Read Source</a>`);
                     marker.addTo(conflictLayer);
@@ -141,10 +189,17 @@
             .catch(e => console.log("Waiting for first live update..."));
 
         // --- Layer Control ---
-        L.control.layers(null, { 
+        const overlays = {
             "<b>Population Density</b>": populationLayer,
-            "<span style='color:#ff7800;'>●</span> <b>Live Conflict Reports</b>": conflictLayer 
-        }, { collapsed: false }).addTo(map);
+            "<span style='color:#ff7800;'>●</span> <b>Serious Conflicts</b>": conflictLayer
+        };
+        
+        for (const [name, config] of Object.entries(typeConfigs)) {
+            const icon = `<span style="background:${config.color}; width:10px; height:10px; display:inline-block; border-radius:50%; margin-right:8px; border:1px solid #000;"></span>`;
+            overlays[icon + name] = config.layer;
+        }
+
+        L.control.layers(null, overlays, { collapsed: false }).addTo(map);
 
     </script>
 </body>
