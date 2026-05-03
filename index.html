@@ -8,88 +8,103 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <style>
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        #map { height: 100vh; width: 100%; background: #262626; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        #map { height: 100vh; width: 100%; background: #f0f0f0; }
         
         .map-header {
             position: absolute;
             top: 20px;
             left: 50px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .map-header h1 { margin: 0; font-size: 1.5rem; color: #333; }
-        .map-header p { margin: 5px 0 0; font-size: 0.9rem; color: #666; }
+        .map-header h1 { margin: 0; font-size: 1.4rem; color: #1a1a1a; font-weight: 700; letter-spacing: -0.5px; }
+        .map-header p { margin: 4px 0 0; font-size: 0.85rem; color: #666; font-weight: 500; }
 
         .filter-container {
             position: absolute;
             top: 20px;
             right: 20px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 220px;
-            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            width: 240px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .filter-container h3 { margin: 0 0 15px; font-size: 1rem; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        .filter-container h3 { margin: 0 0 15px; font-size: 0.95rem; color: #1a1a1a; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
 
         .filter-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
-        .filter-item:hover { transform: translateX(5px); }
+        .filter-item:hover { background: rgba(0,0,0,0.03); transform: translateX(3px); }
 
-        .filter-item input { margin-right: 12px; cursor: pointer; width: 16px; height: 16px; }
+        .filter-item input { margin-right: 12px; cursor: pointer; width: 18px; height: 18px; accent-color: #333; }
 
-        .filter-item label { cursor: pointer; font-size: 0.9rem; color: #444; flex-grow: 1; }
+        .filter-item label { cursor: pointer; font-size: 0.85rem; color: #333; flex-grow: 1; font-weight: 500; }
 
         .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            margin-right: 10px;
             display: inline-block;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
         }
+
+        /* Custom Cluster Colors */
+        .marker-cluster-small { background-color: rgba(181, 226, 140, 0.6); }
+        .marker-cluster-small div { background-color: rgba(110, 204, 57, 0.6); }
+        .marker-cluster-medium { background-color: rgba(241, 211, 87, 0.6); }
+        .marker-cluster-medium div { background-color: rgba(240, 194, 12, 0.6); }
+        .marker-cluster-large { background-color: rgba(253, 156, 115, 0.6); }
+        .marker-cluster-large div { background-color: rgba(241, 128, 23, 0.6); }
 
         /* Custom Popup Style */
         .leaflet-popup-content-wrapper {
-            border-radius: 8px;
-            padding: 5px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .leaflet-popup-content h4 { margin: 5px 0; color: #2c3e50; }
-        .leaflet-popup-content p { margin: 5px 0; font-size: 0.85rem; }
+        .leaflet-popup-content h4 { margin: 8px 0; color: #1a1a1a; font-size: 1.1rem; }
+        .leaflet-popup-content p { margin: 6px 0; font-size: 0.8rem; color: #666; }
+        .tag-container { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
         .type-tag {
             display: inline-block;
-            padding: 2px 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: #495057;
+            padding: 3px 10px;
+            background: #f0f2f5;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
         }
     </style>
 </head>
 <body>
 
     <div class="map-header">
-        <h1>Education Facilities</h1>
-        <p>South Sudan Infrastructure Overview</p>
+        <h1>South Sudan Education</h1>
+        <p>Interactive Infrastructure Map</p>
     </div>
 
     <div class="filter-container" id="filters">
-        <h3>Filter by Type</h3>
+        <h3>Filter Schools</h3>
         <!-- Filters will be generated dynamically -->
     </div>
 
@@ -100,57 +115,102 @@
 
     <script>
         // Initialize Map
-        const map = L.map('map').setView([7.8627, 29.6949], 6);
+        const map = L.map('map', {
+            zoomControl: false
+        }).setView([7.8627, 29.6949], 6);
 
-        // Professional Base Map (CartoDB Positron)
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        L.control.zoom({ position: 'bottomleft' }).addTo(map);
+
+        // Vibrant Base Map (CartoDB Voyager)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
 
-        const colors = {
-            "Primary School": "#2ecc71",
-            "Secondary School": "#3498db",
-            "Nursery School": "#9b59b6",
-            "Vocational School": "#e67e22",
-            "University": "#e74c3c",
-            "Other or Unknown": "#95a5a6"
+        const colorPalette = {
+            "Primary School": "#FF5733",    // Vibrant Orange
+            "Secondary School": "#33FF57",  // Vibrant Green
+            "Nursery School": "#3357FF",    // Vibrant Blue
+            "Vocational School": "#FF33F5", // Vibrant Magenta
+            "University": "#FFD700",        // Gold
+            "Other or Unknown": "#808080"   // Grey
         };
 
-        const defaultColor = "#34495e";
+        const defaultColor = "#333333";
 
-        let geojsonLayer;
         let markers = L.markerClusterGroup({
             showCoverageOnHover: false,
-            spiderfyOnMaxZoom: true
+            spiderfyOnMaxZoom: true,
+            maxClusterRadius: 40, // Tighter clustering
+            disableClusteringAtZoom: 14,
+            iconCreateFunction: function(cluster) {
+                var childCount = cluster.getChildCount();
+                var c = ' marker-cluster-';
+                if (childCount < 10) { c += 'small'; }
+                else if (childCount < 50) { c += 'medium'; }
+                else { c += 'large'; }
+                return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+            }
         });
 
         const activeFilters = new Set();
         let allFeatures = [];
 
+        // Helper to extract types from a feature
+        function getSchoolTypes(feature) {
+            const types = [];
+            const primaryType = feature.properties.school_type;
+            const name = (feature.properties.name || "").toLowerCase();
+
+            // Always add the explicit type
+            if (primaryType) types.push(primaryType);
+
+            // Check name for multi-type keywords if they aren't the primary type
+            const keywords = {
+                "Primary": "Primary School",
+                "Secondary": "Secondary School",
+                "Nursery": "Nursery School",
+                "Vocational": "Vocational School",
+                "University": "University",
+                "College": "University"
+            };
+
+            for (let [keyword, officialType] of Object.entries(keywords)) {
+                if (name.includes(keyword.toLowerCase()) && !types.includes(officialType)) {
+                    types.push(officialType);
+                }
+            }
+            return types.length > 0 ? types : ["Other or Unknown"];
+        }
+
         // Fetch Data
         fetch('maps/dots_education facilities.geojson')
             .then(response => response.json())
             .then(data => {
-                allFeatures = data.features;
+                allFeatures = data.features.map(f => {
+                    f._detectedTypes = getSchoolTypes(f);
+                    return f;
+                });
                 
-                // Get unique types
-                const types = [...new Set(allFeatures.map(f => f.properties.school_type))].sort();
+                // Collect all unique types across all features
+                const allPossibleTypes = new Set();
+                allFeatures.forEach(f => f._detectedTypes.forEach(t => allPossibleTypes.add(t)));
+                const sortedTypes = Array.from(allPossibleTypes).sort();
                 
                 // Initialize filters
                 const filterContainer = document.getElementById('filters');
-                types.forEach(type => {
+                sortedTypes.forEach(type => {
                     activeFilters.add(type);
                     
                     const div = document.createElement('div');
                     div.className = 'filter-item';
-                    const color = colors[type] || defaultColor;
+                    const color = colorPalette[type] || defaultColor;
                     
                     div.innerHTML = `
-                        <input type="checkbox" checked id="type-${type}" value="${type}">
+                        <input type="checkbox" checked id="type-${type.replace(/\s+/g, '-')}" value="${type}">
                         <span class="legend-color" style="background: ${color}"></span>
-                        <label for="type-${type}">${type}</label>
+                        <label for="type-${type.replace(/\s+/g, '-')}">${type}</label>
                     `;
                     
                     div.querySelector('input').addEventListener('change', (e) => {
@@ -168,41 +228,44 @@
         function updateMap() {
             markers.clearLayers();
             
-            const filteredFeatures = allFeatures.filter(f => activeFilters.has(f.properties.school_type));
+            // Feature is shown if ANY of its types are in the active filters
+            const filteredFeatures = allFeatures.filter(f => 
+                f._detectedTypes.some(type => activeFilters.has(type))
+            );
             
             const layer = L.geoJSON({
                 type: "FeatureCollection",
                 features: filteredFeatures
             }, {
                 pointToLayer: (feature, latlng) => {
-                    const type = feature.properties.school_type;
-                    const color = colors[type] || defaultColor;
+                    // Use the color of the first active type detected
+                    const displayType = feature._detectedTypes.find(t => activeFilters.has(t)) || feature._detectedTypes[0];
+                    const color = colorPalette[displayType] || defaultColor;
                     
                     return L.circleMarker(latlng, {
-                        radius: 6,
+                        radius: 7,
                         fillColor: color,
                         color: "#fff",
-                        weight: 1,
+                        weight: 2,
                         opacity: 1,
-                        fillOpacity: 0.8
+                        fillOpacity: 0.9
                     });
                 },
                 onEachFeature: (feature, layer) => {
                     const props = feature.properties;
+                    const tags = feature._detectedTypes.map(t => `<span class="type-tag">${t}</span>`).join('');
+                    
                     layer.bindPopup(`
                         <h4>${props.name || 'Unnamed Facility'}</h4>
-                        <span class="type-tag">${props.school_type}</span>
-                        <p>Location: ${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}</p>
+                        <div class="tag-container">${tags}</div>
+                        <p><strong>Lat:</strong> ${feature.geometry.coordinates[1].toFixed(5)}<br>
+                           <strong>Lon:</strong> ${feature.geometry.coordinates[0].toFixed(5)}</p>
                     `);
                 }
             });
 
             markers.addLayer(layer);
             map.addLayer(markers);
-            
-            if (filteredFeatures.length > 0) {
-                // map.fitBounds(markers.getBounds(), { padding: [50, 50] });
-            }
         }
     </script>
 </body>
