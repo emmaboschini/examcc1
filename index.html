@@ -217,7 +217,6 @@
                 allFeatures = data.features.map(f => {
                     f._detectedTypes = getSchoolTypes(f);
                     f._operator = f.properties.operator_type || "Unknown";
-                    f._city = f.properties["addr_city,C,80"] || f.properties.addr_city || "Not Specified";
                     return f;
                 });
                 
@@ -302,7 +301,6 @@
                         <h4>${p.school_name || p.name || 'Unnamed Facility'}</h4>
                         <div class="tag-container">${tags}</div>
                         <p><strong>Operator:</strong> ${feature._operator}</p>
-                        <p><strong>City/Area:</strong> ${feature._city}</p>
                         <div class="meta-info">
                             Source: ${p["source,C,80"] || "OpenStreetMap"}<br>
                             OSM ID: ${p["osm_id,N,18,0"] || "N/A"}
