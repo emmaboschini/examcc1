@@ -1,43 +1,59 @@
-# South Sudan School Conflict Analysis
+# South Sudan: Population, Education & Conflict Data
 
-This project focuses on analyzing conflict incidents in schools across South Sudan, utilizing data from the South Sudan Education Cluster to identify trends, impacts, and areas of high risk.
+This repository contains a curated collection of open-source datasets focused on the intersection of population distribution, education facilities, and conflict impact in South Sudan (2024–2026).
 
-## Project Overview
-The primary goal is to understand the nature and frequency of conflict-related disruptions to education in South Sudan, including school closures, military use of facilities, and direct attacks.
+## 📁 Repository Structure
 
-## Data Sources
-- **South Sudan Education Cluster Dataset**: Ground-level data on education in emergencies.
-- **IOM DTM Displacement Data**: Round 16 baseline assessment for IDPs and returnees.
-- **OCHA Population Estimates 2024**: Official county-level population statistics.
-- Detailed source documentation can be found in [sources.md](./sources.md).
+The repository is organized into specific "clusters" to keep the data and logic separate:
 
-## Project Structure
-- `data/raw/raw_education in danger.csv`: Original Education Cluster dataset.
-- `data/raw/iom_dtm_r16_baseline.xlsx`: IOM DTM Baseline Assessment Round 16 (XLSX).
-- `data/raw/ssd_2024_population_estimates.xlsx`: OCHA 2024 Population Estimates (XLSX).
-- `data/processed/clean_education in danger.csv`: Processed and cleaned education data.
-- `data/processed/iom_dtm_r16_baseline.csv`: CSV version of the IOM DTM dataset.
-- `data/processed/ssd_2024_population_estimates.csv`: Full CSV version of the OCHA population data.
-- `data/processed/school_age_population_2024.csv`: Filtered version containing only children (ages 0-17).
-- `data/processed/south_sudan_schools.geojson`: Geographic locations of schools from OpenStreetMap.
-- `scripts/fetch_osm_schools.py`: Script used to download data from OpenStreetMap.
-- `scripts/filter_school_age.py`: Script used to filter population data for children.
-- `sources.md`: Documentation of data origins and characteristics.
-- `README.md`: Project overview and status (this file).
+### 1. `data/raw/`
+Contains the original datasets exactly as they were downloaded from global sources.
+- `ss_raw_population.csv`: Full population projections.
+- `ss_raw_schools.csv`: Official government school census.
+- `ss_raw_conflict.csv`: Global "Education in Danger" dataset.
 
-## Current Status
-- [x] Identify primary data source (South Sudan Education Cluster).
-- [x] Download raw data.
-- [x] Data cleaning and preprocessing.
-- [x] Fetch geographic school data from OpenStreetMap (Overpass API).
-- [x] Tidy project structure (organized into `data/` and `scripts/`).
-- [x] Acquire IDP data (IOM DTM Round 16).
-- [x] Acquire school-age population estimates (OCHA 2024).
-- [x] Filter and isolate school-age population data.
-- [ ] Exploratory Data Analysis (EDA).
-- [ ] Visualization of conflict trends.
-- [ ] Final report/insights generation.
+### 2. `data/clean/`
+Contains simplified and processed files that are easier to read and analyze.
+- `ss_clean_population_u17.csv`: Focuses on children under 17.
+- `ss_clean_schools.csv`: Simplified list of 6,000+ schools.
+- `ss_clean_conflict.csv`: Filtered specifically for South Sudan events.
 
-## How to Use
-1. Refer to `sources.md` for background on the data.
-2. Analysis-ready datasets are located in the `data/processed/` folder.
+### 3. `scripts/`
+Contains the Python scripts used to transform the "raw" data into "clean" data.
+- `ss_proc_population.py`: Processes population data.
+- `ss_proc_schools.py`: Processes EMIS school data.
+- `ss_proc_conflict.py`: Filters and cleans conflict data.
+- `ss_prep_map.py`: Merges geographic boundaries with population data for the map.
+
+## 🗺️ Interactive Map
+
+The project includes a professional interactive map (`index.html`) that visualizes the distribution of children under 17 across South Sudan.
+
+### How to View the Map:
+1. **Locally:** Open the `index.html` file in any web browser.
+2. **Online:** This project is ready for **GitHub Pages**.
+
+### How to Publish to GitHub Pages:
+1. Push this repository to GitHub.
+2. Go to **Settings** > **Pages**.
+3. Under **Build and deployment**, set the source to **Deploy from a branch**.
+4. Select the **main** branch and the **root (/)** folder.
+5. Click **Save**. Your map will be live at `https://[your-username].github.io/[repo-name]/`.
+
+---
+
+## 🚀 Getting Started
+
+If you are new to data analysis, follow these steps:
+
+1. **Understand the Sources:** Read `sources.md` to see where the data comes from (UN, WorldPop, Ministry of Education).
+2. **Explore the Clean Data:** Look inside the `data/clean/` folder. These files are ready for use in Excel or Google Sheets.
+3. **Re-run the Processing:** To see how the cleaning works, run the scripts from the main folder:
+   ```bash
+   python3 scripts/ss_proc_population.py
+   python3 scripts/ss_proc_schools.py
+   python3 scripts/ss_proc_conflict.py
+   ```
+
+---
+*Created for the South Sudan Data Project - May 2026*
