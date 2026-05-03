@@ -3,261 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>South Sudan Population & Education Map</title>
+    <title>South Sudan Population & Conflict Map</title>
     
-    <!-- Leaflet CSS for the map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
-        /* Make the map fill the whole screen */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        #map {
-            height: 100%;
-            width: 100%;
-            background-color: #f8f9fa;
-        }
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        #map { height: 100%; width: 100%; background-color: #f8f9fa; }
         
-        /* Modern Info Box Style */
-        .info {
-            padding: 12px 16px;
-            font-size: 14px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            line-height: 1.6;
-            color: #333;
-        }
-        .info h4 {
-            margin: 0 0 8px;
-            color: #084594;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 12px;
-        }
+        .info { padding: 12px 16px; font-size: 14px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; line-height: 1.6; color: #333; }
+        .info h4 { margin: 0 0 8px; color: #084594; text-transform: uppercase; letter-spacing: 0.5px; font-size: 12px; }
         
-        /* Legend Style */
-        .legend {
-            line-height: 24px;
-            color: #555;
-            padding: 10px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .legend i {
-            width: 18px;
-            height: 18px;
-            float: left;
-            margin-right: 8px;
-            opacity: 0.8;
-            border-radius: 3px;
-        }
+        .legend { line-height: 24px; color: #555; padding: 10px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.8; border-radius: 3px; }
 
-        /* Title Overlay */
-        .map-title {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            background: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .map-title h2 {
-            margin: 0;
-            font-size: 18px;
-            color: #2c3e50;
-        }
-        .map-title p {
-            margin: 0;
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        
-        /* Custom Styling for Layer Control */
-        .leaflet-control-layers {
-            border: none !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
-            border-radius: 8px !important;
-            padding: 12px !important;
-        }
-        .leaflet-control-layers-overlays label {
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-        }
+        .map-title { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: white; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        .map-title h2 { margin: 0; font-size: 18px; color: #2c3e50; }
+        .map-title p { margin: 0; font-size: 12px; color: #7f8c8d; }
+
+        /* LIVE Indicator */
+        .live-status { position: absolute; bottom: 30px; left: 10px; z-index: 1000; background: white; padding: 8px 12px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-size: 12px; font-weight: bold; border-left: 4px solid #ff0000; }
+        .live-dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* Pulse Animation for Conflict Markers */
+        .pulse-orange { border-radius: 50%; height: 20px; width: 20px; position: absolute; left: -10px; top: -10px; animation: pulsate 2s ease-out infinite; opacity: 0.0; box-shadow: 0 0 1px 2px #ff7800; }
+        @keyframes pulsate { 0% { transform: scale(0.1, 0.1); opacity: 0.0; } 50% { opacity: 1.0; } 100% { transform: scale(1.2, 1.2); opacity: 0.0; } }
+
+        .leaflet-control-layers { border: none !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important; border-radius: 8px !important; padding: 12px !important; }
     </style>
 </head>
 <body>
 
     <div class="map-title">
-        <h2>South Sudan: Population & Education</h2>
-        <p>County-level Population (Under 17) & Local Facilities</p>
+        <h2>South Sudan: Population & Conflicts</h2>
+        <p>Live Conflict Reports (GDELT) & Population Density</p>
+    </div>
+
+    <div class="live-status">
+        <span class="live-dot"></span> LIVE: GDELT News Updates (Every 30 mins)
     </div>
 
     <div id="map"></div>
 
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Our Population Data -->
     <script src="population_data.js"></script>
 
     <script>
-        // 1. Initialize the map
         const map = L.map('map').setView([7.5, 30.5], 6);
+        map.createPane('topPane').style.zIndex = 650;
 
-        // Create a custom pane for facilities to ensure they are on top of polygons
-        map.createPane('facilitiesPane');
-        map.getPane('facilitiesPane').style.zIndex = 650;
-
-        // 2. Base Tile Layer
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO'
         }).addTo(map);
 
-        // 3. Population Density Logic
+        // --- Population Density ---
         function getColor(d) {
-            return d > 250000 ? '#084594' :
-                   d > 200000 ? '#2171b5' :
-                   d > 150000 ? '#4292c6' :
-                   d > 100000 ? '#6baed6' :
-                   d > 50000  ? '#9ecae1' :
-                   d > 10000  ? '#c6dbef' :
-                                '#eff3ff';
+            return d > 250000 ? '#084594' : d > 200000 ? '#2171b5' : d > 150000 ? '#4292c6' : 
+                   d > 100000 ? '#6baed6' : d > 50000 ? '#9ecae1' : d > 10000 ? '#c6dbef' : '#eff3ff';
         }
 
-        function style(feature) {
-            const pcode = feature.properties.pcode;
-            const pop = populationData[pcode] ? populationData[pcode].Population : 0;
-            return {
-                fillColor: getColor(pop),
-                weight: 1,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.8
-            };
-        }
-
-        // 4. Info Box
-        const info = L.control();
-        info.onAdd = function (map) { this._div = L.DomUtil.create('div', 'info'); this.update(); return this._div; };
-        info.update = function (props) {
-            const pcode = props ? props.pcode : null;
-            const data = pcode ? populationData[pcode] : null;
-            this._div.innerHTML = '<h4>County Information</h4>' + (props ?
-                '<b>' + props.shapeName + '</b><br />' + (data ? data.Population.toLocaleString() + ' children' : 'No data available')
-                : 'Hover over a county');
-        };
-        info.addTo(map);
-
-        // 5. Legend
-        const legend = L.control({position: 'bottomright'});
-        legend.onAdd = function (map) {
-            const div = L.DomUtil.create('div', 'info legend');
-            const grades = [0, 10000, 50000, 100000, 150000, 200000, 250000];
-            div.innerHTML += '<b>Population (Under 17)</b><br>';
-            for (let i = 0; i < grades.length; i++) {
-                div.innerHTML += '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                    grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;' + grades[i + 1].toLocaleString() + '<br>' : '+');
-            }
-            return div;
-        };
-        legend.addTo(map);
-
-        // 6. Define Layer Groups
         const populationLayer = L.layerGroup().addTo(map);
-        
-        // Colors for school types - using very distinct names
-        const typeConfigs = {
-            "Primary School": { color: "blue", layer: L.layerGroup().addTo(map) },
-            "Secondary School": { color: "red", layer: L.layerGroup().addTo(map) },
-            "College": { color: "gold", layer: L.layerGroup().addTo(map) },
-            "Nursery School": { color: "green", layer: L.layerGroup().addTo(map) },
-            "Other or Unknown": { color: "grey", layer: L.layerGroup().addTo(map) }
-        };
-
-        // 7. Load Data
-        // Counties
+        let geojson;
         fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/15db51d84a38231ded5868247ee6588c95e77620/releaseData/gbHumanitarian/SSD/ADM2/geoBoundaries-SSD-ADM2_simplified.geojson')
             .then(res => res.json())
             .then(data => {
-                const geojson = L.geoJson(data, {
-                    style: style,
-                    onEachFeature: function(feature, layer) {
-                        layer.on({
-                            mouseover: (e) => {
-                                e.target.setStyle({ weight: 2, color: '#666', fillOpacity: 0.9 });
-                                info.update(e.target.feature.properties);
-                            },
-                            mouseout: (e) => {
-                                geojson.resetStyle(e.target);
-                                info.update();
-                            }
+                geojson = L.geoJson(data, {
+                    style: (f) => ({ fillColor: getColor(populationData[f.properties.pcode]?.Population || 0), weight: 1, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.8 }),
+                    onEachFeature: (f, l) => {
+                        l.on({
+                            mouseover: (e) => { e.target.setStyle({ weight: 2, color: '#666', fillOpacity: 0.9 }); info.update(f.properties); },
+                            mouseout: (e) => { geojson.resetStyle(e.target); info.update(); }
                         });
                     }
                 }).addTo(populationLayer);
                 map.fitBounds(geojson.getBounds());
             });
 
-        // Schools
-        fetch('data/processed/education_facilities.geojson')
+        // --- Info & Legend ---
+        const info = L.control();
+        info.onAdd = function (map) { this._div = L.DomUtil.create('div', 'info'); this.update(); return this._div; };
+        info.update = function (props) {
+            const data = props ? populationData[props.pcode] : null;
+            this._div.innerHTML = '<h4>County Info</h4>' + (props ? `<b>${props.shapeName}</b><br/>${data ? data.Population.toLocaleString() + ' children' : 'No data'}` : 'Hover over a county');
+        };
+        info.addTo(map);
+
+        const legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            const div = L.DomUtil.create('div', 'info legend');
+            const grades = [0, 10000, 50000, 100000, 150000, 200000, 250000];
+            div.innerHTML += '<b>Population (Under 17)</b><br>';
+            grades.forEach(g => { div.innerHTML += `<i style="background:${getColor(g + 1)}"></i> ${g.toLocaleString()}+<br>`; });
+            return div;
+        };
+        legend.addTo(map);
+
+        // --- GDELT Conflicts (Pulsing Markers) ---
+        const conflictLayer = L.layerGroup().addTo(map);
+        
+        // Custom Pulsing Icon
+        const pulsingIcon = L.divIcon({
+            className: 'custom-pulsing-icon',
+            html: '<div class="pulse-orange"></div><div style="background-color:#ff7800; width:10px; height:10px; border-radius:50%; border:1px solid white;"></div>',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        // Approximate locations for states (as news often mentions states/Juba)
+        const stateCoords = {
+            "Juba": [4.85, 31.6], "Khartoum": [15.5, 32.53], "Tonj": [7.27, 28.68], "Upper Nile": [9.3, 32.7],
+            "Jonglei": [7.0, 32.0], "Unity": [9.0, 30.0], "Warrap": [8.0, 28.5], "Lakes": [6.5, 30.0],
+            "Western Equatoria": [5.5, 28.5], "Eastern Equatoria": [4.5, 33.0], "Northern Bahr el Ghazal": [9.0, 27.5], "Western Bahr el Ghazal": [8.0, 25.5]
+        };
+
+        fetch('data/processed/realtime_conflicts.json')
             .then(res => res.json())
             .then(data => {
-                // We will add each facility to its corresponding type layers
-                data.features.forEach(feature => {
-                    const coords = feature.geometry.coordinates;
-                    const latlng = [coords[1], coords[0]];
-                    const types = feature.properties.types || ["Other or Unknown"];
-                    const name = feature.properties.name || "Unnamed Facility";
-
-                    // Use the color of the first type listed for the visual dot
-                    const primaryType = types[0];
-                    const markerColor = typeConfigs[primaryType] ? typeConfigs[primaryType].color : "grey";
-
-                    const marker = L.circleMarker(latlng, {
-                        radius: 6,
-                        fillColor: markerColor,
-                        color: "#000",
-                        weight: 1,
-                        opacity: 1,
-                        fillOpacity: 0.9,
-                        pane: 'facilitiesPane'
-                    });
-
-                    marker.bindPopup(`<strong>${name}</strong><br>Types: ${types.join(", ")}`);
-
-                    // Add to each relevant layer for filtering
-                    types.forEach(t => {
-                        if (typeConfigs[t]) {
-                            marker.addTo(typeConfigs[t].layer);
-                        } else {
-                            marker.addTo(typeConfigs["Other or Unknown"].layer);
-                        }
-                    });
+                data.articles.forEach(art => {
+                    // Try to find a location in the title or text
+                    let loc = [7.5, 30.5]; // Default to South Sudan center
+                    for (const [name, coord] of Object.entries(stateCoords)) {
+                        if (art.title.includes(name)) { loc = coord; break; }
+                    }
+                    
+                    const marker = L.marker(loc, { icon: pulsingIcon, pane: 'topPane' });
+                    marker.bindPopup(`<strong>Conflict Report</strong><br/>${art.title}<br/><a href="${art.url}" target="_blank">Read Source</a>`);
+                    marker.addTo(conflictLayer);
                 });
-            });
+            })
+            .catch(e => console.log("Waiting for first live update..."));
 
-        // 8. Add Layer Control
-        const overlays = {
-            "<b>Population Density</b>": populationLayer
-        };
-        
-        for (const [name, config] of Object.entries(typeConfigs)) {
-            const circleHtml = `<span style="background:${config.color}; width:12px; height:12px; display:inline-block; border-radius:50%; margin-right:8px; border:1px solid #000;"></span>`;
-            overlays[circleHtml + name] = config.layer;
-        }
-
-        L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+        // --- Layer Control ---
+        L.control.layers(null, { 
+            "<b>Population Density</b>": populationLayer,
+            "<span style='color:#ff7800;'>●</span> <b>Live Conflict Reports</b>": conflictLayer 
+        }, { collapsed: false }).addTo(map);
 
     </script>
 </body>
