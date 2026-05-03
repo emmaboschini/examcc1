@@ -16,13 +16,17 @@ ss_df = df[df['Country'] == 'South Sudan'].copy()
 ss_df['Admin 1'] = ss_df['Admin 1'].str.replace(' State', '', regex=False).str.strip()
 
 # Aggregate by State and also keep individual incident details
-# We create a list of dictionaries for each state
 state_incidents = {}
 for state in ss_df['Admin 1'].unique():
+    # Only keep relevant columns and ensure they are strings
     incidents = ss_df[ss_df['Admin 1'] == state][[
         'Date', 'Location of event', 'Reported Perpetrator', 'Type of education facility'
-    ]].to_dict('records')
-    state_incidents[state] = incidents
+    ]].copy()
+    
+    # Fill empty values to prevent JS errors
+    incidents = incidents.fillna('No Information')
+    
+    state_incidents[state] = incidents.to_dict('records')
 
 # Create summary lookup
 summary_df = ss_df.groupby('Admin 1').agg({
@@ -40,11 +44,24 @@ for feature in gj['features']:
     name = feature['properties'].get('shapeName')
     # Default values if no conflict found
     stats = summary_dict.get(name, {'Incident_Count': 0, 'Educators Killed': 0, 'Students Killed': 0})
-    feature['properties']['incidents_count'] = int(stats['Incident_Count'])
+    
+    count = int(stats['Incident_Count'])
+    feature['properties']['incidents_count'] = count
     feature['properties']['educators_killed'] = int(stats['Educators Killed'])
     feature['properties']['students_killed'] = int(stats['Students Killed'])
-    # Add the full list of incidents
     feature['properties']['incident_list'] = state_incidents.get(name, [])
+    
+    # Dynamic Risk Level
+    if count == 0:
+        risk_level = "No Recent Incidents"
+    elif count < 5:
+        risk_level = "Active Conflict Area"
+    elif count < 10:
+        risk_level = "High-Risk Zone"
+    else:
+        risk_level = "Critical Threat Level"
+    
+    feature['properties']['risk_level'] = risk_level
 
 # Step 4: Save the result
 with open(output_file, 'w') as f:

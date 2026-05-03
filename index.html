@@ -12,61 +12,68 @@
         
         /* Layout */
         #sidebar {
-            width: 380px;
-            background: #f8f9fa;
+            width: 420px;
+            background: #ffffff;
             border-right: 1px solid #ddd;
             overflow-y: auto;
-            padding: 20px;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 25px;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
             z-index: 1001;
         }
         #map-container { flex-grow: 1; position: relative; }
         #map { height: 100%; width: 100%; }
         
         /* UI Components */
-        h1 { font-size: 1.4em; margin-top: 0; color: #2c3e50; }
-        .filter-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
-        select { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px; background: white; }
+        h1 { font-size: 1.6em; margin-top: 0; color: #1a1a1a; letter-spacing: -0.5px; }
+        .filter-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; font-size: 0.9em; }
+        select { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #d1d1d1; font-size: 14px; background: #fcfcfc; cursor: pointer; }
         
         .stat-card {
-            background: white; border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background: #fff5f5; border: 1px solid #fed7d7; border-radius: 10px; padding: 20px; margin-bottom: 25px;
         }
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         .stat-item { text-align: center; }
-        .stat-value { display: block; font-size: 1.2em; font-weight: bold; color: #d9534f; }
-        .stat-label { font-size: 0.8em; color: #777; text-transform: uppercase; }
+        .stat-value { display: block; font-size: 1.5em; font-weight: 800; color: #c53030; }
+        .stat-label { font-size: 0.75em; color: #9b2c2c; text-transform: uppercase; font-weight: 700; }
 
         /* Incident List */
-        .incident-list { margin-top: 20px; }
-        .incident-item {
-            background: white; border-left: 4px solid #d9534f; padding: 10px; margin-bottom: 10px; border-radius: 0 4px 4px 0;
-            font-size: 0.9em; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .incident-list-header { 
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #eee;
         }
-        .incident-date { font-weight: bold; color: #333; margin-bottom: 3px; }
-        .incident-details { color: #666; line-height: 1.4; }
+        .incident-item {
+            background: #fdfdfd; border: 1px solid #edf2f7; border-left: 5px solid #e53e3e; 
+            padding: 12px; margin-bottom: 12px; border-radius: 0 8px 8px 0;
+            font-size: 0.9em; transition: all 0.2s;
+        }
+        .incident-item:hover { border-color: #cbd5e0; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .incident-date { font-weight: 700; color: #2d3748; margin-bottom: 5px; font-size: 0.85em; }
+        .incident-details { color: #4a5568; line-height: 1.5; }
+        .incident-details b { color: #2d3748; }
 
-        /* Map UI */
-        .info { padding: 10px; background: rgba(255,255,255,0.9); border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
-        .legend { line-height: 18px; color: #555; }
-        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+        /* Map Legend */
+        .info { padding: 12px; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 1px solid #eee; }
+        .legend { line-height: 20px; color: #444; font-size: 0.85em; }
+        .legend i { width: 16px; height: 16px; float: left; margin-right: 10px; opacity: 0.8; border-radius: 2px; }
         
-        /* Custom Markers */
-        .risk-marker { transition: transform 0.2s; cursor: pointer; }
-        .risk-marker:hover { transform: scale(1.2); }
+        /* Custom UI */
+        .badge {
+            display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75em; font-weight: 700;
+            background: #e53e3e; color: white; margin-left: 10px;
+        }
     </style>
 </head>
 <body>
 
 <div id="sidebar">
-    <h1>Education Risk Analysis</h1>
-    <p style="font-size: 0.9em; color: #666; margin-bottom: 20px;">
-        Visualizing the intersection of population density, school facilities, and conflict incidents in South Sudan.
+    <h1>South Sudan Education Risk</h1>
+    <p style="font-size: 0.9em; color: #718096; margin-bottom: 25px; line-height: 1.5;">
+        Mapping the relationship between under-17 population centers and documented violence against schools.
     </p>
 
     <div class="filter-group">
-        <label for="stateFilter">Focus on Region:</label>
+        <label for="stateFilter">SELECT REGION</label>
         <select id="stateFilter">
             <option value="All">All of South Sudan</option>
         </select>
@@ -74,7 +81,8 @@
 
     <div id="stateSummary" style="display: none;">
         <div class="stat-card">
-            <h3 id="summaryTitle" style="margin-top:0; font-size: 1.1em; color: #2c3e50;">State Overview</h3>
+            <h3 id="summaryTitle" style="margin:0; font-size: 1em; color: #2d3748; text-transform: uppercase;">Jonglei State</h3>
+            <div id="riskLevelBadge" style="margin-top: 5px;"></div>
             <div class="stat-grid">
                 <div class="stat-item">
                     <span class="stat-value" id="valIncidents">0</span>
@@ -88,15 +96,19 @@
         </div>
 
         <div class="incident-list">
-            <label>Recent Reported Incidents:</label>
+            <div class="incident-list-header">
+                <label style="margin:0;">CONFLICT HISTORY</label>
+                <span id="incidentCountBadge" class="badge">0</span>
+            </div>
             <div id="incidentItems">
-                <!-- Populated by JS -->
+                <!-- Data goes here -->
             </div>
         </div>
     </div>
     
-    <div id="defaultMsg" style="color: #999; font-style: italic; text-align: center; margin-top: 50px;">
-        Select a region on the map or from the dropdown to see detailed conflict history.
+    <div id="defaultMsg" style="color: #a0aec0; font-style: italic; text-align: center; margin-top: 60px; padding: 0 20px;">
+        <svg style="width: 48px; height: 48px; margin-bottom: 15px; opacity: 0.3;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        <br>Click a marker or select a region to view detailed risk data and facility lists.
     </div>
 </div>
 
@@ -109,87 +121,73 @@
 <script>
     const map = L.map('map').setView([7.8, 30.0], 6);
 
-    // Layer Panes for strict ordering
-    map.createPane('popPane');    map.getPane('popPane').style.zIndex = 400;
-    map.createPane('schoolPane'); map.getPane('schoolPane').style.zIndex = 500;
-    map.createPane('riskPane');   map.getPane('riskPane').style.zIndex = 600;
+    // Strict Layer Ordering
+    map.createPane('polygons'); map.getPane('polygons').style.zIndex = 400;
+    map.createPane('schools');  map.getPane('schools').style.zIndex = 500;
+    map.createPane('markers');  map.getPane('markers').style.zIndex = 600;
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; CARTO'
     }).addTo(map);
 
-    // Data Holders
     let allStates = [];
     let allSchools = [];
-    
-    const popLayer = L.layerGroup();
-    const schoolLayer = L.layerGroup();
-    const riskLayer = L.layerGroup();
+    const layerPop = L.layerGroup();
+    const layerSchools = L.layerGroup();
+    const layerRisk = L.layerGroup();
 
-    // 1. Color Helper
+    // 1. Styling Functions
     function getPopColor(d) {
         return d > 200000 ? '#800026' : d > 100000 ? '#BD0026' : d > 50000  ? '#E31A1C' :
                d > 20000  ? '#FC4E2A' : d > 10000  ? '#FD8D3C' : d > 5000   ? '#FEB24C' :
-               d > 1000   ? '#FED976' : '#FFEDA0';
+                            '#FFEDA0';
     }
 
-    // 2. Graded Risk Helper
     function getRiskRadius(count) {
-        if (count === 0) return 0;
-        return 8 + (count * 1.5); // Proportional size
-    }
-    
-    function getRiskLevel(count) {
-        if (count > 10) return "Very High Risk";
-        if (count > 5) return "High Risk";
-        if (count > 0) return "Active Risk Area";
-        return "No Reported Incidents";
+        return 8 + (count * 1.8);
     }
 
-    // 3. Load Population Density
+    // 2. Data Loading
+    // --- Load Population Density ---
     fetch('data/clean/ss_map_data.geojson')
         .then(res => res.json())
         .then(data => {
             L.geoJson(data, {
-                pane: 'popPane',
-                style: f => ({
-                    fillColor: getPopColor(f.properties.population),
-                    weight: 1, opacity: 1, color: 'white', fillOpacity: 0.6
-                }),
+                pane: 'polygons',
+                style: f => ({ fillColor: getPopColor(f.properties.population), weight: 1, opacity: 1, color: 'white', fillOpacity: 0.6 }),
                 onEachFeature: (f, l) => {
                     l.bindTooltip(`<b>${f.properties.shapeName}</b><br>${f.properties.population.toLocaleString()} children`);
                 }
-            }).addTo(popLayer);
-            popLayer.addTo(map);
+            }).addTo(layerPop);
+            layerPop.addTo(map);
         });
 
-    // 4. Load Schools
-    fetch('data/clean/ss_clean_schools_geo.csv')
+    // --- Load Schools (Using safe Pipe-delimited file) ---
+    fetch('data/clean/ss_clean_schools_geo_safe.csv')
         .then(res => res.text())
         .then(csv => {
             const lines = csv.split('\n').slice(1);
             lines.forEach(line => {
-                const p = line.split(',');
+                const p = line.split('|'); // Using PIPE delimiter
                 if (p.length >= 6) {
                     const marker = L.circleMarker([parseFloat(p[4]), parseFloat(p[5])], {
-                        radius: 2, fillColor: "#0078ff", color: "#fff", weight: 0.5, opacity: 0.8, fillOpacity: 0.6, pane: 'schoolPane'
+                        radius: 2, fillColor: "#0078ff", color: "#fff", weight: 0.5, opacity: 0.8, fillOpacity: 0.6, pane: 'schools'
                     }).bindPopup(`<b>${p[0]}</b><br>State: ${p[2]}`);
                     marker.stateName = p[2];
                     allSchools.push(marker);
-                    marker.addTo(schoolLayer);
+                    marker.addTo(layerSchools);
                 }
             });
-            schoolLayer.addTo(map);
+            layerSchools.addTo(map);
         });
 
-    // 5. Load Conflict & Risk Indicators
+    // --- Load Conflict & Risk ---
     fetch('data/clean/ss_conflict_map_data.geojson')
         .then(res => res.json())
         .then(data => {
             allStates = data.features;
-            
-            // Populate Dropdown
             const filter = document.getElementById('stateFilter');
+            
             allStates.sort((a,b) => a.properties.shapeName.localeCompare(b.properties.shapeName))
                      .forEach(f => {
                 const opt = document.createElement('option');
@@ -198,15 +196,14 @@
                 filter.appendChild(opt);
             });
 
-            // Add Proportional Risk Markers
             L.geoJson(data, {
-                pane: 'riskPane',
+                pane: 'markers',
                 pointToLayer: (f, latlng) => {
                     const count = f.properties.incidents_count;
                     if (count > 0) {
                         return L.circleMarker(latlng, {
                             radius: getRiskRadius(count),
-                            fillColor: "#ff0000", color: "#333", weight: 1.5, opacity: 1, fillOpacity: 0.7, className: 'risk-marker'
+                            fillColor: "#e53e3e", color: "#822727", weight: 2, opacity: 1, fillOpacity: 0.8
                         });
                     }
                 },
@@ -216,87 +213,82 @@
                             document.getElementById('stateFilter').value = f.properties.shapeName;
                             updateSelection(f.properties.shapeName);
                         });
-                        l.bindTooltip(`<b>${f.properties.shapeName}</b>: ${getRiskLevel(f.properties.incidents_count)}`);
+                        l.bindTooltip(`<b>${f.properties.shapeName}</b>: ${f.properties.risk_level}`);
                     }
                 }
-            }).addTo(riskLayer);
-            riskLayer.addTo(map);
+            }).addTo(layerRisk);
+            layerRisk.addTo(map);
         });
 
-    // 6. Selection & Filtering Logic
+    // 3. Logic
     function updateSelection(selectedState) {
         const summary = document.getElementById('stateSummary');
         const msg = document.getElementById('defaultMsg');
         
         if (selectedState === "All") {
-            summary.style.display = 'none';
-            msg.style.display = 'block';
+            summary.style.display = 'none'; msg.style.display = 'block';
             map.setView([7.8, 30.0], 6);
-            allSchools.forEach(m => m.addTo(schoolLayer));
+            allSchools.forEach(m => m.addTo(layerSchools));
             return;
         }
 
-        const stateFeature = allStates.find(f => f.properties.shapeName === selectedState);
-        if (!stateFeature) return;
+        const feature = allStates.find(f => f.properties.shapeName === selectedState);
+        if (!feature) return;
 
-        summary.style.display = 'block';
-        msg.style.display = 'none';
+        summary.style.display = 'block'; msg.style.display = 'none';
 
-        // Update Stats
-        const props = stateFeature.properties;
+        // Update Sidebar
+        const p = feature.properties;
         document.getElementById('summaryTitle').textContent = selectedState;
-        document.getElementById('valIncidents').textContent = props.incidents_count;
-        document.getElementById('valCasualties').textContent = props.educators_killed + props.students_killed;
+        document.getElementById('riskLevelBadge').innerHTML = `<span style="font-size:0.8em; font-weight:800; color:#c53030;">${p.risk_level.toUpperCase()}</span>`;
+        document.getElementById('valIncidents').textContent = p.incidents_count;
+        document.getElementById('valCasualties').textContent = p.educators_killed + p.students_killed;
+        document.getElementById('incidentCountBadge').textContent = p.incidents_count;
 
-        // Populate Incident List
         const listDiv = document.getElementById('incidentItems');
         listDiv.innerHTML = '';
-        if (props.incident_list.length === 0) {
-            listDiv.innerHTML = '<p style="color:#999; font-size:0.9em;">No documented incidents in this specific database for this region.</p>';
+        if (p.incident_list.length === 0) {
+            listDiv.innerHTML = '<p style="color:#a0aec0; font-size:0.9em; padding:20px; text-align:center;">No documented incidents for this region.</p>';
         } else {
-            props.incident_list.forEach(inc => {
+            p.incident_list.forEach(inc => {
                 const item = document.createElement('div');
                 item.className = 'incident-item';
                 item.innerHTML = `
-                    <div class="incident-date">${inc.Date}</div>
+                    <div class="incident-date">${new Date(inc.Date).toLocaleDateString('en-GB', { month:'short', year:'numeric', day:'numeric' })}</div>
                     <div class="incident-details">
                         <b>Target:</b> ${inc['Type of education facility']}<br>
                         <b>Actor:</b> ${inc['Reported Perpetrator']}<br>
-                        <b>Location:</b> ${inc['Location of event']}
+                        <b>Area:</b> ${inc['Location of event']}
                     </div>
                 `;
                 listDiv.appendChild(item);
             });
         }
 
-        // Filter Map
-        const bounds = L.geoJson(stateFeature).getBounds();
-        map.fitBounds(bounds, { padding: [20, 20] });
-
+        // Map Interactions
+        map.fitBounds(L.geoJson(feature).getBounds(), { padding: [40, 40] });
         allSchools.forEach(m => {
-            if (m.stateName === selectedState) m.addTo(schoolLayer);
-            else schoolLayer.removeLayer(m);
+            if (m.stateName === selectedState) m.addTo(layerSchools);
+            else layerSchools.removeLayer(m);
         });
     }
 
     document.getElementById('stateFilter').addEventListener('change', e => updateSelection(e.target.value));
 
-    // 7. Layer Controls
-    const overlays = {
-        "Population Density": popLayer,
-        "School Locations": schoolLayer,
-        "Conflict Risk (Proportional)": riskLayer
-    };
-    L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+    // 4. Controls
+    L.control.layers(null, {
+        "Population Density": layerPop,
+        "School Locations": layerSchools,
+        "Conflict Risk (Proportional)": layerRisk
+    }, { collapsed: false }).addTo(map);
 
-    // 8. Legend
     const legend = L.control({position: 'bottomright'});
     legend.onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');
         const grades = [0, 5000, 10000, 20000, 50000, 100000, 200000];
-        div.innerHTML = '<h4>Children Under 17</h4>';
+        div.innerHTML = '<b style="display:block; margin-bottom:10px;">Children Under 17</b>';
         for (let i = 0; i < grades.length; i++) {
-            div.innerHTML += '<i style="background:' + getPopColor(grades[i] + 1) + ' Pel"></i> ' +
+            div.innerHTML += '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
         return div;
