@@ -87,7 +87,12 @@
             border: none !important;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
             border-radius: 8px !important;
-            padding: 10px !important;
+            padding: 12px !important;
+        }
+        .leaflet-control-layers-overlays label {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
         }
     </style>
 </head>
@@ -115,7 +120,7 @@
         map.getPane('facilitiesPane').style.zIndex = 650;
 
         // 2. Base Tile Layer
-        const cartoLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO'
         }).addTo(map);
 
@@ -143,14 +148,14 @@
             };
         }
 
-        // 4. Interaction & Info Box
+        // 4. Info Box
         const info = L.control();
         info.onAdd = function (map) { this._div = L.DomUtil.create('div', 'info'); this.update(); return this._div; };
         info.update = function (props) {
             const pcode = props ? props.pcode : null;
             const data = pcode ? populationData[pcode] : null;
-            this._div.innerHTML = '<h4>County Info</h4>' + (props ?
-                '<b>' + props.shapeName + '</b><br />' + (data ? data.Population.toLocaleString() + ' children' : 'No data')
+            this._div.innerHTML = '<h4>County Information</h4>' + (props ?
+                '<b>' + props.shapeName + '</b><br />' + (data ? data.Population.toLocaleString() + ' children' : 'No data available')
                 : 'Hover over a county');
         };
         info.addTo(map);
@@ -169,20 +174,20 @@
         };
         legend.addTo(map);
 
-        // 6. Layer Groups
+        // 6. Define Layer Groups
         const populationLayer = L.layerGroup().addTo(map);
         
-        // Define school type layers and their colors
-        const schoolTypes = {
-            "Primary School": { color: "#ff7800", layer: L.layerGroup().addTo(map) },
-            "Secondary School": { color: "#e31a1c", layer: L.layerGroup().addTo(map) },
-            "College": { color: "#6a3d9a", layer: L.layerGroup().addTo(map) },
-            "Nursery School": { color: "#33a02c", layer: L.layerGroup().addTo(map) },
-            "Other or Unknown": { color: "#b15928", layer: L.layerGroup().addTo(map) }
+        // Colors for school types - using very distinct names
+        const typeConfigs = {
+            "Primary School": { color: "blue", layer: L.layerGroup().addTo(map) },
+            "Secondary School": { color: "red", layer: L.layerGroup().addTo(map) },
+            "College": { color: "gold", layer: L.layerGroup().addTo(map) },
+            "Nursery School": { color: "green", layer: L.layerGroup().addTo(map) },
+            "Other or Unknown": { color: "grey", layer: L.layerGroup().addTo(map) }
         };
 
         // 7. Load Data
-        // Load Counties
+        // Counties
         fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/15db51d84a38231ded5868247ee6588c95e77620/releaseData/gbHumanitarian/SSD/ADM2/geoBoundaries-SSD-ADM2_simplified.geojson')
             .then(res => res.json())
             .then(data => {
@@ -191,9 +196,8 @@
                     onEachFeature: function(feature, layer) {
                         layer.on({
                             mouseover: (e) => {
-                                let l = e.target;
-                                l.setStyle({ weight: 2, color: '#666', fillOpacity: 0.9 });
-                                info.update(l.feature.properties);
+                                e.target.setStyle({ weight: 2, color: '#666', fillOpacity: 0.9 });
+                                info.update(e.target.feature.properties);
                             },
                             mouseout: (e) => {
                                 geojson.resetStyle(e.target);
@@ -205,48 +209,52 @@
                 map.fitBounds(geojson.getBounds());
             });
 
-        // Load Education Facilities
+        // Schools
         fetch('data/processed/education_facilities.geojson')
             .then(res => res.json())
             .then(data => {
-                L.geoJson(data, {
-                    onEachFeature: function (feature, layer) {
-                        const name = feature.properties.name || "Unnamed Facility";
-                        const types = feature.properties.types || ["Other or Unknown"];
-                        const primaryType = types[0];
-                        const config = schoolTypes[primaryType] || schoolTypes["Other or Unknown"];
+                // We will add each facility to its corresponding type layers
+                data.features.forEach(feature => {
+                    const coords = feature.geometry.coordinates;
+                    const latlng = [coords[1], coords[0]];
+                    const types = feature.properties.types || ["Other or Unknown"];
+                    const name = feature.properties.name || "Unnamed Facility";
 
-                        // Create a specific marker for each school
-                        const marker = L.circleMarker(layer.getLatLng(), {
-                            radius: 6,
-                            fillColor: config.color,
-                            color: "#000",
-                            weight: 1,
-                            opacity: 1,
-                            fillOpacity: 0.9,
-                            pane: 'facilitiesPane'
-                        });
+                    // Use the color of the first type listed for the visual dot
+                    const primaryType = types[0];
+                    const markerColor = typeConfigs[primaryType] ? typeConfigs[primaryType].color : "grey";
 
-                        marker.bindPopup(`<strong>${name}</strong><br>Types: ${types.join(", ")}`);
-                        
-                        // Add the marker to the correct category layers
-                        types.forEach(t => {
-                            const targetLayer = schoolTypes[t] ? schoolTypes[t].layer : schoolTypes["Other or Unknown"].layer;
-                            marker.addTo(targetLayer);
-                        });
-                    }
+                    const marker = L.circleMarker(latlng, {
+                        radius: 6,
+                        fillColor: markerColor,
+                        color: "#000",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.9,
+                        pane: 'facilitiesPane'
+                    });
+
+                    marker.bindPopup(`<strong>${name}</strong><br>Types: ${types.join(", ")}`);
+
+                    // Add to each relevant layer for filtering
+                    types.forEach(t => {
+                        if (typeConfigs[t]) {
+                            marker.addTo(typeConfigs[t].layer);
+                        } else {
+                            marker.addTo(typeConfigs["Other or Unknown"].layer);
+                        }
+                    });
                 });
-            })
-            .catch(err => console.error("Error loading schools:", err));
+            });
 
-        // 8. Layer Control
+        // 8. Add Layer Control
         const overlays = {
             "<b>Population Density</b>": populationLayer
         };
         
-        for (const [name, config] of Object.entries(schoolTypes)) {
-            const icon = `<i style="background:${config.color}; width:10px; height:10px; display:inline-block; border-radius:50%; margin-right:5px; border:1px solid #000;"></i>`;
-            overlays[icon + name] = config.layer;
+        for (const [name, config] of Object.entries(typeConfigs)) {
+            const circleHtml = `<span style="background:${config.color}; width:12px; height:12px; display:inline-block; border-radius:50%; margin-right:8px; border:1px solid #000;"></span>`;
+            overlays[circleHtml + name] = config.layer;
         }
 
         L.control.layers(null, overlays, { collapsed: false }).addTo(map);
