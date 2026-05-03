@@ -7,9 +7,9 @@ This repository hosts a professional analytical dashboard designed to visualize 
 The dashboard ([Live View](https://emmaboschini.github.io/examcc1/)) is an interactive spatial tool built with Leaflet.js, featuring:
 
 ### 1. Multi-Layer Risk Analysis
-- **Conflict Risk Indicators (Red):** Graded markers sized proportionally to the frequency of attacks. Hovering reveals specific risk levels (e.g., "Critical Threat Level").
-- **Educational Facilities (Blue Dots):** Precise geocoded locations for over 4,800 schools.
-- **Population Density (Blue Gradient):** A Choropleth layer showing concentrations of children under 17 across 79 counties, providing essential context for human impact.
+- **Conflict Risk Indicators (Red):** Graded markers sized proportionally to the frequency of attacks.
+- **Educational Facilities (Orange Dots):** Precise geocoded locations for over 4,800 schools.
+- **Population Density (Blue Gradient):** A layer showing concentrations of children under 17.
 
 ### 2. Analytical Controls
 - **Regional Focusing:** A state-level filter that automatically zooms the map and isolates facilities within that administrative area.

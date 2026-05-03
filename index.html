@@ -186,7 +186,7 @@
                 const p = line.split('|');
                 if (p.length >= 6) {
                     const marker = L.circleMarker([parseFloat(p[4]), parseFloat(p[5])], {
-                        radius: 1.8, fillColor: "#3182ce", color: "#fff", weight: 0.4, opacity: 1, fillOpacity: 0.9, pane: 'schoolPane'
+                        radius: 2.5, fillColor: "#ed8936", color: "#fff", weight: 0.5, opacity: 1, fillOpacity: 0.9, pane: 'schoolPane'
                     }).bindPopup(`<b>${p[0]}</b><br>State: ${p[2]}<br>Level: ${p[1]}`);
                     marker.stateName = p[2];
                     marker.schoolType = p[1];
@@ -306,9 +306,9 @@
 
     // 4. Layers UI
     L.control.layers(null, {
-        "School Facilities (Blue)": layerSchools,
+        "School Facilities (Orange)": layerSchools,
         "Attacks on Education (Red)": layerRisk,
-        "Population Context (Neutral)": layerPop
+        "Population Density (Blue)": layerPop
     }, { collapsed: false }).addTo(map);
 
     // 5. Legend
