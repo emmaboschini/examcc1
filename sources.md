@@ -1,44 +1,51 @@
-# Data Inventory: South Sudan Risk Analysis
+# Data Inventory & Technical Citations
 
-This document provides a detailed list of all open-source data assets used in this project.
-
----
-
-## 1. Demographic Data
-**Source:** [WorldPop (University of Southampton)](https://www.worldpop.org/project/categories?id=3&l=SSD)
-- **Content:** High-resolution population counts for children under 17.
-- **Used For:** Providing the neutral background layer for human context.
+This project integrates diverse datasets to provide a holistic view of South Sudan's education landscape. All data is sourced from open repositories.
 
 ---
 
-## 2. Education Infrastructure
-**Source:** [Official EMIS database via OCHA/HDX Mirror](https://data.humdata.org/dataset/811c4282-2223-4fc9-9b40-43223c4e3c3e)
-- **Content:** Official census of over 6,000 schools, including facility names and types.
-- **Used For:** Identifying the locations and levels (Primary/Secondary) of schools nationwide.
+## 1. 👥 Demographic Context
+**Source:** [WorldPop Hub (SSD)](https://www.worldpop.org/project/categories?id=3&l=SSD)
+- **Dataset:** SSD 100m Gridded Population Estimates.
+- **Used For:** Modeling the under-17 population distribution at the county (Admin 2) level.
+- **Resolution:** 100m x 100m grid cells, aggregated to administrative shapes.
 
 ---
 
-## 3. Conflict Incident Data
+## 2. 🏫 Education Infrastructure
+**Source:** [MoGEI EMIS via HDX](https://data.humdata.org/dataset/south-sudan-schools-and-enrollment-data)
+- **Dataset:** 2019 Annual Education Census (Baseline).
+- **Contents:** Official census of over 6,300 registered schools.
+- **Used For:** Providing the structural baseline for national education facilities.
+- **Processing:** Converted from raw Excel to geocoded Pipe-delimited CSV for web stability.
+
+---
+
+## 3. ⚔️ Conflict Incident Logging
 **Source:** [Insecurity Insight - Education in Danger](https://data.humdata.org/dataset/south-sudan-violence-incidents-affecting-aid-operations-education-and-health-care)
-- **Content:** Documented violence affecting schools, students, and educators (2024-2026).
-- **Used For:** Assessing the safety and risk levels of educational facilities.
+- **Dataset:** Violence incidents affecting aid operations and education.
+- **Timeframe:** 2024–2026.
+- **Used For:** Calculating state-level risk metrics and populating the sidebar chronological logs.
 
 ---
 
-## 4. Geographic Boundaries
-**Source:** [geoBoundaries.org (william & Mary geoLab)](https://www.geoboundaries.org/)
-- **Content:** ADM1 (State) and ADM2 (County) digital boundary files (GeoJSON).
-- **Used For:** Drawing the map shapes and enabling the regional filtering system.
+## 4. 🗺️ Spatial & Boundary Files
+**Source:** [geoBoundaries.org](https://www.geoboundaries.org/)
+- **Datasets:** SSD-ADM1 (States) and SSD-ADM2 (Counties).
+- **Format:** High-resolution GeoJSON.
+- **Used For:** Drawing the choropleth maps and enabling the spatial filtering logic.
 
 ---
 
-## 5. Basemap & Technology
-- **Leaflet.js:** Open-source JavaScript library for interactive maps.
-- **CartoDB Light:** Professional, minimalist map background for maximum readability.
-- **Pandas (Python):** Used for data cleaning and merging.
+## 📊 Project Statistics (Current Build)
+- **Mapped Facilities:** 4,861 geocoded schools.
+- **Documented Attacks:** 47 major conflict events in the monitored period.
+- **County Success Rate:** 78/79 counties successfully matched for population mapping (98.7%).
+- **State Coverage:** 10/10 states included in risk assessment metrics.
 
 ---
-### Final Data Statistics
-- **Schools Mapped:** 4,861 geocoded facilities.
-- **Reported Incidents:** 47 major conflict events (2024-2026).
-- **Population Resolution:** 100m x 100m grid estimates.
+### Technology Stack
+- **Web Mapping:** Leaflet.js (v1.9.4)
+- **Analysis:** Pandas (Python 3.12)
+- **Hosting:** GitHub Pages
+- **Styling:** Custom Vanilla CSS for sidebar and dashboard UI

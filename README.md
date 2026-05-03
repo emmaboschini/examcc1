@@ -1,57 +1,62 @@
-# South Sudan: Education Infrastructure & Risk Analysis (2024-2026)
+# South Sudan: Education Risk & Infrastructure Dashboard (2024-2026)
 
-This repository hosts a professional interactive web application designed to assess the risk facing educational facilities in South Sudan. It integrates population data, official school census records, and documented conflict incidents into a single analytical tool.
+This repository hosts a professional analytical dashboard designed to visualize the intersection of demographic density, educational infrastructure, and conflict impact in South Sudan. It serves as a decision-support tool for humanitarian actors and researchers to assess the safety and accessibility of schools in active conflict zones.
 
-## 🗺️ Interactive Map Features
+## 🗺️ Interactive Map Capabilities
 
-The map (`index.html`) is built using Leaflet.js and offers several layers of analysis:
+The dashboard ([Live View](https://emmaboschini.github.io/examcc1/)) is an interactive spatial tool built with Leaflet.js, featuring:
 
-- **Conflict Risk Indicators (Red):** Graded markers showing states targeted by violence. The marker size is proportional to the number of incidents.
-- **School Facilities (Blue):** Precise locations of 4,800+ educational facilities across the country.
-- **Population Context (Neutral):** A subtle backdrop showing the density of children under 17, used as a secondary reference layer.
-- **Dynamic Sidebar:** A real-time data panel that displays a chronological history of attacks, perpetrator details, and casualty statistics for selected regions.
+### 1. Multi-Layer Risk Analysis
+- **Conflict Risk Indicators (Red):** Graded markers sized proportionally to the frequency of attacks. Hovering reveals specific risk levels (e.g., "Critical Threat Level").
+- **Educational Facilities (Blue Dots):** Precise geocoded locations for over 4,800 schools.
+- **Population Density (Blue Gradient):** A Choropleth layer showing concentrations of children under 17 across 79 counties, providing essential context for human impact.
 
-### Interactive Controls:
-- **Administrative Filter:** Focus the map on a specific state to instantly zoom and filter facilities.
-- **School Level Filter:** Toggle between Primary, Secondary, and Pre-Primary facilities to analyze specific infrastructure types.
-- **Layer Control:** Turn individual data layers on or off to reduce clutter.
-
----
-
-## 📁 Repository Structure
-
-The project is organized into professional clusters:
-
-### 1. `data/raw/`
-Original, untouched datasets from global providers.
-- `ss_raw_population.csv`: UN/OCHA population projections.
-- `ss_raw_schools.csv`: MoGEI EMIS school census.
-- `ss_raw_conflict.csv`: Insecurity Insight conflict logs.
-- `ss_admin1.geojson` & `ss_admin2.geojson`: Geographic boundaries.
-
-### 2. `data/clean/`
-Processed files optimized for web mapping and analysis.
-- `ss_clean_population_u17.csv`: Filtered demographic data.
-- `ss_clean_schools_geo_safe.csv`: Geocoded school list (Pipe-delimited for stability).
-- `ss_clean_conflict.csv`: South Sudan-specific incident list.
-- `ss_conflict_map_data.geojson`: Merged spatial data with conflict risk metrics.
-
-### 3. `scripts/`
-Python "engines" used to transform and merge the data.
-- `ss_proc_population.py`: Processes demographics.
-- `ss_proc_schools_safe.py`: Creates the web-safe facility list.
-- `ss_proc_conflict.py`: Filters global conflict logs.
-- `ss_prep_map.py` & `ss_prep_conflict_map.py`: Prepare spatial data for the web map.
+### 2. Analytical Controls
+- **Regional Focusing:** A state-level filter that automatically zooms the map and isolates facilities within that administrative area.
+- **Infrastructure Filtering:** Toggle between **Primary**, **Secondary**, and **Pre-Primary** levels to analyze specific educational sectors.
+- **Interactive Sidebar:** A dynamic chronological log that updates based on map selection, showing the **Date**, **Actor**, **Target**, and **Human Cost** of reported incidents.
 
 ---
 
-## 🚀 Getting Started & Publishing
+## 📁 Repository Organization
 
-1. **Local View:** Open `index.html` in any modern web browser.
-2. **GitHub Pages:** This project is ready for automated hosting.
-   - Go to **Settings** > **Pages** in your GitHub repo.
-   - Select the **main** branch and **root (/)** folder.
-   - Click **Save** to launch your live analytical map.
+The project follows a structured data pipeline to ensure transparency and reproducibility:
+
+### `data/raw/`
+The foundation of the project, containing untouched datasets from global monitoring groups:
+- `ss_raw_population.csv`: Demographic projections (UN/OCHA).
+- `ss_raw_schools.csv`: National education census (MoGEI).
+- `ss_raw_conflict.csv`: Global "Education in Danger" logs (Insecurity Insight).
+- `ss_admin1.geojson` & `ss_admin2.geojson`: Digital boundary files.
+
+### `data/clean/`
+Optimized and merged data ready for the web map:
+- `ss_clean_population_u17.csv`: Filtered demographics with alternate naming support.
+- `ss_clean_schools_geo_safe.csv`: Stabilized school list using Pipe (`|`) delimiters to prevent parsing errors.
+- `ss_conflict_map_data.geojson`: Merged spatial data containing embedded conflict history logs.
+
+### `scripts/`
+Python automation for data maintenance:
+- `ss_proc_population.py`: Processes and reformats demographic names.
+- `ss_proc_schools_safe.py`: Generates the web-optimized facility list.
+- `ss_prep_conflict_map.py`: Aggregates attacks by state and builds the risk metrics.
 
 ---
-*Created for the South Sudan Data Project - May 2026*
+
+## 🛠️ Maintenance & Publishing
+
+### To Update the Data:
+1. Replace files in `data/raw/` with newer versions.
+2. Run the processing scripts from the root directory:
+   ```bash
+   python3 scripts/ss_proc_population.py
+   python3 scripts/ss_proc_schools_safe.py
+   python3 scripts/ss_prep_conflict_map.py
+   ```
+3. Commit and push the changes to GitHub.
+
+### To Publish Changes:
+The project is hosted via **GitHub Pages**. Any push to the `main` branch will automatically update the live dashboard.
+
+---
+*Developed for the South Sudan Humanitarian Data Project - May 2026*
