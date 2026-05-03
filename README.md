@@ -2,83 +2,64 @@
 
 This repository hosts a professional analytical dashboard designed to visualize the intersection of demographic density, educational infrastructure, and conflict impact in South Sudan. It serves as a decision-support tool for humanitarian actors and researchers to assess the safety and accessibility of schools in active conflict zones.
 
-## 🗺️ Interactive Map Capabilities
+---
 
-The dashboard ([Live View](https://emmaboschini.github.io/examcc1/)) is an interactive spatial tool built with Leaflet.js, featuring:
+## 🗺️ Interactive Dashboard
+**Explore the Live Map:** [https://emmaboschini.github.io/examcc1/](https://emmaboschini.github.io/examcc1/)
 
-### 1. Multi-Layer Risk Analysis
-- **Conflict Risk Indicators (Red):** Graded markers sized proportionally to the frequency of attacks.
+### Core Analytical Layers
+- **Conflict Risk Indicators (Red):** Graded markers sized proportionally to the frequency of reported attacks.
 - **Educational Facilities (Orange Dots):** Precise geocoded locations for over 4,800 schools.
-- **Population Density (Blue Gradient):** A layer showing concentrations of children under 17.
+- **Population Density (Blue Gradient):** A high-resolution layer showing concentrations of children under 17, providing essential demographic context.
 
-### 2. Analytical Controls
-- **Regional Focusing:** A state-level filter that automatically zooms the map and isolates facilities within that administrative area.
-- **Infrastructure Filtering:** Toggle between **Primary**, **Secondary**, and **Pre-Primary** levels to analyze specific educational sectors.
-- **Interactive Sidebar:** A dynamic chronological log that updates based on map selection, showing the **Date**, **Actor**, **Target**, and **Human Cost** of reported incidents.
+### User Controls
+- **Administrative Focusing:** State-level filter that automatically zooms the map and isolates local facilities.
+- **Sector Filtering:** Toggle between **Primary**, **Secondary**, and **Pre-Primary** levels for targeted analysis.
+- **Dynamic Chronology:** A sidebar log that updates in real-time to show the **Date**, **Actor**, and **Target** of reported incidents in selected regions.
 
 ---
 
-## 🧠 Analytical Methodology & Data Notes
+## 🧠 Methodology & Strategic Context
 
-To provide an accurate assessment of risk, this project employs a specific multi-layered approach:
+### Response to the Building Bridges Initiative RFP
+This dashboard is a direct strategic response to the **Request for Proposals (RFP)** issued by the **Building Bridges Initiative**. In their proposal, the Initiative highlighted their innovative use of **Artificial Intelligence** to map demographic concentrations in complex environments.
+
+Our decision to include high-resolution **Under-17 Population** gradients demonstrates that their AI-driven mapping works as a powerful foundational layer for advanced risk analysis. By integrating their work with our conflict and infrastructure data, we show how these insights can be transformed into actionable humanitarian tools.
 
 ### Why include School Infrastructure?
-We include the precise locations of thousands of school facilities to move beyond generic state-level warnings. By layering these locations over the areas with reported attacks, researchers can identify **specific facilities** that are physically exposed to high-risk environments. This intersection is crucial for prioritizing safety interventions and identifying gaps in infrastructure security.
+We include precise facility locations to move beyond generic state-level warnings. By layering infrastructure over reported attacks, researchers can identify **specific schools** physically exposed to high-risk environments. This intersection is crucial for prioritizing safety interventions.
 
 ### Spatial Precision of Conflict Data
-It is important to note that the conflict incident data is mapped at the **Administrative State level (Admin 1)** rather than with exact GPS coordinates. While the individual records contain location descriptions, the map visualizes these as state-wide risk indicators. This approach is highly effective for highlighting regional "hotspots" and identifying which broader areas are becoming progressively more dangerous for educational activities.
+Conflict incident data is mapped at the **Administrative State level (Admin 1)**. While individual records contain specific location descriptions (available in the sidebar), the map visualizes regional "hotspots" to identify broader areas becoming progressively dangerous for educational activities.
 
 ---
 
-## 📁 Repository Organization
+## 📁 Repository & Data Architecture
 
 The project follows a structured data pipeline to ensure transparency and reproducibility:
 
-### `data/raw/`
-The foundation of the project, containing untouched datasets from global monitoring groups:
-- `ss_raw_population.csv`: Demographic projections (UN/OCHA).
-- `ss_raw_schools.csv`: National education census (MoGEI).
-- `ss_raw_conflict.csv`: Global "Education in Danger" logs (Insecurity Insight).
-- `ss_admin1.geojson` & `ss_admin2.geojson`: Digital boundary files.
+### Clustered File Structure
+- **`data/raw/`**: Foundation datasets from global monitoring groups (UN/OCHA, MoGEI, Insecurity Insight).
+- **`data/clean/`**: Optimized files, including demographics with alternate naming support and stabilized Pipe-delimited (`|`) school lists.
+- **`scripts/`**: Python "engines" for data maintenance (Demographics, Safe CSV conversion, Risk aggregation).
 
-### `data/clean/`
-Optimized and merged data ready for the web map:
-- `ss_clean_population_u17.csv`: Filtered demographics with alternate naming support.
-- `ss_clean_schools_geo_safe.csv`: Stabilized school list using Pipe (`|`) delimiters to prevent parsing errors.
-- `ss_conflict_map_data.geojson`: Merged spatial data containing embedded conflict history logs.
-
-### `scripts/`
-Python automation for data maintenance:
-- `ss_proc_population.py`: Processes and reformats demographic names.
-- `ss_proc_schools_safe.py`: Generates the web-optimized facility list.
-- `ss_prep_conflict_map.py`: Aggregates attacks by state and builds the risk metrics.
+### Processing Pipeline
+- `ss_proc_population.py`: Harmonizes demographic names.
+- `ss_proc_schools_safe.py`: Generates parsing-safe facility lists.
+- `ss_prep_conflict_map.py`: Merges spatial boundaries with dynamic risk metrics.
 
 ---
 
-## 🛠️ Maintenance & Publishing
+## 🛠️ Technical Workflow
 
-### To Update the Data:
+### Data Maintenance
+To update the dashboard with new data:
 1. Replace files in `data/raw/` with newer versions.
-2. Run the processing scripts from the root directory:
-   ```bash
-   python3 scripts/ss_proc_population.py
-   python3 scripts/ss_proc_schools_safe.py
-   python3 scripts/ss_prep_conflict_map.py
-   ```
+2. Run the processing scripts from the root directory.
 3. Commit and push the changes to GitHub.
 
-### To Publish Changes:
-The project is hosted via **GitHub Pages**. Any push to the `main` branch will automatically update the live dashboard.
+### Deployment
+The project is hosted via **GitHub Pages**. Any push to the `main` branch automatically updates the live analytical dashboard.
 
 ---
-
-## 🏛️ Project Context & Acknowledgments
-
-This project was developed as a strategic response to a **Request for Proposals (RFP)** regarding the mapping of demographic and infrastructure risk.
-
-### Alignment with the Building Bridges Initiative
-The decision to include high-resolution gradients for the **Under-17 Population** is a direct nod to the foundational work performed by the **Building Bridges Initiative**. In their recent RFP, the Initiative detailed their innovative use of **Artificial Intelligence** to map demographic concentrations in complex environments.
-
-This dashboard demonstrates that their AI-driven population data integrates seamlessly with infrastructure and conflict analysis. By layering their demographic insights beneath our facilities and risk metrics, we show how their foundational mapping works as a powerful catalyst for more advanced humanitarian decision-support tools.
-
----
+*Developed for the South Sudan Humanitarian Data Project - May 2026*
