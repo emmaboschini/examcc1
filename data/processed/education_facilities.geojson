@@ -1,0 +1,3295 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6099732,
+          4.85065
+        ]
+      },
+      "properties": {
+        "name": "",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.7417418,
+          9.9901912
+        ]
+      },
+      "properties": {
+        "name": "Mentor Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6690149,
+          4.0983191
+        ]
+      },
+      "properties": {
+        "name": "Matu Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.688314,
+          4.0947862
+        ]
+      },
+      "properties": {
+        "name": "Merwa Progressive College",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6062426,
+          4.846156
+        ]
+      },
+      "properties": {
+        "name": "Agonk Bek Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.7378041,
+          4.0086199
+        ]
+      },
+      "properties": {
+        "name": "Etele Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.310181,
+          3.7145902
+        ]
+      },
+      "properties": {
+        "name": "Moyo Girls' Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3025184,
+          3.7433572
+        ]
+      },
+      "properties": {
+        "name": "Moyo Technical Institute",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6819358,
+          3.6987227
+        ]
+      },
+      "properties": {
+        "name": "Eden Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7986925,
+          3.7435354
+        ]
+      },
+      "properties": {
+        "name": "Limidia Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.8100618,
+          3.7851736
+        ]
+      },
+      "properties": {
+        "name": "Logoa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7749364,
+          3.6947734
+        ]
+      },
+      "properties": {
+        "name": "Logoba Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.783359,
+          3.7126414
+        ]
+      },
+      "properties": {
+        "name": "Liri Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7038444,
+          3.6897195
+        ]
+      },
+      "properties": {
+        "name": "Liwa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6105362,
+          3.6021209
+        ]
+      },
+      "properties": {
+        "name": "Logoba Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.260916,
+          3.8492222
+        ]
+      },
+      "properties": {
+        "name": "Athian Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.4538596,
+          3.6377148
+        ]
+      },
+      "properties": {
+        "name": "Emma Memorial Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2913091,
+          3.685633
+        ]
+      },
+      "properties": {
+        "name": "Mundri One Teachers Training Center",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3242058,
+          3.6880372
+        ]
+      },
+      "properties": {
+        "name": "Moyo Town Council Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5405836,
+          3.7751383
+        ]
+      },
+      "properties": {
+        "name": "Emmanuel And Moni Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9296297,
+          3.5861702
+        ]
+      },
+      "properties": {
+        "name": "",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9034225,
+          3.5223212
+        ]
+      },
+      "properties": {
+        "name": "Yei Teacher Training Collage",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9063061,
+          3.5633831
+        ]
+      },
+      "properties": {
+        "name": "Agoro Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.8903526,
+          3.4978966
+        ]
+      },
+      "properties": {
+        "name": "Lokwa Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.8686038,
+          3.4787357
+        ]
+      },
+      "properties": {
+        "name": "Erepi Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9517609,
+          3.5777727
+        ]
+      },
+      "properties": {
+        "name": "Majak Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9798157,
+          3.6250769
+        ]
+      },
+      "properties": {
+        "name": "Mama Kezia Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9591617,
+          3.6516837
+        ]
+      },
+      "properties": {
+        "name": "Lokwa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9934605,
+          3.642304
+        ]
+      },
+      "properties": {
+        "name": "Benagoro Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.9004883,
+          3.6010663
+        ]
+      },
+      "properties": {
+        "name": "Mandi Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.8400597,
+          3.479288
+        ]
+      },
+      "properties": {
+        "name": "Lurunya Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2392593,
+          3.6473321
+        ]
+      },
+      "properties": {
+        "name": "Mugumbe Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.0855517,
+          3.6463458
+        ]
+      },
+      "properties": {
+        "name": "Eremi Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1296488,
+          3.9014432
+        ]
+      },
+      "properties": {
+        "name": "Mena Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.0464454,
+          3.8020861
+        ]
+      },
+      "properties": {
+        "name": "Epc Nehemiah Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.0409443,
+          3.8145052
+        ]
+      },
+      "properties": {
+        "name": "Era Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2883505,
+          3.6757411
+        ]
+      },
+      "properties": {
+        "name": "Aguu Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2854122,
+          3.6751897
+        ]
+      },
+      "properties": {
+        "name": "Agoro Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.8498144,
+          3.8121788
+        ]
+      },
+      "properties": {
+        "name": "Emmanuel Kintergarden Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.0531541,
+          3.8099184
+        ]
+      },
+      "properties": {
+        "name": "Father Biribawo Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2646438,
+          3.6560794
+        ]
+      },
+      "properties": {
+        "name": "Mundri 2 Primary And Hai Malakal Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.1110888,
+          3.5862842
+        ]
+      },
+      "properties": {
+        "name": "City Academy Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7871264,
+          3.6223636
+        ]
+      },
+      "properties": {
+        "name": "Home Dave Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7920685,
+          3.6489941
+        ]
+      },
+      "properties": {
+        "name": "Kerwa Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.8013076,
+          3.6331083
+        ]
+      },
+      "properties": {
+        "name": "Kerwa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7184279,
+          3.6481137
+        ]
+      },
+      "properties": {
+        "name": "Kilaji Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7300351,
+          3.6433771
+        ]
+      },
+      "properties": {
+        "name": "Gulu One Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6810057,
+          3.6326138
+        ]
+      },
+      "properties": {
+        "name": "Kololo Community Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.8124055,
+          3.6497818
+        ]
+      },
+      "properties": {
+        "name": "Koloa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7653035,
+          3.6496465
+        ]
+      },
+      "properties": {
+        "name": "Kolokolo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7653862,
+          3.6480777
+        ]
+      },
+      "properties": {
+        "name": "Kongolo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6555929,
+          3.6286904
+        ]
+      },
+      "properties": {
+        "name": "Elegu Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7366691,
+          3.6279725
+        ]
+      },
+      "properties": {
+        "name": "Koromula Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7132987,
+          3.6564618
+        ]
+      },
+      "properties": {
+        "name": "Kotobi Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.715133,
+          3.6583772
+        ]
+      },
+      "properties": {
+        "name": "Malualbai P School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7212,
+          3.6570922
+        ]
+      },
+      "properties": {
+        "name": "Bari Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6429173,
+          3.5862318
+        ]
+      },
+      "properties": {
+        "name": "Cwep Itc",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7230345,
+          3.6357954
+        ]
+      },
+      "properties": {
+        "name": "Kotobi Vocational Center",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7565617,
+          3.5980584
+        ]
+      },
+      "properties": {
+        "name": "Emma Memorial Academy",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7660657,
+          3.6236449
+        ]
+      },
+      "properties": {
+        "name": "Mama Alice Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7032018,
+          3.6834434
+        ]
+      },
+      "properties": {
+        "name": "Lafon Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7885311,
+          3.6771374
+        ]
+      },
+      "properties": {
+        "name": "Makuen Agap P. School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7885631,
+          3.6784376
+        ]
+      },
+      "properties": {
+        "name": "Kulundu Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7457991,
+          3.6599912
+        ]
+      },
+      "properties": {
+        "name": "Lama Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7926227,
+          3.6713098
+        ]
+      },
+      "properties": {
+        "name": "Kyeyo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7107263,
+          3.6659043
+        ]
+      },
+      "properties": {
+        "name": "Ladder Kindergarten And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7164227,
+          3.656464
+        ]
+      },
+      "properties": {
+        "name": "Lamuribenge Vocational School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7160959,
+          3.657309
+        ]
+      },
+      "properties": {
+        "name": "Lamwoka Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7227834,
+          3.6451011
+        ]
+      },
+      "properties": {
+        "name": "Baya Primary",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.724808,
+          3.6588595
+        ]
+      },
+      "properties": {
+        "name": "Lechu Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.728175,
+          3.6494166
+        ]
+      },
+      "properties": {
+        "name": "Baya Memorial Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7899042,
+          3.6723835
+        ]
+      },
+      "properties": {
+        "name": "Ledingwa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7558305,
+          3.6494509
+        ]
+      },
+      "properties": {
+        "name": "Lekuangole Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7112488,
+          3.6565721
+        ]
+      },
+      "properties": {
+        "name": "Light House School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7201137,
+          3.6392951
+        ]
+      },
+      "properties": {
+        "name": "Lendrewa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7872186,
+          3.6714134
+        ]
+      },
+      "properties": {
+        "name": "Lerwa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7288569,
+          3.6566247
+        ]
+      },
+      "properties": {
+        "name": "Masaloa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7024245,
+          3.64788
+        ]
+      },
+      "properties": {
+        "name": "Halbul Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.8652327,
+          3.6632404
+        ]
+      },
+      "properties": {
+        "name": "Karika One Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.9133594,
+          3.6401976
+        ]
+      },
+      "properties": {
+        "name": "Majak Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.9092377,
+          3.6151891
+        ]
+      },
+      "properties": {
+        "name": "Hia Baraka Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.8314812,
+          3.6745119
+        ]
+      },
+      "properties": {
+        "name": "Karkia Ll Primary And Pre School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.9253736,
+          3.5708094
+        ]
+      },
+      "properties": {
+        "name": "Majak Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.8329546,
+          3.6458554
+        ]
+      },
+      "properties": {
+        "name": "Kaya Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.9868019,
+          3.5484158
+        ]
+      },
+      "properties": {
+        "name": "Chokokbid Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.964447,
+          3.5742255
+        ]
+      },
+      "properties": {
+        "name": "Jebel Church",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.9473775,
+          3.5730412
+        ]
+      },
+      "properties": {
+        "name": "Kendra Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.8273027,
+          3.5880118
+        ]
+      },
+      "properties": {
+        "name": "Bura Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.7498252,
+          3.716471
+        ]
+      },
+      "properties": {
+        "name": "Adibu Primary",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.0183326,
+          3.7961068
+        ]
+      },
+      "properties": {
+        "name": "Dong Abel Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.0181339,
+          3.8037333
+        ]
+      },
+      "properties": {
+        "name": "Mahat Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.9992768,
+          3.7549375
+        ]
+      },
+      "properties": {
+        "name": "Kai Gai Primary",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.0348262,
+          3.7642345
+        ]
+      },
+      "properties": {
+        "name": "Magwi Central Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.9114119,
+          3.7781922
+        ]
+      },
+      "properties": {
+        "name": "Kagoropa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.9062383,
+          3.7175856
+        ]
+      },
+      "properties": {
+        "name": "Bright Hope Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.8808099,
+          3.7187829
+        ]
+      },
+      "properties": {
+        "name": "Janga Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6633213,
+          4.0914981
+        ]
+      },
+      "properties": {
+        "name": "Fundraising Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.666055,
+          4.08651
+        ]
+      },
+      "properties": {
+        "name": "Besia Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.7220321,
+          4.0395759
+        ]
+      },
+      "properties": {
+        "name": "Fataha Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5632263,
+          4.8552305
+        ]
+      },
+      "properties": {
+        "name": "Father Biribawo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5601631,
+          4.8490143
+        ]
+      },
+      "properties": {
+        "name": "Adotic Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.1781666,
+          8.2838383
+        ]
+      },
+      "properties": {
+        "name": "Crop Training Centre (Ctc)",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5005387,
+          4.8666747
+        ]
+      },
+      "properties": {
+        "name": "Bitti Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5163683,
+          8.9544783
+        ]
+      },
+      "properties": {
+        "name": "House Of Hope",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.509962,
+          8.9556422
+        ]
+      },
+      "properties": {
+        "name": "Mada Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5594831,
+          8.9494754
+        ]
+      },
+      "properties": {
+        "name": "Baac Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5939,
+          8.9403533
+        ]
+      },
+      "properties": {
+        "name": "Gra",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.8701194,
+          9.0839103
+        ]
+      },
+      "properties": {
+        "name": "Ayaa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.8704559,
+          9.0838638
+        ]
+      },
+      "properties": {
+        "name": "Ayipe Cope Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.869875,
+          9.08371
+        ]
+      },
+      "properties": {
+        "name": "Merwa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.4286367,
+          8.9074683
+        ]
+      },
+      "properties": {
+        "name": "Goopi Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.4673967,
+          8.8915333
+        ]
+      },
+      "properties": {
+        "name": "Amadi Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.6179017,
+          8.9617867
+        ]
+      },
+      "properties": {
+        "name": "Goboro Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.3884608,
+          9.5919408
+        ]
+      },
+      "properties": {
+        "name": "Andiriya Apaya",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.7577167,
+          9.061668
+        ]
+      },
+      "properties": {
+        "name": "Amua Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5639583,
+          9.2040333
+        ]
+      },
+      "properties": {
+        "name": "Apwoyo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.510795,
+          9.2396483
+        ]
+      },
+      "properties": {
+        "name": "Arra Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5067967,
+          8.8612633
+        ]
+      },
+      "properties": {
+        "name": "Amalo",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5351183,
+          8.8724667
+        ]
+      },
+      "properties": {
+        "name": "Amara(Hs-Halls)",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.4288796,
+          8.9083387
+        ]
+      },
+      "properties": {
+        "name": "Amadi 2 Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.145411,
+          3.6394495
+        ]
+      },
+      "properties": {
+        "name": "Mundri One Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2442851,
+          3.6303144
+        ]
+      },
+      "properties": {
+        "name": "Akande Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3200933,
+          3.7165483
+        ]
+      },
+      "properties": {
+        "name": "Akka Community Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2899733,
+          3.6865483
+        ]
+      },
+      "properties": {
+        "name": "Akuem Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2924267,
+          3.6933317
+        ]
+      },
+      "properties": {
+        "name": "Mundri Secondary School, Motherland Secondary And Kotobi Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2909833,
+          3.6854868
+        ]
+      },
+      "properties": {
+        "name": "Mundri Adventist Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.5838833,
+          4.0243979
+        ]
+      },
+      "properties": {
+        "name": "Eria Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.5844392,
+          4.0266055
+        ]
+      },
+      "properties": {
+        "name": "Alliance Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.357955,
+          3.6514067
+        ]
+      },
+      "properties": {
+        "name": "Alimo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.27517,
+          3.657095
+        ]
+      },
+      "properties": {
+        "name": "Mijikita Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2934167,
+          3.659955
+        ]
+      },
+      "properties": {
+        "name": "Mijale Amazing Grace Baptist Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2852017,
+          3.64799
+        ]
+      },
+      "properties": {
+        "name": "Mijale Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3022417,
+          3.6494983
+        ]
+      },
+      "properties": {
+        "name": "Mundri Advertise Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2736117,
+          3.6934933
+        ]
+      },
+      "properties": {
+        "name": "Miri Mojo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5277489,
+          3.5937451
+        ]
+      },
+      "properties": {
+        "name": "Moyo Boys' Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.26638,
+          3.7229967
+        ]
+      },
+      "properties": {
+        "name": "Alipi Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.268045,
+          3.722
+        ]
+      },
+      "properties": {
+        "name": "Mitikologa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2738433,
+          3.6270183
+        ]
+      },
+      "properties": {
+        "name": "Aligo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.5831032,
+          4.0249202
+        ]
+      },
+      "properties": {
+        "name": "Erepi Primary Teachers College",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.5398329,
+          3.9752101
+        ]
+      },
+      "properties": {
+        "name": "Abeso Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.0028479,
+          3.811375
+        ]
+      },
+      "properties": {
+        "name": "Disu Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.451535,
+          3.6380667
+        ]
+      },
+      "properties": {
+        "name": "Metu Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.4535667,
+          3.6424883
+        ]
+      },
+      "properties": {
+        "name": "Mianga Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.4538733,
+          3.6375417
+        ]
+      },
+      "properties": {
+        "name": "Moyo Army Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.0071394,
+          7.0492021
+        ]
+      },
+      "properties": {
+        "name": "Dongoda",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5827294,
+          4.8468946
+        ]
+      },
+      "properties": {
+        "name": "",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.5100163,
+          8.955537
+        ]
+      },
+      "properties": {
+        "name": "Lutaya Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5274036,
+          4.8094224
+        ]
+      },
+      "properties": {
+        "name": "Limidia High Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.5521753,
+          4.3635218
+        ]
+      },
+      "properties": {
+        "name": "Afonji Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.686751,
+          4.0983819
+        ]
+      },
+      "properties": {
+        "name": "Upper Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6659637,
+          4.0954398
+        ]
+      },
+      "properties": {
+        "name": "Ezra Baya Memorials Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6478398,
+          4.0782873
+        ]
+      },
+      "properties": {
+        "name": "University Of Juba. College Of Comunity Studies And Rural Development",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6485288,
+          4.0770002
+        ]
+      },
+      "properties": {
+        "name": "Faka Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.4838109,
+          5.1023165
+        ]
+      },
+      "properties": {
+        "name": "Aciek Agriculture Training Centre",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.4752481,
+          5.0303943
+        ]
+      },
+      "properties": {
+        "name": "Alero School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6982053,
+          4.0964985
+        ]
+      },
+      "properties": {
+        "name": "Mbara Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6746688,
+          4.1119317
+        ]
+      },
+      "properties": {
+        "name": "Ezibon Mandiri Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.6869656,
+          4.0940847
+        ]
+      },
+      "properties": {
+        "name": "Medewu Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.84513,
+          4.1705913
+        ]
+      },
+      "properties": {
+        "name": "Yei Day Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.8234049,
+          9.3879903
+        ]
+      },
+      "properties": {
+        "name": "Imotong Life Skills Centre",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5907518,
+          4.8414249
+        ]
+      },
+      "properties": {
+        "name": "Gbari Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.585328,
+          4.8458726
+        ]
+      },
+      "properties": {
+        "name": "Goboro Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.6135973,
+          4.8413329
+        ]
+      },
+      "properties": {
+        "name": "Dufile Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.1842515,
+          8.6641406
+        ]
+      },
+      "properties": {
+        "name": "Dar El Salaam Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.303072,
+          4.1219177
+        ]
+      },
+      "properties": {
+        "name": "",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.3028106,
+          4.1236627
+        ]
+      },
+      "properties": {
+        "name": "Banika Islamic Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5598281,
+          4.8384299
+        ]
+      },
+      "properties": {
+        "name": "",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.5674235,
+          4.8385843
+        ]
+      },
+      "properties": {
+        "name": "Geria Bush School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.7067939,
+          9.6208612
+        ]
+      },
+      "properties": {
+        "name": "Bright Junior Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.5427617,
+          3.9503331
+        ]
+      },
+      "properties": {
+        "name": "Bishop Asili Senior Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          32.5978381,
+          3.9182878
+        ]
+      },
+      "properties": {
+        "name": "Bishop Gwynne School Of Theology",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.4643019,
+          5.5995726
+        ]
+      },
+      "properties": {
+        "name": "Bari Displace",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.4843731,
+          5.6223335
+        ]
+      },
+      "properties": {
+        "name": "",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.0756446,
+          8.6183535
+        ]
+      },
+      "properties": {
+        "name": "Akuem Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.285953,
+          5.3432784
+        ]
+      },
+      "properties": {
+        "name": "Mundri Teachers Union Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3076474,
+          5.3493353
+        ]
+      },
+      "properties": {
+        "name": "Mundri Youth Center",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.379117,
+          5.4050778
+        ]
+      },
+      "properties": {
+        "name": "Nanga Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.4364781,
+          5.5699939
+        ]
+      },
+      "properties": {
+        "name": "Nasir Primary And Secondary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3117296,
+          5.3335204
+        ]
+      },
+      "properties": {
+        "name": "New Generation Academy",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.327356,
+          5.3466793
+        ]
+      },
+      "properties": {
+        "name": "Noor Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3247392,
+          5.3445409
+        ]
+      },
+      "properties": {
+        "name": "Nuru Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.4183168,
+          5.5995064
+        ]
+      },
+      "properties": {
+        "name": "Nyambiri Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.1600992,
+          5.3700777
+        ]
+      },
+      "properties": {
+        "name": "Nyojo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3270902,
+          5.0327437
+        ]
+      },
+      "properties": {
+        "name": "Obero Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3197747,
+          5.3524505
+        ]
+      },
+      "properties": {
+        "name": "Odokomba Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.2962452,
+          5.341644
+        ]
+      },
+      "properties": {
+        "name": "Ogolo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.210673,
+          5.25738
+        ]
+      },
+      "properties": {
+        "name": "Okari Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.1088705,
+          5.1615679
+        ]
+      },
+      "properties": {
+        "name": "Omdurman Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3244384,
+          5.3522595
+        ]
+      },
+      "properties": {
+        "name": "One Way Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3198749,
+          5.3381108
+        ]
+      },
+      "properties": {
+        "name": "Orphanage Primary",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.2996667,
+          4.829435
+        ]
+      },
+      "properties": {
+        "name": "Osubira Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3311287,
+          5.344783
+        ]
+      },
+      "properties": {
+        "name": "Paanjala Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3934836,
+          5.2290373
+        ]
+      },
+      "properties": {
+        "name": "Palacam Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3073052,
+          5.3292863
+        ]
+      },
+      "properties": {
+        "name": "Palmar Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.2685737,
+          5.3323553
+        ]
+      },
+      "properties": {
+        "name": "Panjara Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3051527,
+          5.3508436
+        ]
+      },
+      "properties": {
+        "name": "Parish Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.4174594,
+          5.2391294
+        ]
+      },
+      "properties": {
+        "name": "Partial P School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.2908612,
+          5.345824
+        ]
+      },
+      "properties": {
+        "name": "Pentagon College",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.2990728,
+          5.3299753
+        ]
+      },
+      "properties": {
+        "name": "Peremasu School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.1999944,
+          5.251839
+        ]
+      },
+      "properties": {
+        "name": "Pibor Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3391975,
+          5.3528109
+        ]
+      },
+      "properties": {
+        "name": "Potika Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3192492,
+          5.3529326
+        ]
+      },
+      "properties": {
+        "name": "Primary School Leer",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3169658,
+          5.3150083
+        ]
+      },
+      "properties": {
+        "name": "Riangmal Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.1656684,
+          5.5765989
+        ]
+      },
+      "properties": {
+        "name": "Riangmal Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3117666,
+          5.3728442
+        ]
+      },
+      "properties": {
+        "name": "Roa Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3201249,
+          5.3546964
+        ]
+      },
+      "properties": {
+        "name": "Romogi Seed Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3347734,
+          4.9483583
+        ]
+      },
+      "properties": {
+        "name": "Rubeke Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3417105,
+          5.0605989
+        ]
+      },
+      "properties": {
+        "name": "Rubeke Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3185655,
+          5.3489285
+        ]
+      },
+      "properties": {
+        "name": "Rubeke Primary School Otogo Pam",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3443289,
+          5.3580933
+        ]
+      },
+      "properties": {
+        "name": "Rubeke Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3291096,
+          5.3488502
+        ]
+      },
+      "properties": {
+        "name": "Rumaker Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.0359677,
+          5.1298917
+        ]
+      },
+      "properties": {
+        "name": "Saint Andrew College",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.2017337,
+          5.2509091
+        ]
+      },
+      "properties": {
+        "name": "Saint Kizito Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3275581,
+          5.3512263
+        ]
+      },
+      "properties": {
+        "name": "Sasanya Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3168607,
+          5.3237212
+        ]
+      },
+      "properties": {
+        "name": "Seventh Advertise Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3324846,
+          5.5332453
+        ]
+      },
+      "properties": {
+        "name": "Seventh Days Advertise Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3038651,
+          5.3538924
+        ]
+      },
+      "properties": {
+        "name": "St Augustine Nursery School Mijale",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3165965,
+          5.3581306
+        ]
+      },
+      "properties": {
+        "name": "St Joseph Lutaya Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.2883477,
+          5.3426111
+        ]
+      },
+      "properties": {
+        "name": "St Kizito Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3275668,
+          5.3436471
+        ]
+      },
+      "properties": {
+        "name": "St Mary'S College",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3261166,
+          5.350353
+        ]
+      },
+      "properties": {
+        "name": "St Paul Secondary School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3173988,
+          5.3596266
+        ]
+      },
+      "properties": {
+        "name": "St. John Bugo Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3460416,
+          5.3510081
+        ]
+      },
+      "properties": {
+        "name": "St. Joseph Basic School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3221393,
+          5.3057542
+        ]
+      },
+      "properties": {
+        "name": "St.Mark Nursery School Kololo",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.0537638,
+          5.1378576
+        ]
+      },
+      "properties": {
+        "name": "Stordy Nursery & Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.087535,
+          5.1516957
+        ]
+      },
+      "properties": {
+        "name": "Swinga Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3271781,
+          5.3534321
+        ]
+      },
+      "properties": {
+        "name": "Take Care Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3206971,
+          5.3377511
+        ]
+      },
+      "properties": {
+        "name": "Tendele Community School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3404726,
+          5.5072983
+        ]
+      },
+      "properties": {
+        "name": "Tororo Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3446691,
+          5.6615282
+        ]
+      },
+      "properties": {
+        "name": "True Light Nursery And Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3184878,
+          5.3488119
+        ]
+      },
+      "properties": {
+        "name": "Ubbi Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.1500785,
+          8.3009068
+        ]
+      },
+      "properties": {
+        "name": "Uyon Primary Sch",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.1329794,
+          8.3092751
+        ]
+      },
+      "properties": {
+        "name": "Wardoper Family Care Nursery School",
+        "type": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.1287333,
+          6.8006746
+        ]
+      },
+      "properties": {
+        "name": "Lunguma Primary School",
+        "type": "Primary School"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          55.5356506,
+          -21.1940645
+        ]
+      },
+      "properties": {
+        "name": "",
+        "type": "0"
+      }
+    }
+  ]
+}
