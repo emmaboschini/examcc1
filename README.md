@@ -7,13 +7,17 @@ The primary goal is to understand the nature and frequency of conflict-related d
 
 ## Data Sources
 - **South Sudan Education Cluster Dataset**: Ground-level data on education in emergencies, including school functionality and conflict-related closures.
+- **IOM DTM Displacement Data**: Round 16 baseline assessment for IDPs and returnees.
+- **OCHA Population Estimates 2024**: Official county-level population statistics disaggregated by age and sex.
 - Detailed source documentation can be found in [sources.md](./sources.md).
 
 ## Project Structure
-- `data/raw/raw_education in danger.csv`: Original dataset as downloaded.
-- `data/raw/iom_dtm_r16_baseline.xlsx`: IOM DTM Baseline Assessment Round 16 (Displacement data).
+- `data/raw/raw_education in danger.csv`: Original Education Cluster dataset.
+- `data/raw/iom_dtm_r16_baseline.xlsx`: IOM DTM Baseline Assessment Round 16 (XLSX).
+- `data/raw/ssd_2024_population_estimates.xlsx`: OCHA 2024 Population Estimates (XLSX).
+- `data/processed/clean_education in danger.csv`: Processed and cleaned education data.
 - `data/processed/iom_dtm_r16_baseline.csv`: CSV version of the IOM DTM dataset.
-- `data/processed/clean_education in danger.csv`: Processed and cleaned data prepared for analysis.
+- `data/processed/ssd_2024_population_estimates.csv`: CSV version of the OCHA population data.
 - `data/processed/south_sudan_schools.geojson`: Geographic locations of schools from OpenStreetMap.
 - `scripts/fetch_osm_schools.py`: Script used to download data from OpenStreetMap.
 - `sources.md`: Documentation of data origins and characteristics.
@@ -25,11 +29,12 @@ The primary goal is to understand the nature and frequency of conflict-related d
 - [x] Data cleaning and preprocessing.
 - [x] Fetch geographic school data from OpenStreetMap (Overpass API).
 - [x] Tidy project structure (organized into `data/` and `scripts/`).
-- [x] Acquire IDP and population data (IOM DTM Round 16).
+- [x] Acquire IDP data (IOM DTM Round 16).
+- [x] Acquire school-age population estimates (OCHA 2024).
 - [ ] Exploratory Data Analysis (EDA).
 - [ ] Visualization of conflict trends.
 - [ ] Final report/insights generation.
 
 ## How to Use
 1. Refer to `sources.md` for background on the data.
-2. The analysis-ready data is located in the `data/processed/` folder.
+2. Analysis-ready datasets are located in the `data/processed/` folder.

@@ -19,7 +19,15 @@
 ## 3. IOM DTM Baseline Assessment (Round 16)
 - **Provider:** International Organization for Migration (IOM)
 - **Platform:** [Humanitarian Data Exchange (HDX)](https://data.humdata.org/)
-- **Description:** Displacement tracking data for IDPs and returnees across South Sudan. Collected between December 2024 and February 2025. Includes location-level data (Lat/Lon) and demographic estimates (e.g., % of children).
+- **Description:** Displacement tracking data for IDPs and returnees across South Sudan. Collected between December 2024 and February 2025. Includes location-level data (Lat/Lon) and demographic estimates.
 - **Local Files:**
     - `data/raw/iom_dtm_r16_baseline.xlsx`: The raw multi-sheet Excel dataset.
     - `data/processed/iom_dtm_r16_baseline.csv`: The converted data sheet for analysis.
+
+## 4. OCHA Population Estimates 2024
+- **Provider:** United Nations Office for the Coordination of Humanitarian Affairs (OCHA)
+- **Platform:** [Humanitarian Data Exchange (HDX)](https://data.humdata.org/)
+- **Description:** Official subnational population statistics for South Sudan, projected for 2024. Includes age-disaggregated data (e.g., ages 5-17 for school-age estimates) at the county level (Admin 2).
+- **Local Files:**
+    - `data/raw/ssd_2024_population_estimates.xlsx`: The raw Excel projections.
+    - `data/processed/ssd_2024_population_estimates.csv`: CSV version with focused age brackets for analysis.
