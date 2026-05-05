@@ -174,7 +174,7 @@
                 item.className = 'incident-item';
                 item.style.borderLeftColor = '#3182ce';
                 item.innerHTML = `<div class="incident-date">${new Date(update.Date).toLocaleDateString('en-GB', { month:'short', year:'numeric', day:'numeric' })}</div>
-                <div class="incident-details"><b>Location:</b> ${update['Location of event']} (${update['Admin 1']})<br><b>Facility:</b> ${update['Type of education facility']}</div>`;
+                <div class="incident-details"><b>Location:</b> ${update['Location of event']} (${update['Admin 1']})<br><b>Facility:</b> ${update['Type of education facility']}${update.Description ? '<br><i>' + update.Description + '</i>' : ''}</div>`;
                 fieldListDiv.appendChild(item);
             });
         } else {

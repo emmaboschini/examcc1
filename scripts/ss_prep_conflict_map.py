@@ -55,12 +55,12 @@ with open(geojson_file) as f:
 # We try to use the new column names if they exist, otherwise fallback
 if 'Facility Name' in field_updates_ss.columns:
     field_updates = field_updates_ss[[
-        'Date', 'Facility Name', 'State', 'Facility Type'
+        'Date', 'Facility Name', 'State', 'Facility Type', 'Description'
     ]].rename(columns={'Facility Name': 'Location of event', 'State': 'Admin 1', 'Facility Type': 'Type of education facility'}).fillna('No Information').to_dict('records')
 else:
     field_updates = field_updates_ss[[
         'Date', 'Location of event', 'Admin 1', 'Type of education facility'
-    ]].fillna('No Information').to_dict('records')
+    ]].fillna('').to_dict('records')
 
 for feature in gj['features']:
     name = feature['properties'].get('shapeName')
