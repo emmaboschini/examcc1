@@ -76,7 +76,6 @@ def update_conflict_csv(kobo_reports):
     # Process Kobo (Mark as Verified)
     for report in kobo_reports:
         uid = str(report.get('_id', report.get('id', '')))
-        if uid and uid not in df_existing['SiND Event ID'].astype(str).values:
             # Helper to safely get numbers
             def safe_int(val):
                 try:
@@ -84,17 +83,23 @@ def update_conflict_csv(kobo_reports):
                 except:
                     return 0
 
+            # Map the actual Kobo field names (Flexible mapping)
+            k_date = report.get('Date_of_the_Incident') or report.get('Date_of_Incident') or datetime.now().strftime('%Y-%m-%d')
+            k_state = report.get('State') or report.get('State_Admin_1') or 'Unknown'
+            k_location = report.get('Name_of_the_facility') or report.get('Location_of_event') or 'Field Report'
+            k_facility = report.get('Type_of_Facility_yo_select_more_than_one') or report.get('Type_of_Facility') or 'Unknown'
+            k_perpetrator = report.get('Reported_Perpetrator') or 'Unknown'
+            
             # Clean State Name to match map logic
-            state_raw = str(report.get('State_Admin_1', 'Unknown'))
-            state_clean = state_raw.replace(' State', '').strip()
+            state_clean = str(k_state).replace(' State', '').strip()
 
             new_row = {
-                'Date': report.get('Date_of_Incident', datetime.now().strftime('%Y-%m-%d')),
+                'Date': k_date,
                 'Country': 'South Sudan',
                 'Admin 1': state_clean,
-                'Location of event': report.get('Location_of_event', 'Field Report'),
-                'Reported Perpetrator': report.get('Reported_Perpetrator', 'Unknown'),
-                'Type of education facility': report.get('Type_of_Facility', 'Unknown'),
+                'Location of event': k_location,
+                'Reported Perpetrator': k_perpetrator,
+                'Type of education facility': k_facility,
                 'Educators Killed': safe_int(report.get('Educators_Killed', 0)),
                 'Students Killed': safe_int(report.get('Students_Killed', 0)),
                 'SiND Event ID': uid,
