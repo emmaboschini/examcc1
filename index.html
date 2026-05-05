@@ -317,8 +317,15 @@
     const legend = L.control({position: 'bottomright'});
     legend.onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');
+        
+        // Infrastructure and Risk section
+        div.innerHTML = '<b style="display:block; margin-bottom:10px;">Map Symbology</b>';
+        div.innerHTML += '<i style="background: #e53e3e; border-radius: 50%; border: 2px solid white; width: 14px; height: 14px;"></i> Armed Attacks (Regional Risk)<br>';
+        div.innerHTML += '<i style="background: #ed8936; border-radius: 50%; border: 1px solid white; width: 10px; height: 10px; margin-left: 2px;"></i> School Facilities<br><hr>';
+
+        // Population section
         const grades = [0, 5000, 10000, 50000, 100000, 200000];
-        div.innerHTML = '<b style="display:block; margin-bottom:10px;">Children Population (Under 17)</b>';
+        div.innerHTML += '<b style="display:block; margin-top:5px; margin-bottom:10px;">Children Population (Under 17)</b>';
         for (let i = 0; i < grades.length; i++) {
             div.innerHTML += '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
