@@ -1,0 +1,41 @@
+name: Daily Map Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Every day at midnight
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  update-map:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install pandas requests openpyxl
+
+      - name: Run Update Bot (Kobo Data)
+        env:
+          KOBO_TOKEN: ${{ secrets.KOBO_TOKEN }}
+          KOBO_FORM_ID: ${{ secrets.KOBO_FORM_ID }}
+        run: python3 scripts/ss_update_bot.py
+
+      - name: Re-Process Data Layers
+        run: |
+          python3 scripts/ss_proc_population.py
+          python3 scripts/ss_proc_schools_safe.py
+          python3 scripts/ss_prep_conflict_map.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "Education Risk Bot"
+          git config --global user.email "bot@ebinitiative.org"
+          git add data/ scripts/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Automated update: Synchronize field reports and refresh map layers" && git push)

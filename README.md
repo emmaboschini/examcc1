@@ -54,8 +54,27 @@ The project is built entirely on **open, publicly available data sources**, ensu
 
 ## 🛠️ Maintenance & Deployment
 
-- **Hosting:** Deployed via **GitHub Pages** for instant accessibility by non-technical staff.
-- **Updates:** To refresh the dashboard, simply replace raw files and run the processing scripts. All spatial logic is automated to handle changing conflict dynamics.
+### Field Reporting Integration (KoboToolbox)
+For local teams in low-bandwidth or offline environments, we use **KoboToolbox** for real-time reporting.
+- **Reporting Form:** [Education Incident Report](https://ee-eu.kobotoolbox.org/x/Ox8Mmfdc)
+- **Synchronization:** Dropdowns are standardized to match map administrative logic.
+
+### Automated Daily Updates
+The dashboard is automated via **GitHub Actions**. Every 24 hours, a dedicated **Update Bot** (`scripts/ss_update_bot.py`) performs the following:
+1. Connects to the Kobo API to fetch new field reports.
+2. Synchronizes new incidents with the master database (`data/raw/ss_raw_conflict.csv`).
+3. Re-runs all processing scripts to update the live map.
+
+### Manual Maintenance
+To refresh the dashboard manually:
+1. Replace raw files in `data/raw/`.
+2. Run the processing scripts:
+   ```bash
+   python3 scripts/ss_proc_population.py
+   python3 scripts/ss_proc_schools_safe.py
+   python3 scripts/ss_prep_conflict_map.py
+   ```
+3. Commit and push to `main`.
 
 ---
 *Technical Response developed for the Education Bridge Initiative (EBI) - May 2026*
