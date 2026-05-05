@@ -180,7 +180,7 @@
                 const state = formatStr(update['Admin 1']);
 
                 item.innerHTML = `<div class="incident-date">${new Date(update.Date).toLocaleDateString('en-GB', { month:'short', year:'numeric', day:'numeric' })}</div>
-                <div class="incident-details"><b>Report:</b> ${type} in ${state}${update.Description ? '<br><i>' + update.Description + '</i>' : ''}</div>`;
+                <div class="incident-details"><b>Location:</b> ${type} in ${state}${update.Description ? '<br><i>' + update.Description + '</i>' : ''}</div>`;
                 fieldListDiv.appendChild(item);
             });
         } else {
