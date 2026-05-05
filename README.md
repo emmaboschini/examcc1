@@ -60,6 +60,12 @@ For local teams in low-bandwidth or offline environments, we use **KoboToolbox**
 - **Reporting Form:** [Education Incident Report](https://ee-eu.kobotoolbox.org/x/Ox8Mmfdc)
 - **Synchronization:** Automated every **30 minutes** via GitHub Actions.
 
+**Key Advantages for EBI Field Teams:**
+*   **Offline Data Collection:** Teams can record incidents in remote areas without internet; data syncs automatically once a connection is re-established.
+*   **Data Standardization:** Controlled dropdowns (e.g., State names) eliminate manual typos and ensure 100% compatibility with the analytical map.
+*   **Immediate Situational Awareness:** Reduces the "information lag" between a field incident and headquarters' response by automating the data pipeline.
+*   **Scalability:** The open-source nature of Kobo allows EBI to deploy an unlimited number of field reporters without additional licensing costs.
+
 ### Automated Updates
 A dedicated **Update Bot** (`scripts/ss_update_bot.py`) performs the following:
 1. Connects to the Kobo API to fetch new field reports.
