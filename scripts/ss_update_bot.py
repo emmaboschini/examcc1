@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 # 1. Configuration
 KOBO_TOKEN = os.getenv('KOBO_TOKEN')
 KOBO_FORM_ID = os.getenv('KOBO_FORM_ID')
-CSV_PATH = 'data/raw/ss_raw_conflict.csv'
+CSV_PATH = 'data/raw/ss_kobo_entries.csv'
 
 def fetch_kobo_data():
     if not KOBO_TOKEN or not KOBO_FORM_ID:

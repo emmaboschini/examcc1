@@ -10,6 +10,15 @@ print(f"Merging conflict summary into State GeoJSON...")
 
 # Step 2: Load conflict data
 df = pd.read_csv(input_file, encoding='latin1')
+
+# Load Kobo entries if the file exists
+kobo_file = "data/raw/ss_kobo_entries.csv"
+try:
+    kobo_df = pd.read_csv(kobo_file)
+    df = pd.concat([df, kobo_df], ignore_index=True)
+except FileNotFoundError:
+    pass
+
 ss_df = df[df['Country'] == 'South Sudan'].copy()
 
 # Ensure Status column exists
