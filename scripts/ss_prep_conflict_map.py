@@ -19,13 +19,12 @@ if 'Status' not in ss_df.columns:
 # Clean state names
 ss_df['Admin 1'] = ss_df['Admin 1'].str.replace(' State', '', regex=False).str.strip()
 
-# --- NEW: Separate Verified vs Unverified ---
-# Verified data goes into the state risk math
+# Aggregated verified data goes into the state risk math
 verified_ss = ss_df[ss_df['Status'] == 'verified'].copy()
-# Unverified news alerts for individual dots
-unverified_ss = ss_df[ss_df['Status'] == 'unverified'].copy()
+# Field updates for the side box
+field_updates_ss = ss_df[ss_df['Status'] == 'field_update'].copy()
 
-# Aggregate by State (VERIFIED ONLY)
+# Aggregate by State
 state_incidents = {}
 for state in verified_ss['Admin 1'].unique():
     incidents = verified_ss[verified_ss['Admin 1'] == state][[
@@ -40,13 +39,12 @@ summary_df = verified_ss.groupby('Admin 1').agg({
 }).rename(columns={'Date': 'Incident_Count'}).reset_index()
 summary_dict = summary_df.set_index('Admin 1').to_dict('index')
 
-# Step 3: Load GeoJSON and merge data
 with open(geojson_file) as f:
     gj = json.load(f)
 
-# Keep track of unverified news for the map
-news_alerts = unverified_ss[[
-    'Date', 'Location of event', 'Source URL', 'Type of education facility'
+# Field updates for the sidebar
+field_updates = field_updates_ss[[
+    'Date', 'Location of event', 'Admin 1', 'Type of education facility'
 ]].fillna('No Information').to_dict('records')
 
 for feature in gj['features']:
@@ -65,9 +63,8 @@ for feature in gj['features']:
     else: risk_level = "Critical Threat Level"
     feature['properties']['risk_level'] = risk_level
 
-# Save the news alerts in a separate property or file
-# We will attach the global news alerts to the top-level of the geojson
-gj['news_alerts'] = news_alerts
+# Attach global field updates to the top-level of the geojson
+gj['field_updates'] = field_updates
 
 # Step 4: Save the result
 with open(output_file, 'w') as f:

@@ -37,10 +37,6 @@
         .legend { line-height: 22px; color: #4a5568; font-size: 0.8em; font-weight: 600; }
         .legend i { width: 14px; height: 14px; float: left; margin-right: 10px; margin-top: 4px; border-radius: 3px; }
         .empty-state { color: #a0aec0; font-style: italic; text-align: center; margin-top: 40px; font-size: 0.9em; }
-
-        .news-badge { background: #f6e05e; color: #744210; font-size: 0.7em; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-left: 10px; }
-        .news-link { color: #3182ce; text-decoration: none; font-weight: 600; }
-        .news-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -82,13 +78,18 @@
         <div id="incidentItems"></div>
     </div>
 
-    <div id="newsFeed" style="margin-top: 40px; border-top: 2px solid #edf2f7; padding-top: 20px;">
-        <span class="incident-list-label">🔔 LIVE NEWS ALERTS <span class="news-badge">UNVERIFIED</span></span>
-        <div id="newsItems"></div>
+    <div id="fieldUpdatesBox" style="margin-top: 40px; border-top: 2px solid #edf2f7; padding-top: 20px;">
+        <span class="incident-list-label">📡 UPDATES FROM THE FIELD</span>
+        <div id="fieldItems"></div>
     </div>
-    
+
     <div id="defaultMsg" class="empty-state">
         <br>Select a region on the map to begin risk analysis.
+    </div>
+
+    <div id="footer" style="margin-top: 50px; font-size: 0.65em; color: #a0aec0; border-top: 1px solid #edf2f7; padding-top: 10px;">
+        Dashboard Version: 2.0.1<br>
+        <span id="lastUpdated">Loading sync time...</span>
     </div>
 </div>
 
@@ -164,20 +165,24 @@
         });
         layerRisk.addTo(map);
 
-        const newsListDiv = document.getElementById('newsItems');
-        newsListDiv.innerHTML = '';
-        if (data.news_alerts && data.news_alerts.length > 0) {
-            data.news_alerts.forEach(news => {
+        const fieldListDiv = document.getElementById('fieldItems');
+        fieldListDiv.innerHTML = '';
+        if (data.field_updates && data.field_updates.length > 0) {
+            // Show latest 5 updates
+            data.field_updates.slice().reverse().slice(0, 5).forEach(update => {
                 const item = document.createElement('div');
                 item.className = 'incident-item';
-                item.style.borderLeftColor = '#f6e05e';
-                item.innerHTML = `<div class="incident-date">${new Date(news.Date).toLocaleDateString('en-GB', { month:'short', year:'numeric', day:'numeric' })}</div>
-                <div class="incident-details"><b>Headline:</b> ${news['Location of event']}<br><a class="news-link" href="${news['Source URL']}" target="_blank">Read Full Report →</a></div>`;
-                newsListDiv.appendChild(item);
+                item.style.borderLeftColor = '#3182ce';
+                item.innerHTML = `<div class="incident-date">${new Date(update.Date).toLocaleDateString('en-GB', { month:'short', year:'numeric', day:'numeric' })}</div>
+                <div class="incident-details"><b>Location:</b> ${update['Location of event']} (${update['Admin 1']})<br><b>Facility:</b> ${update['Type of education facility']}</div>`;
+                fieldListDiv.appendChild(item);
             });
         } else {
-            newsListDiv.innerHTML = '<p class="empty-state">No pending news alerts.</p>';
+            fieldListDiv.innerHTML = '<p class="empty-state">No field updates received yet.</p>';
         }
+
+        // Show the last sync time
+        document.getElementById('lastUpdated').textContent = "Data Last Synced: " + new Date().toLocaleString('en-GB', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
     });
 
     function applyFilters() {
