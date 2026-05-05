@@ -61,8 +61,11 @@ def update_conflict_csv(kobo_reports):
         print(f"Loaded existing database with {len(df_existing)} entries.")
     except FileNotFoundError:
         print("Starting new database.")
-        cols = ['Date', 'State', 'Facility Name', 'Facility Type', 'Description', 'SiND Event ID', 'Status']
+        cols = ['Date', 'Country', 'State', 'Facility Name', 'Facility Type', 'Description', 'SiND Event ID', 'Status']
         df_existing = pd.DataFrame(columns=cols)
+
+    if 'Country' not in df_existing.columns:
+        df_existing['Country'] = 'South Sudan'
 
     updates_made = False
     new_count = 0
@@ -83,6 +86,7 @@ def update_conflict_csv(kobo_reports):
 
             new_row = {
                 'Date': k_date,
+                'Country': 'South Sudan',
                 'State': state_clean,
                 'Facility Name': k_location,
                 'Facility Type': k_facility,
