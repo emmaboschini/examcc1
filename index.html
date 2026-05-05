@@ -9,60 +9,38 @@
     
     <style>
         body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; display: flex; height: 100vh; overflow: hidden; background: #f4f7f6; }
-        
-        /* Sidebar Styling */
-        #sidebar {
-            width: 400px;
-            background: #ffffff;
-            border-right: 1px solid #e0e0e0;
-            overflow-y: auto;
-            padding: 30px;
-            box-shadow: 2px 0 20px rgba(0,0,0,0.05);
-            z-index: 1001;
-        }
+        #sidebar { width: 400px; background: #ffffff; border-right: 1px solid #e0e0e0; overflow-y: auto; padding: 30px; box-shadow: 2px 0 20px rgba(0,0,0,0.05); z-index: 1001; }
         #map-container { flex-grow: 1; position: relative; }
         #map { height: 100%; width: 100%; background: #eef2f3; }
         
-        /* Headers */
         h1 { font-size: 1.5em; margin-top: 0; color: #1a202c; letter-spacing: -0.5px; line-height: 1.2; }
         .subtitle { font-size: 0.9em; color: #718096; margin-bottom: 30px; line-height: 1.5; }
         
-        /* Filter Styles */
         .filter-section { margin-bottom: 25px; border-bottom: 1px solid #edf2f7; padding-bottom: 20px; }
         .filter-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: #4a5568; font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.5px; }
-        select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 14px; background: #fff; cursor: pointer; transition: border 0.2s; }
-        select:hover { border-color: #cbd5e0; }
+        select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 14px; background: #fff; cursor: pointer; }
         
-        /* Stats Cards */
-        .stat-card {
-            background: #fff5f5; border: 1px solid #fed7d7; border-radius: 12px; padding: 20px; margin-bottom: 25px;
-        }
+        .stat-card { background: #fff5f5; border: 1px solid #fed7d7; border-radius: 12px; padding: 20px; margin-bottom: 25px; }
         .stat-title { font-size: 0.85em; font-weight: 800; color: #c53030; text-transform: uppercase; margin-bottom: 15px; display: block; }
         .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .stat-item { text-align: left; }
         .stat-value { display: block; font-size: 1.8em; font-weight: 900; color: #2d3748; line-height: 1; }
         .stat-label { font-size: 0.7em; color: #718096; font-weight: 600; }
 
-        /* Incident List */
         .incident-list-label { font-weight: 800; color: #4a5568; font-size: 0.75em; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .incident-item {
-            background: #ffffff; border: 1px solid #edf2f7; border-left: 4px solid #e53e3e; 
-            padding: 15px; margin-bottom: 12px; border-radius: 8px;
-            font-size: 0.9em; transition: transform 0.1s;
-        }
-        .incident-item:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .incident-item { background: #ffffff; border: 1px solid #edf2f7; border-left: 4px solid #e53e3e; padding: 15px; margin-bottom: 12px; border-radius: 8px; font-size: 0.9em; }
         .incident-date { font-weight: 800; color: #2d3748; margin-bottom: 5px; font-size: 0.85em; }
         .incident-details { color: #4a5568; line-height: 1.5; }
-        .incident-details b { color: #4a5568; font-weight: 600; font-size: 0.85em; opacity: 0.8; }
 
-        /* Map Overlays */
         .info { padding: 12px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; }
         .legend { line-height: 22px; color: #4a5568; font-size: 0.8em; font-weight: 600; }
         .legend i { width: 14px; height: 14px; float: left; margin-right: 10px; margin-top: 4px; border-radius: 3px; }
-        
-        /* Empty State */
-        .empty-state { color: #a0aec0; font-style: italic; text-align: center; margin-top: 80px; font-size: 0.9em; }
+        .empty-state { color: #a0aec0; font-style: italic; text-align: center; margin-top: 40px; font-size: 0.9em; }
+
+        .news-badge { background: #f6e05e; color: #744210; font-size: 0.7em; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-left: 10px; }
+        .news-link { color: #3182ce; text-decoration: none; font-weight: 600; }
+        .news-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -80,7 +58,6 @@
                 <option value="All">All of South Sudan</option>
             </select>
         </div>
-
         <div class="filter-group">
             <label for="typeFilter">School Level</label>
             <select id="typeFilter">
@@ -96,27 +73,22 @@
         <div class="stat-card">
             <span class="stat-title" id="summaryTitle">Region Stats</span>
             <div class="stat-grid">
-                <div class="stat-item">
-                    <span class="stat-value" id="valIncidents">0</span>
-                    <span class="stat-label">Attacks</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value" id="valCasualties">0</span>
-                    <span class="stat-label">Fatalities</span>
-                </div>
+                <div class="stat-item"><span class="stat-value" id="valIncidents">0</span><span class="stat-label">Attacks</span></div>
+                <div class="stat-item"><span class="stat-value" id="valCasualties">0</span><span class="stat-label">Fatalities</span></div>
             </div>
             <div id="riskText" style="margin-top: 15px; font-size: 0.8em; font-weight: 700; color: #c53030;"></div>
         </div>
+        <span class="incident-list-label">Verified History</span>
+        <div id="incidentItems"></div>
+    </div>
 
-        <span class="incident-list-label">Documented Conflict History</span>
-        <div id="incidentItems">
-            <!-- Dynamic items -->
-        </div>
+    <div id="newsFeed" style="margin-top: 40px; border-top: 2px solid #edf2f7; padding-top: 20px;">
+        <span class="incident-list-label">🔔 LIVE NEWS ALERTS <span class="news-badge">UNVERIFIED</span></span>
+        <div id="newsItems"></div>
     </div>
     
     <div id="defaultMsg" class="empty-state">
-        <svg style="width: 48px; height: 48px; margin-bottom: 15px; opacity: 0.2;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A2 2 0 013 15.382V6.418a2 2 0 011.106-1.789L9 2m0 18l6-3m-6 3V7m6 10l4.553 2.276A2 2 0 0022 17.618V8.622a2 2 0 00-1.106-1.789L16 4m0 14V4m0 0L9 7"></path></svg>
-        <br>Select a region on the map to begin risk analysis and view facility distributions.
+        <br>Select a region on the map to begin risk analysis.
     </div>
 </div>
 
@@ -129,143 +101,99 @@
 <script>
     const map = L.map('map').setView([7.8, 30.0], 6);
 
-    // Layer Panes (Consistent Depth)
-    map.createPane('bgPane');      map.getPane('bgPane').style.zIndex = 300;
     map.createPane('popPane');     map.getPane('popPane').style.zIndex = 400;
     map.createPane('schoolPane');  map.getPane('schoolPane').style.zIndex = 500;
     map.createPane('riskPane');    map.getPane('riskPane').style.zIndex = 600;
 
-    // Professional Light Base Map
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CARTO'
-    }).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; CARTO' }).addTo(map);
 
     let allStates = [];
     let allSchools = [];
-    
     const layerPop = L.layerGroup();
     const layerSchools = L.layerGroup();
     const layerRisk = L.layerGroup();
 
-    // 1. Palette (Professional Blue Gradient)
     function getPopColor(d) {
-        return d > 200000 ? '#084594' : 
-               d > 100000 ? '#2171b5' : 
-               d > 50000  ? '#4292c6' : 
-               d > 20000  ? '#6baed6' : 
-               d > 5000   ? '#9ecae1' : 
-               d > 0      ? '#c6dbef' :
-                            '#f7fbff';
+        return d > 200000 ? '#084594' : d > 100000 ? '#2171b5' : d > 50000 ? '#4292c6' : d > 20000 ? '#6baed6' : d > 5000 ? '#9ecae1' : d > 0 ? '#c6dbef' : '#f7fbff';
     }
 
-    // 2. Load Data
-    // --- Population (Base Analysis Layer) ---
-    fetch('data/clean/ss_map_data.geojson')
-        .then(res => res.json())
-        .then(data => {
-            L.geoJson(data, {
-                pane: 'popPane',
-                style: f => ({ 
-                    fillColor: getPopColor(f.properties.population), 
-                    weight: 1, 
-                    opacity: 1, 
-                    color: '#fff', 
-                    fillOpacity: 0.7 
-                }),
-                onEachFeature: (f, l) => {
-                    l.bindTooltip(`<b>${f.properties.shapeName}</b><br>${f.properties.population.toLocaleString()} children`);
-                }
-            }).addTo(layerPop);
-            layerPop.addTo(map); // Added by default for verification
+    // Load Data
+    fetch('data/clean/ss_map_data.geojson').then(res => res.json()).then(data => {
+        L.geoJson(data, {
+            pane: 'popPane',
+            style: f => ({ fillColor: getPopColor(f.properties.population), weight: 1, opacity: 1, color: '#fff', fillOpacity: 0.7 }),
+            onEachFeature: (f, l) => { l.bindTooltip(`<b>${f.properties.shapeName}</b><br>${f.properties.population.toLocaleString()} children`); }
+        }).addTo(layerPop);
+        layerPop.addTo(map); 
+    });
+
+    fetch('data/clean/ss_clean_schools_geo_safe.csv').then(res => res.text()).then(csv => {
+        const lines = csv.split('\n').slice(1);
+        lines.forEach(line => {
+            const p = line.split('|');
+            if (p.length >= 6) {
+                const marker = L.circleMarker([parseFloat(p[4]), parseFloat(p[5])], {
+                    radius: 2.5, fillColor: "#ed8936", color: "#fff", weight: 0.5, opacity: 1, fillOpacity: 0.9, pane: 'schoolPane'
+                }).bindPopup(`<b>${p[0]}</b><br>Level: ${p[1]}`);
+                marker.stateName = p[2]; marker.schoolType = p[1];
+                allSchools.push(marker); marker.addTo(layerSchools);
+            }
+        });
+        layerSchools.addTo(map);
+    });
+
+    fetch('data/clean/ss_conflict_map_data.geojson').then(res => res.json()).then(data => {
+        allStates = data.features;
+        const filter = document.getElementById('stateFilter');
+        allStates.sort((a,b) => a.properties.shapeName.localeCompare(b.properties.shapeName)).forEach(f => {
+            const opt = document.createElement('option'); opt.value = f.properties.shapeName; opt.textContent = f.properties.shapeName; filter.appendChild(opt);
         });
 
-    // --- Schools ---
-    fetch('data/clean/ss_clean_schools_geo_safe.csv')
-        .then(res => res.text())
-        .then(csv => {
-            const lines = csv.split('\n').slice(1);
-            lines.forEach(line => {
-                const p = line.split('|');
-                if (p.length >= 6) {
-                    const marker = L.circleMarker([parseFloat(p[4]), parseFloat(p[5])], {
-                        radius: 2.5, fillColor: "#ed8936", color: "#fff", weight: 0.5, opacity: 1, fillOpacity: 0.9, pane: 'schoolPane'
-                    }).bindPopup(`<b>${p[0]}</b><br>State: ${p[2]}<br>Level: ${p[1]}`);
-                    marker.stateName = p[2];
-                    marker.schoolType = p[1];
-                    allSchools.push(marker);
-                    marker.addTo(layerSchools);
+        L.geoJson(data, {
+            onEachFeature: (f, l) => {
+                const count = f.properties.incidents_count;
+                if (count > 0) {
+                    const marker = L.circleMarker(l.getBounds().getCenter(), {
+                        radius: 8 + (count * 2), fillColor: "#e53e3e", color: "#fff", weight: 2, opacity: 1, fillOpacity: 0.9, pane: 'riskPane'
+                    });
+                    marker.on('click', () => { document.getElementById('stateFilter').value = f.properties.shapeName; applyFilters(); });
+                    marker.bindTooltip(`<b>${f.properties.shapeName}</b>: ${f.properties.risk_level}`);
+                    marker.addTo(layerRisk);
                 }
-            });
-            layerSchools.addTo(map);
+            }
         });
+        layerRisk.addTo(map);
 
-    // --- Conflict Risk ---
-    fetch('data/clean/ss_conflict_map_data.geojson')
-        .then(res => res.json())
-        .then(data => {
-            allStates = data.features;
-            
-            // Setup Region Filter
-            const filter = document.getElementById('stateFilter');
-            allStates.sort((a,b) => a.properties.shapeName.localeCompare(b.properties.shapeName))
-                     .forEach(f => {
-                const opt = document.createElement('option');
-                opt.value = f.properties.shapeName;
-                opt.textContent = f.properties.shapeName;
-                filter.appendChild(opt);
+        const newsListDiv = document.getElementById('newsItems');
+        newsListDiv.innerHTML = '';
+        if (data.news_alerts && data.news_alerts.length > 0) {
+            data.news_alerts.forEach(news => {
+                const item = document.createElement('div');
+                item.className = 'incident-item';
+                item.style.borderLeftColor = '#f6e05e';
+                item.innerHTML = `<div class="incident-date">${new Date(news.Date).toLocaleDateString('en-GB', { month:'short', year:'numeric', day:'numeric' })}</div>
+                <div class="incident-details"><b>Headline:</b> ${news['Location of event']}<br><a class="news-link" href="${news['Source URL']}" target="_blank">Read Full Report →</a></div>`;
+                newsListDiv.appendChild(item);
             });
+        } else {
+            newsListDiv.innerHTML = '<p class="empty-state">No pending news alerts.</p>';
+        }
+    });
 
-            L.geoJson(data, {
-                onEachFeature: (f, l) => {
-                    const count = f.properties.incidents_count;
-                    if (count > 0) {
-                        // Calculate the center of the state to place the marker
-                        const center = l.getBounds().getCenter();
-                        
-                        const marker = L.circleMarker(center, {
-                            radius: 8 + (count * 2),
-                            fillColor: "#e53e3e", 
-                            color: "#fff", 
-                            weight: 2, 
-                            opacity: 1, 
-                            fillOpacity: 0.9, 
-                            pane: 'riskPane',
-                            className: 'risk-marker'
-                        });
-
-                        marker.on('click', () => {
-                            document.getElementById('stateFilter').value = f.properties.shapeName;
-                            applyFilters();
-                        });
-                        
-                        marker.bindTooltip(`<b>${f.properties.shapeName}</b>: ${f.properties.risk_level}`);
-                        marker.addTo(layerRisk);
-                    }
-                }
-            });
-            layerRisk.addTo(map);
-        });
-
-    // 3. Filtering Engine
     function applyFilters() {
         const selectedState = document.getElementById('stateFilter').value;
         const selectedType = document.getElementById('typeFilter').value;
         const summary = document.getElementById('stateSummary');
         const msg = document.getElementById('defaultMsg');
         
-        // Handle "All" view
         if (selectedState === "All") {
-            summary.style.display = 'none';
-            msg.style.display = 'block';
+            summary.style.display = 'none'; msg.style.display = 'block';
             map.setView([7.8, 30.0], 6);
         } else {
-            summary.style.display = 'block';
-            msg.style.display = 'none';
+            summary.style.display = 'block'; msg.style.display = 'none';
             const feature = allStates.find(f => f.properties.shapeName === selectedState);
             const p = feature.properties;
-            
-            // Update Sidebar
-            document.getElementById('summaryTitle').textContent = selectedState + " Risk Stats";
+            document.getElementById('summaryTitle').textContent = selectedState;
             document.getElementById('valIncidents').textContent = p.incidents_count;
             document.getElementById('valCasualties').textContent = p.educators_killed + p.students_killed;
             document.getElementById('riskText').textContent = p.risk_level.toUpperCase();
@@ -273,68 +201,43 @@
             const listDiv = document.getElementById('incidentItems');
             listDiv.innerHTML = '';
             if (p.incident_list.length === 0) {
-                listDiv.innerHTML = '<p class="empty-state">No documented attacks in this region.</p>';
+                listDiv.innerHTML = '<p class="empty-state">No verified attacks in this region.</p>';
             } else {
                 p.incident_list.forEach(inc => {
                     const item = document.createElement('div');
                     item.className = 'incident-item';
-                    item.innerHTML = `
-                        <div class="incident-date">${new Date(inc.Date).toLocaleDateString('en-GB', { month:'long', year:'numeric', day:'numeric' })}</div>
-                        <div class="incident-details">
-                            <b>Facility:</b> ${inc['Type of education facility']}<br>
-                            <b>Actor:</b> ${inc['Reported Perpetrator']}<br>
-                            <b>Location:</b> ${inc['Location of event']}
-                        </div>
-                    `;
+                    item.innerHTML = `<div class="incident-date">${new Date(inc.Date).toLocaleDateString('en-GB', { month:'long', year:'numeric', day:'numeric' })}</div>
+                    <div class="incident-details"><b>Facility:</b> ${inc['Type of education facility']}<br><b>Actor:</b> ${inc['Reported Perpetrator']}<br><b>Location:</b> ${inc['Location of event']}</div>`;
                     listDiv.appendChild(item);
                 });
             }
-            
             map.fitBounds(L.geoJson(feature).getBounds(), { padding: [40, 40] });
         }
 
-        // Apply visual filter to school markers
         allSchools.forEach(m => {
             const stateMatch = (selectedState === "All" || m.stateName === selectedState);
             const typeMatch = (selectedType === "All" || m.schoolType === selectedType);
-            
-            if (stateMatch && typeMatch) m.addTo(layerSchools);
-            else layerSchools.removeLayer(m);
+            if (stateMatch && typeMatch) m.addTo(layerSchools); else layerSchools.removeLayer(m);
         });
     }
 
     document.getElementById('stateFilter').addEventListener('change', applyFilters);
     document.getElementById('typeFilter').addEventListener('change', applyFilters);
 
-    // 4. Layers UI
-    L.control.layers(null, {
-        "School Facilities (Orange)": layerSchools,
-        "Attacks on Education (Red)": layerRisk,
-        "Population Density (Blue)": layerPop
-    }, { collapsed: false }).addTo(map);
+    L.control.layers(null, { "Schools (Orange)": layerSchools, "Verified Attacks (Red)": layerRisk, "Population (Blue)": layerPop }, { collapsed: false }).addTo(map);
 
-    // 5. Legend
     const legend = L.control({position: 'bottomright'});
     legend.onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');
-        
-        // Infrastructure and Risk section
-        div.innerHTML = '<b style="display:block; margin-bottom:10px;">Map Symbology</b>';
-        div.innerHTML += '<i style="background: #e53e3e; border-radius: 50%; border: 2px solid white; width: 14px; height: 14px;"></i> Armed Attacks (Regional Risk)<br>';
-        div.innerHTML += '<i style="background: #ed8936; border-radius: 50%; border: 1px solid white; width: 10px; height: 10px; margin-left: 2px;"></i> School Facilities<br><hr>';
-
-        // Population section
+        div.innerHTML = '<b>Map Symbology</b><br><i style="background: #e53e3e; border-radius: 50%; border: 2px solid white; width: 12px; height: 12px;"></i> Verified Attack<br><i style="background: #ed8936; border-radius: 50%; border: 1px solid white; width: 10px; height: 10px;"></i> School Facility<br><hr>';
         const grades = [0, 5000, 10000, 50000, 100000, 200000];
-        div.innerHTML += '<b style="display:block; margin-top:5px; margin-bottom:10px;">Children Population (Under 17)</b>';
+        div.innerHTML += '<b>Population (Under 17)</b><br>';
         for (let i = 0; i < grades.length; i++) {
-            div.innerHTML += '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            div.innerHTML += '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
         return div;
     };
     legend.addTo(map);
-
 </script>
-
 </body>
 </html>

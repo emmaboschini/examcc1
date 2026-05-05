@@ -2,7 +2,7 @@ name: Daily Map Update
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Every day at midnight
+    - cron: '0 */3 * * *' # Every 3 hours
   workflow_dispatch: # Allows manual trigger
 
 jobs:

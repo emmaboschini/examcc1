@@ -12,24 +12,28 @@ print(f"Merging conflict summary into State GeoJSON...")
 df = pd.read_csv(input_file, encoding='latin1')
 ss_df = df[df['Country'] == 'South Sudan'].copy()
 
-# Clean state names to match GeoJSON (e.g., remove " State")
+# Ensure Status column exists
+if 'Status' not in ss_df.columns:
+    ss_df['Status'] = 'verified'
+
+# Clean state names
 ss_df['Admin 1'] = ss_df['Admin 1'].str.replace(' State', '', regex=False).str.strip()
 
-# Aggregate by State and also keep individual incident details
-state_incidents = {}
-for state in ss_df['Admin 1'].unique():
-    # Only keep relevant columns and ensure they are strings
-    incidents = ss_df[ss_df['Admin 1'] == state][[
-        'Date', 'Location of event', 'Reported Perpetrator', 'Type of education facility'
-    ]].copy()
-    
-    # Fill empty values to prevent JS errors
-    incidents = incidents.fillna('No Information')
-    
-    state_incidents[state] = incidents.to_dict('records')
+# --- NEW: Separate Verified vs Unverified ---
+# Verified data goes into the state risk math
+verified_ss = ss_df[ss_df['Status'] == 'verified'].copy()
+# Unverified news alerts for individual dots
+unverified_ss = ss_df[ss_df['Status'] == 'unverified'].copy()
 
-# Create summary lookup
-summary_df = ss_df.groupby('Admin 1').agg({
+# Aggregate by State (VERIFIED ONLY)
+state_incidents = {}
+for state in verified_ss['Admin 1'].unique():
+    incidents = verified_ss[verified_ss['Admin 1'] == state][[
+        'Date', 'Location of event', 'Reported Perpetrator', 'Type of education facility'
+    ]].fillna('No Information').to_dict('records')
+    state_incidents[state] = incidents
+
+summary_df = verified_ss.groupby('Admin 1').agg({
     'Date': 'count',
     'Educators Killed': 'sum',
     'Students Killed': 'sum'
@@ -40,9 +44,13 @@ summary_dict = summary_df.set_index('Admin 1').to_dict('index')
 with open(geojson_file) as f:
     gj = json.load(f)
 
+# Keep track of unverified news for the map
+news_alerts = unverified_ss[[
+    'Date', 'Location of event', 'Source URL', 'Type of education facility'
+]].fillna('No Information').to_dict('records')
+
 for feature in gj['features']:
     name = feature['properties'].get('shapeName')
-    # Default values if no conflict found
     stats = summary_dict.get(name, {'Incident_Count': 0, 'Educators Killed': 0, 'Students Killed': 0})
     
     count = int(stats['Incident_Count'])
@@ -51,17 +59,15 @@ for feature in gj['features']:
     feature['properties']['students_killed'] = int(stats['Students Killed'])
     feature['properties']['incident_list'] = state_incidents.get(name, [])
     
-    # Dynamic Risk Level
-    if count == 0:
-        risk_level = "No Recent Incidents"
-    elif count < 5:
-        risk_level = "Active Conflict Area"
-    elif count < 10:
-        risk_level = "High-Risk Zone"
-    else:
-        risk_level = "Critical Threat Level"
-    
+    if count == 0: risk_level = "No Recent Incidents"
+    elif count < 5: risk_level = "Active Conflict Area"
+    elif count < 10: risk_level = "High-Risk Zone"
+    else: risk_level = "Critical Threat Level"
     feature['properties']['risk_level'] = risk_level
+
+# Save the news alerts in a separate property or file
+# We will attach the global news alerts to the top-level of the geojson
+gj['news_alerts'] = news_alerts
 
 # Step 4: Save the result
 with open(output_file, 'w') as f:
