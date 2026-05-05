@@ -1,48 +1,51 @@
 Date,Admin 1,Location of event,Type of education facility,Reported Perpetrator,Educators Killed,Students Killed,Status
-2025-12-07,Western Bahr el Ghazal State,Private Travel,Primary School,Government: Military,0,0,verified
-2025-12-03,Jonglei,Education Building,Secondary School,Government: Military,0,0,verified
-2025-12-03,Jonglei,Education Building,Secondary School,Government: Military,0,0,verified
-2025-10-02,Western Equatoria,Education Building,School: No Further Details,NSA,0,0,verified
-2025-05-09,Lakes,Unspecified Location,Not Applicable,No Information,0,0,verified
-2025-02-08,Western Equatoria,Education Building,Secondary School,Government: Military,0,2,verified
-2024-11-17,Central Equatoria,Education Building,School: No Further Details,NSA,0,0,verified
-2024-06-12,Central Equatoria,Education Building,University,Police,0,0,verified
-2024-01-19,Warrap,Education Building,School: No Further Details,NSA,0,0,verified
-2024-01-12,Northern Bahr el Ghazal,Education Building,Not Applicable,Police,0,0,verified
-2023-09-09,Western Equatoria,Home,Not Applicable,No Information,1,0,verified
-2023-08-23,Western Bahr el Ghazal State,Education Building,University,Police,0,0,verified
-2023-08-16,Western Bahr el Ghazal State,Education Building,University,Police,0,0,verified
-2023-07-06,Central Equatoria,Education Building,Secondary School,NSA,0,0,verified
-2023-06-15,Lakes,Unspecified Location,Not Applicable,Police,0,0,verified
-2022-11-09,Western Bahr el Ghazal State,Education Building,University,Police,0,0,verified
-2022-09-05,Jonglei,Public Building,School: No Further Details,No Information,0,0,verified
-2022-08-20,Jonglei,Education Building,School: No Further Details,NSA,0,0,verified
-2022-08-20,Jonglei,Education Building,School: No Further Details,NSA,0,0,verified
-2022-08-12,Jonglei,Unspecified Location,Not Applicable,Police,0,0,verified
-2022-08-08,Eastern Equatoria,Unspecified Location,Not Applicable,NSA,0,0,verified
-2022-08-07,Eastern Equatoria,On Way To or From School,Not Applicable,Other,2,0,verified
-2022-07-31,Eastern Equatoria,Education Building,Not Applicable,Government: Military,0,0,verified
-2022-07-31,Eastern Equatoria,Home,Not Applicable,Government: Military,0,0,verified
-2022-07-01,Greater Pibor Administrative Area,Education Building,Primary School,No Information,0,0,verified
-2022-07-01,Greater Pibor Administrative Area,Education Building,Primary School,No Information,0,0,verified
-2022-06-20,Lakes,Other,Not Applicable,Government: Military,0,0,verified
-2022-06-15,Central Equatoria,Education Building,Primary School,Government: Military,0,0,verified
-2022-06-01,Greater Pibor Administrative Area,Education Building,Primary School,NSA,0,0,verified
-2022-03-31,Warrap,Education Building,School: No Further Details,NSA,0,0,verified
-2022-03-29,No Information,Education Building,Not Applicable,Donor Government,0,0,verified
-2022-03-03,Jonglei,Education Building,Not Applicable,Police,0,0,verified
-2022-03-01,Jonglei,Education Building,University,Police,0,0,verified
-2022-02-09,Jonglei,Unspecified Location,Not Applicable,Police,0,0,verified
-2022-02-09,Jonglei,Unspecified Location,Not Applicable,Police,0,0,verified
-2021-09-20,Western Equatoria,Education Building,School: No Further Details,NSA,0,0,verified
-2021-06-20,Eastern Equatoria,Education Building,School: No Further Details,NSA,0,0,verified
-2021-06-15,Great Pibor Administrative Area,On Way To or From School,Not Applicable,NSA,0,0,verified
-2021-02-02,Upper Nile,Education Building,Secondary School,NSA,0,0,verified
-2020-12-31,Central Equatoria,Education Building,School: No Further Details,No Information,0,0,verified
-2020-11-25,Central Equatoria,Unspecified Location,Not Applicable,No Information,1,0,verified
-2020-11-24,Greater Pibor Administrative Area,Education Building,Not Applicable,NSA,0,1,verified
-2020-09-18,Jonglei,Education Building,Not Applicable,Employee,0,0,verified
-2020-06-20,Central Equatoria,Education Building,University,NSA,0,0,verified
-2020-01-27,Central Equatoria,Unspecified Location,Not Applicable,NSA,0,0,verified
-2020-01-12,Central Equatoria,On Way To or From School,Not Applicable,NSA,1,0,verified
-2018-02-26,Lakes,Education Building,School: No Further Details,Government: Military,0,0,verified
+2026-05-05,upper_nile,Nasir University,university,,,,field_update
+2026-05-05,western_equatoria,this is a test,secondary_school,,,,field_update
+2026-05-05,northern_bahr_el_ghazal,also a test,pre_primary,,,,field_update
+2025-12-07,Western Bahr el Ghazal State,Private Travel,Primary School,Government: Military,0.0,0.0,verified
+2025-12-03,Jonglei,Education Building,Secondary School,Government: Military,0.0,0.0,verified
+2025-12-03,Jonglei,Education Building,Secondary School,Government: Military,0.0,0.0,verified
+2025-10-02,Western Equatoria,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2025-05-09,Lakes,Unspecified Location,Not Applicable,No Information,0.0,0.0,verified
+2025-02-08,Western Equatoria,Education Building,Secondary School,Government: Military,0.0,2.0,verified
+2024-11-17,Central Equatoria,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2024-06-12,Central Equatoria,Education Building,University,Police,0.0,0.0,verified
+2024-01-19,Warrap,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2024-01-12,Northern Bahr el Ghazal,Education Building,Not Applicable,Police,0.0,0.0,verified
+2023-09-09,Western Equatoria,Home,Not Applicable,No Information,1.0,0.0,verified
+2023-08-23,Western Bahr el Ghazal State,Education Building,University,Police,0.0,0.0,verified
+2023-08-16,Western Bahr el Ghazal State,Education Building,University,Police,0.0,0.0,verified
+2023-07-06,Central Equatoria,Education Building,Secondary School,NSA,0.0,0.0,verified
+2023-06-15,Lakes,Unspecified Location,Not Applicable,Police,0.0,0.0,verified
+2022-11-09,Western Bahr el Ghazal State,Education Building,University,Police,0.0,0.0,verified
+2022-09-05,Jonglei,Public Building,School: No Further Details,No Information,0.0,0.0,verified
+2022-08-20,Jonglei,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2022-08-20,Jonglei,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2022-08-12,Jonglei,Unspecified Location,Not Applicable,Police,0.0,0.0,verified
+2022-08-08,Eastern Equatoria,Unspecified Location,Not Applicable,NSA,0.0,0.0,verified
+2022-08-07,Eastern Equatoria,On Way To or From School,Not Applicable,Other,2.0,0.0,verified
+2022-07-31,Eastern Equatoria,Home,Not Applicable,Government: Military,0.0,0.0,verified
+2022-07-31,Eastern Equatoria,Education Building,Not Applicable,Government: Military,0.0,0.0,verified
+2022-07-01,Greater Pibor Administrative Area,Education Building,Primary School,No Information,0.0,0.0,verified
+2022-07-01,Greater Pibor Administrative Area,Education Building,Primary School,No Information,0.0,0.0,verified
+2022-06-20,Lakes,Other,Not Applicable,Government: Military,0.0,0.0,verified
+2022-06-15,Central Equatoria,Education Building,Primary School,Government: Military,0.0,0.0,verified
+2022-06-01,Greater Pibor Administrative Area,Education Building,Primary School,NSA,0.0,0.0,verified
+2022-03-31,Warrap,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2022-03-29,No Information,Education Building,Not Applicable,Donor Government,0.0,0.0,verified
+2022-03-03,Jonglei,Education Building,Not Applicable,Police,0.0,0.0,verified
+2022-03-01,Jonglei,Education Building,University,Police,0.0,0.0,verified
+2022-02-09,Jonglei,Unspecified Location,Not Applicable,Police,0.0,0.0,verified
+2022-02-09,Jonglei,Unspecified Location,Not Applicable,Police,0.0,0.0,verified
+2021-09-20,Western Equatoria,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2021-06-20,Eastern Equatoria,Education Building,School: No Further Details,NSA,0.0,0.0,verified
+2021-06-15,Great Pibor Administrative Area,On Way To or From School,Not Applicable,NSA,0.0,0.0,verified
+2021-02-02,Upper Nile,Education Building,Secondary School,NSA,0.0,0.0,verified
+2020-12-31,Central Equatoria,Education Building,School: No Further Details,No Information,0.0,0.0,verified
+2020-11-25,Central Equatoria,Unspecified Location,Not Applicable,No Information,1.0,0.0,verified
+2020-11-24,Greater Pibor Administrative Area,Education Building,Not Applicable,NSA,0.0,1.0,verified
+2020-09-18,Jonglei,Education Building,Not Applicable,Employee,0.0,0.0,verified
+2020-06-20,Central Equatoria,Education Building,University,NSA,0.0,0.0,verified
+2020-01-27,Central Equatoria,Unspecified Location,Not Applicable,NSA,0.0,0.0,verified
+2020-01-12,Central Equatoria,On Way To or From School,Not Applicable,NSA,1.0,0.0,verified
+2018-02-26,Lakes,Education Building,School: No Further Details,Government: Military,0.0,0.0,verified
