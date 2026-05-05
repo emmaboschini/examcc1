@@ -76,6 +76,7 @@ def update_conflict_csv(kobo_reports):
     # Process Kobo (Mark as Verified)
     for report in kobo_reports:
         uid = str(report.get('_id', report.get('id', '')))
+        if uid and uid not in df_existing['SiND Event ID'].astype(str).values:
             # Helper to safely get numbers
             def safe_int(val):
                 try:
