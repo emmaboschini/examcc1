@@ -15,7 +15,7 @@ This inventory documents the open-source data assets used to build the technical
 ## 2. 🏫 Education Infrastructure
 **Source:** [Official EMIS database via OCHA/HDX Mirror](https://data.humdata.org/dataset/south-sudan-schools-and-enrollment-data)
 - **Dataset:** 2019 Annual Education Census (Baseline).
-- **Contents:** Official census of over 6,300 registered schools.
+- **Contents:** Official census of registered schools, filtered to 4,803 validated South Sudan locations.
 - **Used For:** Providing the structural baseline for national education facilities across South Sudan.
 
 ---
@@ -28,7 +28,14 @@ This inventory documents the open-source data assets used to build the technical
 
 ---
 
-## 4. 🗺️ Spatial & Boundary Files
+## 4. 🛰️ Real-Time Field Updates
+**Source:** [KoboToolbox (EBI Field Form)](https://www.kobotoolbox.org/)
+- **Integration:** Custom Python "Update Bot" synchronized with the Kobo API.
+- **Purpose:** Bridges the gap between official datasets and immediate ground-level incidents reported by EBI teams.
+
+---
+
+## 5. 🗺️ Spatial & Boundary Files
 **Source:** [geoBoundaries.org (William & Mary geoLab)](https://www.geoboundaries.org/)
 - **Datasets:** SSD-ADM1 (States) and SSD-ADM2 (Counties).
 - **Format:** High-resolution GeoJSON.
@@ -37,14 +44,17 @@ This inventory documents the open-source data assets used to build the technical
 ---
 
 ## 📊 Project Statistics (Build: May 2026)
-- **Geocoded Infrastructure:** 4,861 individual school facilities mapped.
-- **Documented Incidents:** 47 high-impact conflict events (SSD Focus).
-- **County Success Rate:** 98.7% (78/79 administrative counties successfully synchronized).
+- **Geocoded Infrastructure:** 4,803 individual school facilities mapped (Validated SSD Boundaries).
+- **Documented Incidents:** 47 high-impact conflict events (Verified SSD History).
+- **Synchronization Cycle:** 30-minute automated refresh via GitHub Actions.
 - **License Model:** 100% Open-Source (No proprietary licenses required per EBI objective).
 
 ---
 ### Technology Stack (EBI RFP Compliance)
 - **AI Integration:** **Gemini CLI Agent** used for automated data processing and dashboard orchestration.
 - **Geospatial Engine:** Leaflet.js (v1.9.4) for non-technical staff accessibility.
-- **Data Engineering:** Python (Pandas 3.12) for maintainable data pipelines.
-- **Hosting:** GitHub Pages (Public cloud deployment).
+- **Data Engineering:** Python (Pandas) for maintainable data pipelines.
+- **Automation:** GitHub Actions for continuous data synchronization.
+
+---
+*Technical Response developed for the Education Bridge Initiative (EBI) - May 2026*
