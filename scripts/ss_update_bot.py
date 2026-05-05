@@ -32,13 +32,18 @@ def fetch_kobo_data():
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 data = response.json()
-                # Some versions return a list directly, others use 'results'
                 if isinstance(data, list):
                     results = data
                 else:
                     results = data.get('results', [])
                 
-                print(f"✅ Success! Found {len(results)} reports at {url}")
+                print(f"✅ Success! Connected to {url}")
+                print(f"📊 Total records found in Kobo: {len(results)}")
+                
+                if len(results) > 0:
+                    print("🔍 Diagnostic: First record fields found:")
+                    print(list(results[0].keys()))
+                
                 return results
             else:
                 print(f"ℹ️ Status {response.status_code} at {url}")
