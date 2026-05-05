@@ -1,3 +1,3 @@
-Date,State,Facility Name,Facility Type,Description,SiND Event ID,Status
-2026-05-05,western_equatoria,this is a test,secondary_school,this is what happened: this is a test,773626399,field_update
-2026-05-05,northern_bahr_el_ghazal,also a test,pre_primary,also a test,773628543,field_update
+Date,Country,State,Facility Name,Facility Type,Description,SiND Event ID,Status
+2026-05-05,South Sudan,western_equatoria,this is a test,secondary_school,this is what happened: this is a test,773626399,field_update
+2026-05-05,South Sudan,northern_bahr_el_ghazal,also a test,pre_primary,also a test,773628543,field_update
