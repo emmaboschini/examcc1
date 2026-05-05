@@ -61,14 +61,8 @@ def update_conflict_csv(kobo_reports):
         print(f"Loaded existing database with {len(df_existing)} entries.")
     except FileNotFoundError:
         print("Starting new database.")
-        df_existing = pd.DataFrame(columns=['Date', 'Country', 'Admin 1', 'Location of event', 'Reported Perpetrator', 'Type of education facility', 'Educators Killed', 'Students Killed', 'SiND Event ID', 'Status', 'Source URL'])
-
-    if 'Status' not in df_existing.columns:
-        df_existing['Status'] = 'verified'
-    if 'Source URL' not in df_existing.columns:
-        df_existing['Source URL'] = ''
-    if 'Country' not in df_existing.columns:
-        df_existing['Country'] = 'South Sudan'
+        cols = ['Date', 'State', 'County', 'Facility Name', 'Facility Type', 'Incident Type', 'Perpetrator', 'Weapons', 'Damaged', 'Casualties', 'Description', 'SiND Event ID', 'Status']
+        df_existing = pd.DataFrame(columns=cols)
 
     updates_made = False
     new_count = 0
@@ -77,35 +71,36 @@ def update_conflict_csv(kobo_reports):
     for report in kobo_reports:
         uid = str(report.get('_id', report.get('id', '')))
         if uid and uid not in df_existing['SiND Event ID'].astype(str).values:
-            # Helper to safely get numbers
-            def safe_int(val):
-                try:
-                    return int(float(val)) if val and str(val).strip() else 0
-                except:
-                    return 0
-
             # Map the actual Kobo field names (Flexible mapping)
             k_date = report.get('Date_of_the_Incident') or report.get('Date_of_Incident') or datetime.now().strftime('%Y-%m-%d')
             k_state = report.get('State') or report.get('State_Admin_1') or 'Unknown'
+            k_county = report.get('County_002') or 'Unknown'
             k_location = report.get('Name_of_the_facility') or report.get('Location_of_event') or 'Field Report'
             k_facility = report.get('Type_of_Facility_yo_select_more_than_one') or report.get('Type_of_Facility') or 'Unknown'
             k_perpetrator = report.get('Reported_Perpetrator') or 'Unknown'
+            k_incident = report.get('Type_of_incident') or 'Unknown'
+            k_weapons = report.get('Weaponed_used') or 'Unknown'
+            k_damaged = report.get('Was_the_facility_damaged') or 'Unknown'
+            k_casualties = report.get('Were_there_any_casualties_or_i') or 'Unknown'
+            k_description = report.get('Brief_description_of_the_event') or ''
             
             # Clean State Name to match map logic
             state_clean = str(k_state).replace(' State', '').strip()
 
             new_row = {
                 'Date': k_date,
-                'Country': 'South Sudan',
-                'Admin 1': state_clean,
-                'Location of event': k_location,
-                'Reported Perpetrator': k_perpetrator,
-                'Type of education facility': k_facility,
-                'Educators Killed': safe_int(report.get('Educators_Killed', 0)),
-                'Students Killed': safe_int(report.get('Students_Killed', 0)),
+                'State': state_clean,
+                'County': k_county,
+                'Facility Name': k_location,
+                'Facility Type': k_facility,
+                'Incident Type': k_incident,
+                'Perpetrator': k_perpetrator,
+                'Weapons': k_weapons,
+                'Damaged': k_damaged,
+                'Casualties': k_casualties,
+                'Description': k_description,
                 'SiND Event ID': uid,
-                'Status': 'field_update',
-                'Source URL': ''
+                'Status': 'field_update'
             }
             df_existing = pd.concat([df_existing, pd.DataFrame([new_row])], ignore_index=True)
             updates_made = True
