@@ -41,8 +41,9 @@ def fetch_kobo_data():
                 print(f"📊 Total records found in Kobo: {len(results)}")
                 
                 if len(results) > 0:
-                    print("🔍 Diagnostic: First record fields found:")
-                    print(list(results[0].keys()))
+                    print("🔍 Diagnostic: Full content of the latest report:")
+                    import json
+                    print(json.dumps(results[0], indent=2))
                 
                 return results
             else:
